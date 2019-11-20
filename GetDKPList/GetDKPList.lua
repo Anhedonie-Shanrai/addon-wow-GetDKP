@@ -181,10 +181,10 @@ function GetDKP_List_VarLoad()
 		--getglobal("GDL_Playerlist_ShowItemButton").status = "set";
 		if (GDKPvar_save["ShowOnlyInRaid"] == "true") then
 			getglobal("GDL_Playerlist_InRaidButton").status = "inraid";
-			GDL_Playerlist_InRaidButton:SetText(GDL_INRAID);
+			GDL_Playerlist_InRaidButton:SetText(GDL_NOTINRAID);
 		else
 			getglobal("GDL_Playerlist_InRaidButton").status = "notinraid";
-			GDL_Playerlist_InRaidButton:SetText(GDL_NOTINRAID);
+			GDL_Playerlist_InRaidButton:SetText(GDL_INRAID);
 
 		end;
 		GDL_NonSetItems = {};
@@ -430,8 +430,7 @@ function GetDKP_List_Toggle()
 		if (GetDKP_List_Frame:IsVisible()) then
 			GetDKP_List_Frame:Hide();
 		else
-			GetDKP_List_Frame:SetAlpha(0.0);
-			GDL_Playerlist_Frame:SetAlpha(0.0);
+
 			GetDKP_List_Frame:Show();
 			GDL_Playerlist_Frame:Show();
 			GetDKP_List_Frame_Show = 1;
@@ -442,16 +441,17 @@ function GetDKP_List_Toggle()
 		end;
 
 end;
-function GetDKP_List_OnUpdate(this, elapsed)
-	this.TimeSinceLastUpdate = this.TimeSinceLastUpdate + elapsed;
 
-  if (this.TimeSinceLastUpdate > GDL_UpdateInterval and GetDKP_List_Frame:GetAlpha() < 1 ) then
-	a = GetDKP_List_Frame:GetAlpha();
-	a = a + 0.1;
-	GetDKP_List_Frame:SetAlpha(a);
-	GDL_Playerlist_Frame:SetAlpha(a);
-	this.TimeSinceLastUpdate = 0;
-  end
+function GetDKP_List_OnUpdate(this, elapsed)
+--	this.TimeSinceLastUpdate = this.TimeSinceLastUpdate + elapsed;
+
+  --if (this.TimeSinceLastUpdate > GDL_UpdateInterval and GetDKP_List_Frame:GetAlpha() < 1 ) then
+--	a = GetDKP_List_Frame:GetAlpha();
+--	a = a + 0.1;
+--	GetDKP_List_Frame:SetAlpha(a);
+--	GDL_Playerlist_Frame:SetAlpha(a);
+--	this.TimeSinceLastUpdate = 0;
+  --end
 end;
 
 function GetDKP_List_ButtonToggle()
@@ -1315,11 +1315,11 @@ end;
 
 function GDL_ItemList_OnUpdate(this, elapsed, GDL_ItemList_Stop)
 
-	this.TimeSinceLastUpdate = this.TimeSinceLastUpdate + elapsed;
-	if (this.TimeSinceLastUpdate > GDL_ItemList_UpdateInterval) then
-		GDL_Itemlist_SetFrame:Hide();
-		this.TimeSinceLastUpdate = 0;
-	end
+	--this.TimeSinceLastUpdate = this.TimeSinceLastUpdate + elapsed;
+	--if (this.TimeSinceLastUpdate > GDL_ItemList_UpdateInterval) then
+	--	GDL_Itemlist_SetFrame:Hide();
+	--	this.TimeSinceLastUpdate = 0;
+	--end
 end;
 
 function GDL_ItemList_SetFrameSetLink()
