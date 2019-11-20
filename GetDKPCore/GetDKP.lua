@@ -102,7 +102,7 @@ end;
  
 --This Message show after  each Update and first install
 StaticPopupDialogs["Update_Show"] = {
-text = "Welcome to GetDKP v7.4.0\nFixed getDKP for WoW Patch 7.4 and fixed some minor bugs with class colors\n Bugreport @ eqdkp-plus.eu/forum/ ;)",
+text = "Welcome to GetDKP v7.4.1\nFixed getDKP for WoW-Classic 1.13.2 Bugreport @ eqdkp-plus.eu/forum/ ;)",
 button1 = "Thanks!",
 timeout = 0
 }
