@@ -138,6 +138,11 @@ function GDKP_Load()
 		--this:RegisterEvent("AUCTION_HOUSE_CLOSE");
 		--this:RegisterEvent("AUCTION_ITEM_LIST_UPDATE");
 		--this:RegisterEvent("MERCHANT_SHOW");
+
+		-- Set the script as workaround for newer UI versions problem with onEvent function
+		this:SetScript("OnEvent", GDKP_Event)
+		-- Registers an addon message prefix, allowing messages sent over addon channels with that prefix to be received by the client.
+		C_ChatInfo.RegisterAddonMessagePrefix("GETDKP")
 end;
 function GetDKP_RegisterMRTNotify()
 	if MRT_RegisterLootNotify ~= nil then
@@ -1036,7 +1041,7 @@ this.TimeSinceLastUpdate = this.TimeSinceLastUpdate + elapsed;
 end;
 
 -- register wisper event for dkp request
-function GDKP_Event(event, ...)
+function GDKP_Event(self, event, ...)
 	local numArgs, result;
 	local requestfrom, playerlockup, _output ;
 	local _args

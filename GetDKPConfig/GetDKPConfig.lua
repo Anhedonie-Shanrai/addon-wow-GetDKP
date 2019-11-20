@@ -631,10 +631,6 @@ end;
 --------------------
 function GetDKP_List_Load_Resiv(arg1,arg2,arg3,arg4)
 	_args = GDKP_GetArgs(arg2, ",");
-	
-	if(not IsPromoted()) then
-		print("You are not promoted");
-	end;
 
 	if (_args[1] == "ASK" and GetDKP_CheckifPlayerIsInRaid(UnitName("player")) and IsPromoted() and GDKPvar_save.GetDKPASK) then
 		GDC_GDL_ASK_SEND:Show();
