@@ -2743,28 +2743,46 @@ end;
 		
 			for key, val in pairs(gdkp.players) do
 				if GetDKP_CheckifPlayerIsInRaid(key)  then
-					if _type == "add" then
-						gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] + amount ;
-						
-						
-					elseif _type == "sub" then
-						gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] - amount ;
-						gdkp.players[key][_dkptable.."_spend"] = gdkp.players[key][_dkptable.."_spend"] + amount ;
+					if GDKPvar_save.epgp == true then
+						if _type == "add" then
+							gdkp.players[key][_dkptable.."_earned"] = gdkp.players[key][_dkptable.."_earned"] + amount ;
+							gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_earned"] / gdkp.players[key][_dkptable.."_spend"] ;
+						elseif _type == "sub" then
+							gdkp.players[key][_dkptable.."_spend"] = gdkp.players[key][_dkptable.."_spend"] + amount ;
+							gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_earned"] / gdkp.players[key][_dkptable.."_spend"] ;							
+						end;
+					else
+						if _type == "add" then
+							gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] + amount ;
+							
+						elseif _type == "sub" then
+							gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] - amount ;
+							gdkp.players[key][_dkptable.."_spend"] = gdkp.players[key][_dkptable.."_spend"] + amount ;
+						end;
 					end;
-					
 				else
 					
 					if (gdkp_alliases) then
 						if (gdkp_alliases[key]) then
 							for i= 1,getn(gdkp_alliases[key]),1 do
 								if GetDKP_CheckifPlayerIsInRaid(gdkp_alliases[key][1]) then
-									if _type == "add" then
-										gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] + amount ;
-										gdkp.players[key][_dkptable.."_earned"] = gdkp.players[key][_dkptable.."_earned"] + amount ;
-									elseif _type == "sub" then
-										gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] - amount ;
-										gdkp.players[key][_dkptable.."_spend"] = gdkp.players[key][_dkptable.."_spend"] + amount ;
-									end;	
+									if GDKPvar_save.epgp == true then
+										if _type == "add" then
+											gdkp.players[key][_dkptable.."_earned"] = gdkp.players[key][_dkptable.."_earned"] + amount ;
+											gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_earned"] / gdkp.players[key][_dkptable.."_spend"] ;
+										elseif _type == "sub" then
+											gdkp.players[key][_dkptable.."_spend"] = gdkp.players[key][_dkptable.."_spend"] + amount ;
+											gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_earned"] / gdkp.players[key][_dkptable.."_spend"] ;							
+										end;									
+									else
+										if _type == "add" then
+											gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] + amount ;
+											gdkp.players[key][_dkptable.."_earned"] = gdkp.players[key][_dkptable.."_earned"] + amount ;
+										elseif _type == "sub" then
+											gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] - amount ;
+											gdkp.players[key][_dkptable.."_spend"] = gdkp.players[key][_dkptable.."_spend"] + amount ;
+										end;
+									end;
 								end;
 							end;
 						end;
@@ -2796,9 +2814,13 @@ end;
 			for key, val in pairs(gdkp.players) do
 				if (string.lower(key) == string.lower(_args[1]))  then
 					if _type == "add" then
-						gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] + amount ;
-						gdkp.players[key][_dkptable.."_earned"] = gdkp.players[key][_dkptable.."_earned"] + amount ;
-						
+						if GDKPvar_save.epgp == true then
+							gdkp.players[key][_dkptable.."_earned"] = gdkp.players[key][_dkptable.."_earned"] + amount ;
+							gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_earned"] / gdkp.players[key][_dkptable.."_spend"] ;	
+						else
+							gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] + amount ;
+							gdkp.players[key][_dkptable.."_earned"] = gdkp.players[key][_dkptable.."_earned"] + amount ;
+						end;
 						if (_live == "true") then 
 							GDKP_Output("<LiveDKP> "..amount.." ".._dkptable..typestring..TEXT_DKP_ADDDKP_Player.." "..key,Chan)
 						end;	
@@ -2807,8 +2829,13 @@ end;
 						C_ChatInfo.SendAddonMessage("GETDKP",amount..",".._dkptable..","..key..",add"..",".._item..","..GDKP_LiveChanged_timestamp,"RAID");
 						end;
 					elseif _type == "sub" then
-						gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] - amount ;
-						gdkp.players[key][_dkptable.."_spend"] = gdkp.players[key][_dkptable.."_spend"] + amount ;
+						if GDKPvar_save.epgp == true then
+							gdkp.players[key][_dkptable.."_spend"] = gdkp.players[key][_dkptable.."_spend"] + amount ;
+							gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_earned"] / gdkp.players[key][_dkptable.."_spend"] ;
+						else
+							gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] - amount ;
+							gdkp.players[key][_dkptable.."_spend"] = gdkp.players[key][_dkptable.."_spend"] + amount ;
+						end;
 						if (_item ~= nil and _item ~= "") then
 							if (DKP_ITEMS[key] == nil) then
 								DKP_ITEMS[key] = {};
@@ -2903,13 +2930,22 @@ end;
 					splitplayer, splitrealm = strsplit( "-", key, 2 );
 				end;
 				if GetDKP_CheckifPlayerIsInRaid(key) or GetDKP_CheckifPlayerIsInRaid(splitplayer) then
-					if _type == "add" then
-						gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] + amount ;
+					if GDKPvar_save.epgp == true then
+						if _type == "add" then
+							gdkp.players[key][_dkptable.."_earned"] = gdkp.players[key][_dkptable.."_earned"] + amount ;
+							gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_earned"] / gdkp.players[key][_dkptable.."_spend"] ;
+						elseif _type == "sub" then
+							gdkp.players[key][_dkptable.."_spend"] = gdkp.players[key][_dkptable.."_spend"] + amount ;
+							gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_earned"] / gdkp.players[key][_dkptable.."_spend"] ;							
+						end;
+					else
+						if _type == "add" then
+							gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] + amount ;
 						
-						
-					elseif _type == "sub" then
-						gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] - amount ;
-						gdkp.players[key][_dkptable.."_spend"] = gdkp.players[key][_dkptable.."_spend"] + amount ;
+						elseif _type == "sub" then
+							gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] - amount ;
+							gdkp.players[key][_dkptable.."_spend"] = gdkp.players[key][_dkptable.."_spend"] + amount ;
+						end;
 					end;
 					
 				else
@@ -2918,12 +2954,22 @@ end;
 						if (gdkp_alliases[key]) then
 							for i= 1,getn(gdkp_alliases[key]),1 do
 								if GetDKP_CheckifPlayerIsInRaid(gdkp_alliases[key][1]) then
-									if _type == "add" then
-										gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] + amount ;
-										gdkp.players[key][_dkptable.."_earned"] = gdkp.players[key][_dkptable.."_earned"] + amount ;
-									elseif _type == "sub" then
-										gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] - amount ;
-										gdkp.players[key][_dkptable.."_spend"] = gdkp.players[key][_dkptable.."_spend"] + amount ;
+									if GDKPvar_save.epgp == true then
+										if _type == "add" then
+											gdkp.players[key][_dkptable.."_earned"] = gdkp.players[key][_dkptable.."_earned"] + amount ;
+											gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_earned"] / gdkp.players[key][_dkptable.."_spend"] ;
+										elseif _type == "sub" then
+											gdkp.players[key][_dkptable.."_spend"] = gdkp.players[key][_dkptable.."_spend"] + amount ;
+											gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_earned"] / gdkp.players[key][_dkptable.."_spend"] ;							
+										end;									
+									else
+										if _type == "add" then
+											gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] + amount ;
+											gdkp.players[key][_dkptable.."_earned"] = gdkp.players[key][_dkptable.."_earned"] + amount ;
+										elseif _type == "sub" then
+											gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] - amount ;
+											gdkp.players[key][_dkptable.."_spend"] = gdkp.players[key][_dkptable.."_spend"] + amount ;
+										end;
 									end;	
 								end;
 							end;
@@ -2956,8 +3002,13 @@ end;
 			for key, val in pairs(gdkp.players) do
 				if (string.lower(key) == string.lower(_args[1]))  then
 					if _type == "add" then
-						gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] + amount ;
-						gdkp.players[key][_dkptable.."_earned"] = gdkp.players[key][_dkptable.."_earned"] + amount ;
+						if GDKPvar_save.epgp == true then
+							gdkp.players[key][_dkptable.."_earned"] = gdkp.players[key][_dkptable.."_earned"] + amount ;
+							gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_earned"] / gdkp.players[key][_dkptable.."_spend"] ;	
+						else
+							gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] + amount ;
+							gdkp.players[key][_dkptable.."_earned"] = gdkp.players[key][_dkptable.."_earned"] + amount ;
+						end;
 						
 						if (_live == "true") then 
 							GDKP_Output("<LiveDKP> "..amount.." ".._dkptable..typestring..TEXT_DKP_ADDDKP_Player.." "..key,Chan)
@@ -2967,8 +3018,13 @@ end;
 							--C_ChatInfo.SendAddonMessage("GETDKP",amount..",".._dkptable..","..key..",add"..",".._item..","..GDKP_LiveChanged_timestamp,"RAID");
 						end;
 					elseif _type == "sub" then
-						gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] - amount ;
-						gdkp.players[key][_dkptable.."_spend"] = gdkp.players[key][_dkptable.."_spend"] + amount ;
+						if GDKPvar_save.epgp == true then
+							gdkp.players[key][_dkptable.."_spend"] = gdkp.players[key][_dkptable.."_spend"] + amount ;
+							gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_earned"] / gdkp.players[key][_dkptable.."_spend"] ;
+						else
+							gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] - amount ;
+							gdkp.players[key][_dkptable.."_spend"] = gdkp.players[key][_dkptable.."_spend"] + amount ;
+						end;
 						if (_item ~= nil and _item ~= "") then
 							if (DKP_ITEMS[key] == nil) then
 								DKP_ITEMS[key] = {};
