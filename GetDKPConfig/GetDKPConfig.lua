@@ -263,7 +263,7 @@ function GetDKP_VarLoad()
 		GDKPvar_save.ShowOnlyInRaid = false;
 		GDKPvar_save.ShowItems = true;
 		GDKPvar_save.TokenItems = true;
-		GDKPvar_save.GetDKPASK = true;
+		GDKPvar_save.GetDKPASK = false;
 		GDKPvar_save.HideOutGoingWhisper = true;
 		GDKPvar_save.IncomigWhisper = false;
 		GDKPvar_save.NeedLimit = -1;
@@ -448,7 +448,7 @@ function GDKP_CheckConfig()
 	end;
 	
 	if GDKPvar_save.GetDKPASK == nil then 
-		GDKPvar_save.GetDKPASK = true
+		GDKPvar_save.GetDKPASK = false
 	end;
 	
 	if GDKPvar_save.HideOutGoingWhisper == nil then 
@@ -619,7 +619,7 @@ function GetDKP_Config_OnEvent(self, event, ... )
 		GetDKP_Zone();
 	elseif (event =="CHAT_MSG_ADDON") then
 		
-		if (arg1 == "getdkp_list_load" and arg4 ~= UnitName("player")) then 
+		if (arg1 == "getdkp_list_load" and arg4 ~= UnitName("player").."-"..GetRealmName()) then 
 			GetDKP_List_Load_Resiv(arg1,arg2,arg3,arg4);
 		end;
 	else
@@ -631,13 +631,17 @@ end;
 --------------------
 function GetDKP_List_Load_Resiv(arg1,arg2,arg3,arg4)
 	_args = GDKP_GetArgs(arg2, ",");
-	
-	if(not IsPromoted()) then
-		print("You are not promoted");
-	end;
 
 	if (_args[1] == "ASK" and GetDKP_CheckifPlayerIsInRaid(UnitName("player")) and IsPromoted() and GDKPvar_save.GetDKPASK) then
 		GDC_GDL_ASK_SEND:Show();
+	end;
+
+	if(_args[1] == "ASKACCEPTED" and arg4 ~= UnitName("player").."-"..GetRealmName()) then
+		print("GETDKP: Ask for data accepted by: ", arg4)
+		if(GDC_GDL_ASK_SEND:IsShown()) then
+			print("GETDKP: Hide ask window.")
+			GDC_GDL_ASK_SEND:Hide();
+		end
 	end;
 	
 	if (_args[1] == "StartUI") then
@@ -737,6 +741,11 @@ function GetDKP_List_Load_Resiv(arg1,arg2,arg3,arg4)
 		end;
 	end;
 end;
+
+-- Broadcast that send request was accepted to inform other assits that it is not required anymore
+function GetDKP_Ask_Send_Accepted()
+	C_ChatInfo.SendAddonMessage("getdkp_list_load", "ASKACCEPTED", "RAID")
+end
 
 function GetDKP_List_Load_Send()
 local konto , dkpchars ;
@@ -907,9 +916,7 @@ function GetDKP_Config_OnUpdate(this, elapsed)
 		end;
 	end
 	if (this.TimeSinceLastUpdate > GDL_UpdateInterval and GetDKP_Config_Frame:GetAlpha() < 1 ) then
-		a = GetDKP_Config_Frame:GetAlpha();
-		a = a + 0.1;
-		GetDKP_Config_Frame:SetAlpha(a);
+		GetDKP_Config_Frame:SetAlpha(1);
 		this.TimeSinceLastUpdate = 0;
 	end
 end;
