@@ -2585,7 +2585,9 @@ function GETDKP_ProcessSaveNote(_type,_looter,_item,dkpstring)
                 end;
             end;
             if _dkptable ~= nil and _dkptable ~= "" then
-                GDKP_Output("<LiveDKP> "..dkpvalue.." ".._dkptable.." "..TEXT_DKP_SUBDKP_Player.." ".._looter.." "..TEXT_DKP_GETS.." ".._item,Chan)
+				if (GDKPvar_save.reportowner == true) then
+					GDKP_Output("<LiveDKP> "..dkpvalue.." ".._dkptable.." "..TEXT_DKP_SUBDKP_Player.." ".._looter.." "..TEXT_DKP_GETS.." ".._item,Chan)
+				end;
                 GDKP_MATH_DKP(_looter.." "..dkpvalue.." ".._dkptable,"sub","true","false",_item)
             end;
         end;
@@ -2636,7 +2638,9 @@ function GETDKP_ProcessSaveCost(option,_type,_looter,_item,dkpstring)
             end;
         end;
         if _dkptable ~= nil and _dkptable ~= "" and _looter ~= "bank" and _looter ~= "disenchanted" then
-            GDKP_Output("<LiveDKP> "..dkpvalue.." ".._dkptable.." "..TEXT_DKP_SUBDKP_Player.." ".._looter.." "..TEXT_DKP_GETS.." ".._item,Chan)
+			if (GDKPvar_save.reportowner == true) then
+				GDKP_Output("<LiveDKP> "..dkpvalue.." ".._dkptable.." "..TEXT_DKP_SUBDKP_Player.." ".._looter.." "..TEXT_DKP_GETS.." ".._item,Chan)
+			end;
             GDKP_MATH_DKP(_looter.." "..dkpvalue.." ".._dkptable,"sub","true","false",_item)
         end;
     end;
@@ -2804,10 +2808,12 @@ end;
 				end;
 			end;
 			if (_live == "true") then -- set by CT Raidtracker Hook
-				if _type == "add" then
-					GDKP_Output("<LiveDKP> "..amount.." ".._dkptable..typestring..TEXT_DKP_ADDDKP_RAID,Chan)
-				elseif _type == "sub" then
-					GDKP_Output("<LiveDKP> "..amount.." ".._dkptable.." DKP "..TEXT_DKP_SUBDKP_RAID,Chan)
+				if (GDKPvar_save.reportowner == true) then
+					if _type == "add" then
+						GDKP_Output("<LiveDKP> "..amount.." ".._dkptable..typestring..TEXT_DKP_ADDDKP_RAID,Chan)
+					elseif _type == "sub" then
+						GDKP_Output("<LiveDKP> "..amount.." ".._dkptable.." DKP "..TEXT_DKP_SUBDKP_RAID,Chan)
+					end;
 				end;
 			end;		
 		else -- Player
@@ -2821,8 +2827,10 @@ end;
 							gdkp.players[key][_dkptable.."_current"] = gdkp.players[key][_dkptable.."_current"] + amount ;
 							gdkp.players[key][_dkptable.."_earned"] = gdkp.players[key][_dkptable.."_earned"] + amount ;
 						end;
-						if (_live == "true") then 
-							GDKP_Output("<LiveDKP> "..amount.." ".._dkptable..typestring..TEXT_DKP_ADDDKP_Player.." "..key,Chan)
+						if (_live == "true") then
+							if (GDKPvar_save.reportowner == true) then
+								GDKP_Output("<LiveDKP> "..amount.." ".._dkptable..typestring..TEXT_DKP_ADDDKP_Player.." "..key,Chan)
+							end;
 						end;	
 						if (_update == "true") then
 						--if (_update == "true" and _item ~= "") then
@@ -2846,7 +2854,9 @@ end;
 							end;
 						end;
 						if (_live ==  "true") then 
-							GDKP_Output("<LiveDKP> "..amount.." ".._dkptable..typestring..TEXT_DKP_SUBDKP_Player.." "..key,Chan)
+							if (GDKPvar_save.reportowner == true) then
+								GDKP_Output("<LiveDKP> "..amount.." ".._dkptable..typestring..TEXT_DKP_SUBDKP_Player.." "..key,Chan)
+							end;
 						end;
 						if (_update == "true") then
 						--if (_update == "true" and _item ~= "") then -- promote to raid even if no item is given
@@ -2992,10 +3002,12 @@ end;
 				end;
 			end;
 			if (_live == "true") then -- set by CT Raidtracker Hook
-				if _type == "add" then
-					GDKP_Output("<LiveDKP> "..amount.." ".._dkptable..typestring..TEXT_DKP_ADDDKP_RAID,Chan)
-				elseif _type == "sub" then
-					GDKP_Output("<LiveDKP> "..amount.." ".._dkptable.." DKP "..TEXT_DKP_SUBDKP_RAID,Chan)
+				if (GDKPvar_save.reportowner == true) then
+					if _type == "add" then
+						GDKP_Output("<LiveDKP> "..amount.." ".._dkptable..typestring..TEXT_DKP_ADDDKP_RAID,Chan)
+					elseif _type == "sub" then
+						GDKP_Output("<LiveDKP> "..amount.." ".._dkptable.." DKP "..TEXT_DKP_SUBDKP_RAID,Chan)
+					end;
 				end;
 			end;		
 		else -- Player
@@ -3010,8 +3022,10 @@ end;
 							gdkp.players[key][_dkptable.."_earned"] = gdkp.players[key][_dkptable.."_earned"] + amount ;
 						end;
 						
-						if (_live == "true") then 
-							GDKP_Output("<LiveDKP> "..amount.." ".._dkptable..typestring..TEXT_DKP_ADDDKP_Player.." "..key,Chan)
+						if (_live == "true") then
+							if (GDKPvar_save.reportowner == true) then
+								GDKP_Output("<LiveDKP> "..amount.." ".._dkptable..typestring..TEXT_DKP_ADDDKP_Player.." "..key,Chan)
+							end;
 						end;	
 						if (_update == "true") then
 						--if (_update == "true" and _item ~= "") then
@@ -3035,7 +3049,9 @@ end;
 							end;
 						end;
 						if (_live ==  "true") then 
-							GDKP_Output("<LiveDKP> "..amount.." ".._dkptable..typestring..TEXT_DKP_SUBDKP_Player.." "..key,Chan)
+							if (GDKPvar_save.reportowner == true) then
+								GDKP_Output("<LiveDKP> "..amount.." ".._dkptable..typestring..TEXT_DKP_SUBDKP_Player.." "..key,Chan)
+							end;
 						end;
 						if (_update == "true") then
 						--if (_update == "true" and _item ~= "") then -- promote to raid even if no item is given
