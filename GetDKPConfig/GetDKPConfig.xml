@@ -1705,9 +1705,6 @@
 										<OnShow>
 											self:ClearFocus();
 										</OnShow>
-										<!--<OnEditFocusLost>
-										     GetDKP_Config_GDA_EditBox_OnEnterPressed(1);
-										</OnEditFocusLost>-->
 										<OnEnterPressed>
 											GetDKP_Config_GDA_EditBox_OnEnterPressed(1);
 										</OnEnterPressed>
@@ -3635,7 +3632,6 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						GetDKP_Ask_Send_Accepted();
 						GetDKP_List_Load_Send();
 						GDC_GDL_ASK_SEND_BUTTON2:Hide();
 						GDC_GDL_ASK_SEND_BUTTON1:Hide();
@@ -3718,7 +3714,7 @@
 						GetDKP_Config_OnUpdate2(self, elapsed);
 					</OnUpdate>
 					<OnDragStart>
-						self:StartMoving();
+					self:StartMoving();
 						self.isMoving = true;
 					</OnDragStart>
 					<OnDragStop>
