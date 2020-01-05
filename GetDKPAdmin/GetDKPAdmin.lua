@@ -428,7 +428,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 								find = 0;
 								for i = 1 , table.getn(GetDKPAdmin_List) do
 									if (GetDKPAdmin_List[i].name == arg2) then
-										find = 1;
+										find = 0;
 									end;
 								end;
 								if (find ~= 1) then
@@ -466,7 +466,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 						find = 0;
 						for i = 1 , table.getn(GetDKPAdmin_List) do
 							if (GetDKPAdmin_List[i].name == arg2) then
-								find = 1;
+								find = 0;
 							end;
 						end;
 						
@@ -503,7 +503,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 					find = 0;
 					for i = 1 , table.getn(GetDKPAdmin_List) do
 						if (GetDKPAdmin_List[i].name == Username) then
-							find = 1;
+							find = 0;
 						end;
 					end;
 					
@@ -539,7 +539,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 					find = 0;
 					for i = 1 , table.getn(GetDKPAdmin_List) do
 						if (GetDKPAdmin_List[i].name == Username) then
-							find = 1;
+							find = 0;
 						end;
 					end;
 					
