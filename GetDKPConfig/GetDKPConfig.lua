@@ -287,7 +287,7 @@ function GDKP_CheckConfig()
 		GDKPvar_save.MRT = true;
 	end
 	if GDKPvar_save.epgp == nil then
-		GDKPvar_save.epgp = false;
+		GDKPvar_save.epgp = true;
 	end;
 	if GDKPvar_save.GDA_announce_highest_bid1 == nil then
 		GDKPvar_save.GDA_announce_highest_bid1 = false;
@@ -314,34 +314,34 @@ function GDKP_CheckConfig()
 		GDKPvar_save.Scaling_GDA = 60;
 	end;
 	if GDKPvar_save.GDA_Rule == nil then
-		GDKPvar_save.GDA_Rule = 1;
+		GDKPvar_save.GDA_Rule = 2;
 	end;
 	if GDKPvar_save.GDA_Chatlook == nil then
-		GDKPvar_save.GDA_Chatlook = 1;
+		GDKPvar_save.GDA_Chatlook = 2;
 	end;
 	if GDKPvar_save.GDA_Chatoutput == nil then
 		GDKPvar_save.GDA_Chatoutput = 4;
 	end;
 	if GDKPvar_save.GDA_MinDKP == nil then
-		GDKPvar_save.GDA_MinDKP = 20;
+		GDKPvar_save.GDA_MinDKP = 45;
 	end;
 	if GDKPvar_save.GDA_OnOff == nil then
-		GDKPvar_save.GDA_OnOff = false;
+		GDKPvar_save.GDA_OnOff = true;
 	end;
 	if GDKPvar_save.GDA_BetWord == nil then
-		GDKPvar_save.GDA_BetWord = "bet";
+		GDKPvar_save.GDA_BetWord = "bis";
 	end;
 	if GDKPvar_save.GDA_GreedWord == nil then
-		GDKPvar_save.GDA_GreedWord = "greed";
+		GDKPvar_save.GDA_GreedWord = "need";
 	end;
 	if GDKPvar_save.GDA_GreedDKP == nil then
-		GDKPvar_save.GDA_GreedDKP = "50";
+		GDKPvar_save.GDA_GreedDKP = "45";
 	end;
 	if GDKPvar_save.GDA_MinDKP_Rule2 == nil then
-		GDKPvar_save.GDA_MinDKP_Rule2 = 50;
+		GDKPvar_save.GDA_MinDKP_Rule2 = 90;
 	end;
 	if GDKPvar_save.GDA_Chatlook_Rule2 == nil then
-		GDKPvar_save.GDA_Chatlook_Rule2 = 1;
+		GDKPvar_save.GDA_Chatlook_Rule2 = 2;
 	end;
 	if GDKPvar_save.GDA_Chatoutput_Rule2 == nil then
 		GDKPvar_save.GDA_Chatoutput_Rule2 = 4;
@@ -356,7 +356,7 @@ function GDKP_CheckConfig()
 		GDKPvar_save.GDA_Chatoutput_Rule3 = 4;
 	end;
 	if GDKPvar_save.GDA_Countdown_Time == nil then
-		GDKPvar_save.GDA_Countdown_Time = 60;
+		GDKPvar_save.GDA_Countdown_Time = 30;
 	end;
 	if GDKPvar_save.GDA_Countdown_Alert == nil then
 		GDKPvar_save.GDA_Countdown_Alert = 10;
@@ -456,7 +456,7 @@ function GDKP_CheckConfig()
 	end
 	
 	if GDKPvar_save.IncomingWhisper == nil then
-		GDKPvar_save.IncomingWhisper = false
+		GDKPvar_save.IncomingWhisper = true
 	end;	
 	
 	if GDKPvar_save.NeedLimit == nil then
