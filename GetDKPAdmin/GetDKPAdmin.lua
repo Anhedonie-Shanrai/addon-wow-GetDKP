@@ -169,7 +169,8 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 	-----------------------------------------------------------------------------------
 	-------------------------------- Roll Find ----------------------------------------
 	if  (event == "CHAT_MSG_SYSTEM" and GDA_PAAR ==1 and arg1~=nil) then
-		local _pos1,_posX,_name = string.find(arg1, "(%w+)");
+		local _pos1, _posX = string.find(arg1, " ");
+  		local _name = string.sub(arg1, 0, _pos1-1);
 		local _pos1,_posX,_wurf = string.find(arg1, "(%d+)");
 		for i = 1, table.getn(GDA_PAAR_NAME) do
 			if (GDA_PAAR_NAME[i].name == _name) then
