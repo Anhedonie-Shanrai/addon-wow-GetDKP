@@ -6,7 +6,7 @@
 ---- see http://www.gnu.org/licenses/.							----
 --------------------------------------------------------------------
 
-GDL_Set_Position = {head = 1,neck = 2,shoulder = 3,cloak = 4,robe = 5,hemd = 6,wappen = 7,wrist = 8,hand = 9,belt = 10,legs = 11,feet = 12,finger1 = 13,finger2 = 14,trinket1 = 15,trinket2 = 16,wapponmainhand = 17,shildhand = 18,diztans = 19};
+GDL_Set_Position = {head = 1,neck = 2,shoulder = 3,cloak = 4,robe = 5,hemd = 6,wappen = 7,wrist = 8,hand = 9,belt = 10,legs = 11,feet = 12,finger1 = 13,finger2 = 14,trinket1 = 15,trinket2 = 16,wapponmainhand = 17,shildhand = 18,diztans = 19}
 GDL_Sets = {	
 	Mage = {
 		T1 =	{ 
@@ -1122,7 +1122,7 @@ GDL_Sets = {
 				setname = { 0, "", "Unknown Class", "Unbekannte Klasse"," " },
 				},
 	},
-};
+}
 Legendaries = {
         { 19019, "INV_Sword_39", "Thunderfury, Blessed Blade of the Windseeker", "Donnerzorn, Gesegnete Klinge des Windsuchers" },
         { 22736, "INV_Sword_61", "Andonisus, Reaper of Souls", "Andosius, Der Seelenschl\195\164chter" },
@@ -1132,7 +1132,7 @@ Legendaries = {
         { 22589, "INV_Staff_Medivh", "Atiesh, Greatstaff of the Guardian", "Atiesh, Hohestab des W\195\164chters"},
         { 22631, "INV_Staff_Medivh", "Atiesh, Greatstaff of the Guardian", "Atiesh, Hohestab des W\195\164chters"},
         { 22630, "INV_Staff_Medivh", "Atiesh, Greatstaff of the Guardian", "Atiesh, Hohestab des W\195\164chters"},
-        };   
+        }
 GDL_ColorItemTable=		{"ffff8000",	-- legendary, orange
 						 "ffa335ee",	-- epic, purple
 						 "ff0070dd",	-- rare, blue
@@ -1161,7 +1161,7 @@ GDL_ZG = {
 			{19620,"Maelstrom's Tendril","Maelstroms Ranke"},
 			{19586,"Heathen's Brand","Emblem des Ungl\195\164 ubigen"},
 			{19608,"Vision of Voodress","Vision von Voodress"}
-			};
+			}
 GDL_AQ20 = {
 			{20890,"Qiraji Ornate Hilt","Verschn\195\182rkelter Griff der Qiraji"},
 			{20886,"Qiraji Spiked Hilt","Stachelgriff der Qiraji"},
@@ -1169,7 +1169,7 @@ GDL_AQ20 = {
 			{20888,"Qiraji Ceremonial Ring","Zeremonienring der Qiraji"},
 			{20885,"Qiraji Martial Drape","Kampftuch der Qiraji"},
 			{20889,"Qiraji Regal Drape","Hoheitstuch der Qiraji"}
-			};
+			}
 GDL_AQ40 = {
 			{20962,"Vek'nilash's Circlet","Vek'nilashs Reif"},
 			{20932,"Qiraji Bindings of Dominance","Dominanzbindungen der Qiraji"},
@@ -1179,7 +1179,7 @@ GDL_AQ40 = {
 			{20928,"Qiraji Bindings of Command","Befehlsbindungen der Qiraji"},
 			{20929,"Carapace of the Old God","Knochenpanzer des alten Gottes"},
 			{20930,"Vek'lor's Diadem","Vek'lors Diadem"}
-		   };
+		   }
 GDL_T4 = 	{
 			[29753] =	{"INV_Chest_Chain_03","Chestguard of the Fallen Defender","Brustschutz des gefallenen Verteidigers"},
 			[29754] =	{"INV_Chest_Chain_03","Chestguard of the Fallen Champion","Brustschutz des gefallenen Champions"},
@@ -1196,7 +1196,7 @@ GDL_T4 = 	{
 			[29765] =	{"INV_Pants_Plate_17","Leggings of the Fallen Hero","Gamaschen des gefallenen Helden"},
 			[29766] =	{"INV_Pants_Plate_17","Leggings of the Fallen Champion","Gamaschen des gefallenen Champions"},
 			[29767] =	{"INV_Pants_Plate_17","Leggings of the Fallen Defender","Gamaschen des gefallenen Verteidigers"},
-			};
+			}
 GDL_T5 = 	{
 			[30236] =	{"INV_Chest_Chain_03","Chestguard of the Vanquished Champion","Brustschutz des bezwungenen Champions"},
 			[30237] =	{"INV_Chest_Chain_03","Chestguard of the Vanquished Defender","Brustschutz des bezwungenen Verteidigers"},
@@ -1213,7 +1213,7 @@ GDL_T5 = 	{
 			[30248] =	{"INV_Shoulder_22","Pauldrons of the Vanquished Champion","Schulterst\195\188cke des bezwungenen Champions"},
 			[30249] =	{"INV_Shoulder_22","Pauldrons of the Vanquished Defender","Schulterst\195\188cke des bezwungenen Verteidigers"},
 			[30250] =	{"INV_Shoulder_22","Pauldrons of the Vanquished Hero","Schulterst\195\188cke des bezwungenen Helden"},
-			};
+			}
 GDL_T6 =	{
 			[31089] =	{"INV_Chest_Chain_03","Chestguard of the Forgotten Conqueror","Brustschutz des vergessenen Eroberers"},
 			[31090] =	{"INV_Chest_Chain_03","Chestguard of the Forgotten Vanquisher","Brustschutz des vergessenen Bezwingers"},
@@ -1240,7 +1240,7 @@ GDL_T6 =	{
 			[34857] =	{"INV_Boots_Plate_04","Boots of the Forgotten Protector","Stiefel des vergessenen Besch\195\188tzers"},
 			[34858] =	{"INV_Boots_Plate_07","Boots of the Forgotten Vanquisher","Stiefel des vergessenen Bezwingers"},
 			
-			};
+			}
 						
 
 			

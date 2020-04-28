@@ -277,7 +277,7 @@ underlineFrame:SetScript("OnHide", function(this) this:Hide(); end)
 underlineFrame:SetScript("OnShow", function(this) 	-- change sizing on the fly to catch runtime uiscale changes
     underlineFrame.tx:SetPoint("TOPLEFT", -1, -2/this:GetEffectiveScale())
     underlineFrame.tx:SetPoint("RIGHT", 1,0)
-    underlineFrame.tx:SetHeight(0.6 / this:GetEffectiveScale());
+    underlineFrame.tx:SetHeight(0.6 / this:GetEffectiveScale())
 end)
 underlineFrame:SetHeight(1)
 
