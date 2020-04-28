@@ -42,7 +42,7 @@ function GetDKP_Reset_Data()
 	DKP_ITEMS = nil
 
 end
-	
+
 ------------------------
 -- GetDKP Plus OnLoad --
 ------------------------
@@ -102,7 +102,7 @@ function GetDKP_VarLoad()
 		GDC_GDA_EditBoxGWord:SetText(GDKPvar_save.GDA_GreedWord)
 		--print("Debug: "..GDKPvar_save.GDA_GreedWord)
 		GDC_GDA_EditBoxGDKP:SetText(GDKPvar_save.GDA_GreedDKP)
-		for i=1,3,1 do 
+		for i=1,3,1 do
 			getglobal("GetDKP_Config_Frame_CheckButton"..(i+70)):SetChecked(nil)
 			if ( i == GDKPvar_save.GDA_Rule) then
 				getglobal("GetDKP_Config_Frame_CheckButton"..(i+70)):SetChecked(true)
@@ -117,35 +117,35 @@ function GetDKP_VarLoad()
 		end
 		for i=1,3,1 do
 			getglobal("GetDKP_Config_Frame_CheckButton"..i+31):SetChecked(nil)
-			if (GDKPvar_save.GDA_Chatlook == i) then 
+			if (GDKPvar_save.GDA_Chatlook == i) then
 				getglobal("GetDKP_Config_Frame_CheckButton"..i+31):SetChecked(true)
 			end
 		end
 		for i=1,5,1 do
 			getglobal("GetDKP_Config_Frame_CheckButton"..i+34):SetChecked(nil)
-			if (GDKPvar_save.GDA_Chatoutput == i) then 
+			if (GDKPvar_save.GDA_Chatoutput == i) then
 				getglobal("GetDKP_Config_Frame_CheckButton"..i+34):SetChecked(true)
 			end
 		end
-		for i = 1,3,1 do 
+		for i = 1,3,1 do
 			getglobal("GetDKP_Config_Frame_CheckButton"..(39+i)):SetChecked(nil)
 			if (GDKPvar_save.GDA_Chatlook_Rule2 == i) then
 				getglobal("GetDKP_Config_Frame_CheckButton"..(39+i)):SetChecked(true)
 			end
 		end
-		for i = 1,5,1 do 
+		for i = 1,5,1 do
 			getglobal("GetDKP_Config_Frame_CheckButton"..(42+i)):SetChecked(nil)
 			if (GDKPvar_save.GDA_Chatoutput_Rule2 == i) then
 				getglobal("GetDKP_Config_Frame_CheckButton"..(42+i)):SetChecked(true)
 			end
 		end
-		for i = 1,3,1 do 
+		for i = 1,3,1 do
 			getglobal("GetDKP_Config_Frame_CheckButton"..(80+i)):SetChecked(nil)
 			if (GDKPvar_save.GDA_Chatlook_Rule3 == i) then
 				getglobal("GetDKP_Config_Frame_CheckButton"..(80+i)):SetChecked(true)
 			end
 		end
-		for i = 1,5,1 do 
+		for i = 1,5,1 do
 			getglobal("GetDKP_Config_Frame_CheckButton"..(83+i)):SetChecked(nil)
 			if (GDKPvar_save.GDA_Chatoutput_Rule3 == i) then
 				getglobal("GetDKP_Config_Frame_CheckButton"..(83+i)):SetChecked(true)
@@ -272,7 +272,7 @@ function GetDKP_VarLoad()
 		GDKPvar_save.LOOTLEVEL = 2
 		GDKPvar_save.LiveDKP = true
 		GDKPvar_save.MRT = true
-		
+
 		GetDKP_VarLoad()
 		return
 	end
@@ -389,76 +389,76 @@ function GDKP_CheckConfig()
 	if GDKPvar_save.requestRP == nil then
 		GDKPvar_save.requestRP = true
 	end
-	
-	if GDKPvar_save.requestItems == nil then 
+
+	if GDKPvar_save.requestItems == nil then
 		GDKPvar_save.requestItems = true
 	end
-		
-	if GDKPvar_save.requestItem == nil then 
+
+	if GDKPvar_save.requestItem == nil then
 		GDKPvar_save.requestItem = true
 	end
-	if GDKPvar_save.showtooltip == nil then 
+	if GDKPvar_save.showtooltip == nil then
 		GDKPvar_save.showtooltip = true
 	end
-	if GDKPvar_save.showtooltipraid == nil then 
+	if GDKPvar_save.showtooltipraid == nil then
 		GDKPvar_save.showtooltipraid = true
 	end
-	if GDKPvar_save.posi_tooltip == nil then 
+	if GDKPvar_save.posi_tooltip == nil then
 		GDKPvar_save.posi_tooltip = "top"
 	end
-	
-	if GDKPvar_save.minmax == nil then 
+
+	if GDKPvar_save.minmax == nil then
 		GDKPvar_save.minmax = true
 	end
-	
-	if GDKPvar_save.dkp == nil then 
+
+	if GDKPvar_save.dkp == nil then
 		GDKPvar_save.dkp = true
 	end
-	
-	if GDKPvar_save.ignoreValue == nil then 
+
+	if GDKPvar_save.ignoreValue == nil then
 		GDKPvar_save.ignoreValue = 0
 	end
-	
-	if GDKPvar_save.listowner == nil then 
+
+	if GDKPvar_save.listowner == nil then
 		GDKPvar_save.listowner = true
 	end
-	
-	if GDKPvar_save.reportowner == nil then 
+
+	if GDKPvar_save.reportowner == nil then
 		GDKPvar_save.reportowner = true
 	end
-	
-	if GDKPvar_save.reportChannel == nil then 
+
+	if GDKPvar_save.reportChannel == nil then
 		GDKPvar_save.reportChannel = "lokal"
 	end
-	
-	if GDKPvar_save.TierDrop == nil then 
+
+	if GDKPvar_save.TierDrop == nil then
 		GDKPvar_save.TierDrop = true
 	end
-	
-	if GDKPvar_save.ShowOnlyInRaid == nil then 
+
+	if GDKPvar_save.ShowOnlyInRaid == nil then
 		GDKPvar_save.ShowOnlyInRaid = false
 	end
-	
-	if GDKPvar_save.ShowItems == nil then 
+
+	if GDKPvar_save.ShowItems == nil then
 		GDKPvar_save.ShowItems = true
 	end
-	
-	if GDKPvar_save.TokenItems == nil then 
+
+	if GDKPvar_save.TokenItems == nil then
 		GDKPvar_save.TokenItems = true
 	end
-	
-	if GDKPvar_save.GetDKPASK == nil then 
+
+	if GDKPvar_save.GetDKPASK == nil then
 		GDKPvar_save.GetDKPASK = true
 	end
-	
-	if GDKPvar_save.HideOutGoingWhisper == nil then 
+
+	if GDKPvar_save.HideOutGoingWhisper == nil then
 		GDKPvar_save.HideOutGoingWhisper = true
 	end
-	
+
 	if GDKPvar_save.IncomingWhisper == nil then
 		GDKPvar_save.IncomingWhisper = false
 	end
-	
+
 	if GDKPvar_save.NeedLimit == nil then
 		GDKPvar_save.NeedLimit = 0
 	end
@@ -473,11 +473,11 @@ function GDKP_CheckConfig()
 	if GDKPvar_save.LOOTLEVEL == nil then
 		GDKPvar_save.LOOTLEVEL = 2
 	end
-	
+
 	if GDKPvar_save.LiveDKP == nil then
 		GDKPvar_save.LiveDKP = true
 	end
-	
+
 	if GDKPvar_save.GDA_Loot_GDA == nil then
 		GDKPvar_save.GDA_Loot_GDA = true
 	end
@@ -577,18 +577,18 @@ function GetDKP_Config_SlashHandler(msg)
 		elseif 	(string.lower(msg) == "reset")  then
 			GDKP_ResetConfig()
 			return
-		elseif 	(string.lower(msg) == "whisperhide an") or  (string.lower(msg) == "whisperhide on")  then	
+		elseif 	(string.lower(msg) == "whisperhide an") or  (string.lower(msg) == "whisperhide on")  then
 			GDKP_SetOptionValue("HideOutGoingWhisper",true)
 			return
-		elseif 	(string.lower(msg) == "whisperhide aus") or  (string.lower(msg) == "whisperhide off")  then	
+		elseif 	(string.lower(msg) == "whisperhide aus") or  (string.lower(msg) == "whisperhide off")  then
 			GDKP_SetOptionValue("HideOutGoingWhisper",false)
 			return
-		elseif string.sub(string.lower(msg),1,9) == "needlimit" then	
+		elseif string.sub(string.lower(msg),1,9) == "needlimit" then
 			GDKP_SetOptionValue("NeedLimit",string.sub(msg, 11 ,-1) )
-			return	
-		elseif string.sub(string.lower(msg),1,11) == "buyerslimit" then	
+			return
+		elseif string.sub(string.lower(msg),1,11) == "buyerslimit" then
 			GDKP_SetOptionValue("BuyersLimit",string.sub(msg, 13 ,-1) )
-			return	
+			return
 		elseif 	(string.lower(msg) == "livedkp on") or (string.lower(msg) == "livedkp an") then
 			GDKP_SetOptionValue("LiveDKP",true)
 			return
@@ -618,20 +618,20 @@ function GetDKP_Config_OnEvent(self, event, ... )
 	elseif (event == "ZONE_CHANGED" or event =="ZONE_CHANGED_NEW_AREA") then
 		GetDKP_Zone()
 	elseif (event =="CHAT_MSG_ADDON") then
-		
-		if (arg1 == "getdkp_list_load" and arg4 ~= UnitName("player")) then 
+
+		if (arg1 == "getdkp_list_load" and arg4 ~= UnitName("player")) then
 			GetDKP_List_Load_Resiv(arg1,arg2,arg3,arg4)
 		end
 	else
 		return
 	end
 end
--------------------- 
+--------------------
 -- List Handler --
 --------------------
 function GetDKP_List_Load_Resiv(arg1,arg2,arg3,arg4)
 	_args = GDKP_GetArgs(arg2, ",")
-	
+
 	if(not IsPromoted()) then
 		print("You are not promoted")
 	end
@@ -639,7 +639,7 @@ function GetDKP_List_Load_Resiv(arg1,arg2,arg3,arg4)
 	if (_args[1] == "ASK" and GetDKP_CheckifPlayerIsInRaid(UnitName("player")) and IsPromoted() and GDKPvar_save.GetDKPASK) then
 		GDC_GDL_ASK_SEND:Show()
 	end
-	
+
 	if (_args[1] == "StartUI") then
 		print(GDC_RESIV1..arg4)
 		if (multiTable) then
@@ -647,13 +647,13 @@ function GetDKP_List_Load_Resiv(arg1,arg2,arg3,arg4)
 				if (multiTable[1].DKP.disc == "Raid DKP") then
 					multiTable = {}
 					multiTable = {
-								[1]= { 
-									["dkp"] = { 
-											["name"] = "dkp",  
-											["disc"] = "Raid DKP",  
+								[1]= {
+									["dkp"] = {
+											["name"] = "dkp",
+											["disc"] = "Raid DKP",
 											["events"] = " ",
 										}
-									}  
+									}
 								}
 				end
 			end
@@ -669,8 +669,8 @@ function GetDKP_List_Load_Resiv(arg1,arg2,arg3,arg4)
 		GetDKP_List_VarLoad()
 		GetDKPAdmin_VarLoad()
 		GetDKP_Zone()
-		
-		
+
+
 	end
 	if (_args[1] == "time") then
 		if (DKPInfo) then
@@ -707,7 +707,7 @@ function GetDKP_List_Load_Resiv(arg1,arg2,arg3,arg4)
 			multiTable[_args[2]][_args[3]]["events"] = _args[6]
 		end
 		if (_args[1] == "DKPInfo" and _args[2] ~= "start" and _args[2] ~= "end") then
-		
+
 			DKPInfo[_args[2]] = _args[3]
 		end
 		if (_args[1] == "gdkp" and _args[2] ~= "start" and _args[2] ~= "end") then
@@ -747,25 +747,25 @@ dkpcharlen = {}
 			return
 		end
 	end
-	
+
 	if (DKPInfo and multiTable and GetDKP_CheckifPlayerIsInRaid(UnitName("player")) and IsPromoted() and not getdkp_list_load_empfang) then
 		getdkp_list_load_issend = 1
-		
+
 		if (getdkp_list_load_multitable == true and getdkp_list_load_dkpinfo == false and getdkp_list_load_gdkp == false and getdkp_list_load_dkpitems == false) then
 			a = 0
 			for key, val in pairs(DKP_ITEMS) do
-				for i=1,getn(DKP_ITEMS[key]["Items"]),1 do 
+				for i=1,getn(DKP_ITEMS[key]["Items"]),1 do
 					a = a + 1
 				end
 			end
 			for key, val in pairs(gdkp.players) do
-				for i=1,getn(multiTable),1 do 
+				for i=1,getn(multiTable),1 do
 					a = a + 1
 				end
 			end
 			getdkp_list_load_statusbarlen = getn(multiTable) + a + 7
 			getdkp_list_load_statusbar_values = 1
-			
+
 			GetDKP_Config_Frame_Send_StatusBar:SetMinMaxValues(0,getdkp_list_load_statusbarlen)
 			GetDKP_Config_Frame_Send_StatusBar:SetValue(getdkp_list_load_statusbar_values)
 			GetDKP_Config_Frame_Send_StatusBar2:SetMinMaxValues(0,getdkp_list_load_statusbarlen)
@@ -775,24 +775,24 @@ dkpcharlen = {}
 			getdkpcharlen = 0
 			C_ChatInfo.SendAddonMessage("getdkp_list_load","time,"..DKPInfo["timestamp"],"RAID")
 			C_ChatInfo.SendAddonMessage("getdkp_list_load","multiTable,start","RAID")
-			for i=1,getn(multiTable),1 do 
+			for i=1,getn(multiTable),1 do
 				konto = table.foreach(multiTable[i], VarReturn)
 				dkpchars = "multiTable,"..i..","..konto..","..multiTable[i][konto].name..","..multiTable[i][konto].disc..","..multiTable[i][konto].events
-				
+
 				if ( strlen(dkpchars) < 244 ) then
 					C_ChatInfo.SendAddonMessage("getdkp_list_load",dkpchars,"RAID")
 					getdkp_list_load_statusbar_values = getdkp_list_load_statusbar_values + 1
-					
+
 				else
 					--debug (dkpchars)
 					return
 				end
 			end
 			C_ChatInfo.SendAddonMessage("getdkp_list_load","multiTable,end","RAID")
-			
+
 		end
 		if (getdkp_list_load_multitable == true and getdkp_list_load_dkpinfo == true and getdkp_list_load_gdkp == false and getdkp_list_load_dkpitems == false) then
-		
+
 			C_ChatInfo.SendAddonMessage("getdkp_list_load","DKPInfo,start","RAID")
 			C_ChatInfo.SendAddonMessage("getdkp_list_load","DKPInfo,".."date,"..DKPInfo["date"],"RAID")
 			C_ChatInfo.SendAddonMessage("getdkp_list_load","DKPInfo,".."timestamp,"..DKPInfo["timestamp"],"RAID")
@@ -802,18 +802,18 @@ dkpcharlen = {}
 			C_ChatInfo.SendAddonMessage("getdkp_list_load","DKPInfo,".."total_points,"..DKPInfo["total_points"],"RAID")
 			C_ChatInfo.SendAddonMessage("getdkp_list_load","DKPInfo,end","RAID")
 			getdkp_list_load_statusbar_values = getdkp_list_load_statusbar_values + 7
-			
+
 		end
 		if (getdkp_list_load_multitable == true and getdkp_list_load_dkpinfo == true and getdkp_list_load_gdkp == true and getdkp_list_load_dkpitems == false) then
 			getdkpcharlen = 0
 			C_ChatInfo.SendAddonMessage("getdkp_list_load","gdkp,start","RAID")
 			for key, val in pairs(gdkp.players) do
-				for i=1,getn(multiTable),1 do 
+				for i=1,getn(multiTable),1 do
 					konto = table.foreach(multiTable[i], VarReturn)
 					dkpchars = "gdkp,"..key..","..konto..","..val[konto.."_current"]..","..val[konto.."_spend"]..","..val[konto.."_adjust"]..","..val[konto.."_earned"]..","..val.class..","..val.rcount
 					getdkpcharlen = getdkpcharlen + strlen(dkpchars)
 					if (getdkpcharlen > 4000) then
-						
+
 						for j=1,150000000,1 do
 						end
 						getdkpcharlen = 0
@@ -829,7 +829,7 @@ dkpcharlen = {}
 			end
 			C_ChatInfo.SendAddonMessage("getdkp_list_load","gdkp,end","RAID")
 		end
-		
+
 		if (getdkp_list_load_multitable == true and getdkp_list_load_dkpinfo == true and getdkp_list_load_gdkp == true and getdkp_list_load_dkpitems == true) then
 			C_ChatInfo.SendAddonMessage("getdkp_list_load","DKP_ITEMS,start","RAID")
 			for key, val in pairs(DKP_ITEMS) do
@@ -837,14 +837,14 @@ dkpcharlen = {}
 					if (getdkp_list_load_char_overvlow == key) then
 						getdkp_list_load_char_overvlow = ""
 					end
-					for i=1,getn(DKP_ITEMS[key]["Items"]),1 do 
+					for i=1,getn(DKP_ITEMS[key]["Items"]),1 do
 						dkpchars = "DKP_ITEMS,"..key..","..i..","..DKP_ITEMS[key]["Items"][i].name..","..DKP_ITEMS[key]["Items"][i].dkp
-						
+
 						getdkpcharlen = getdkpcharlen + strlen(dkpchars)
 						if (getdkpcharlen > 4000) then
 							getdkp_list_load_char_overvlow = key
 							getdkpcharlen = 0
-							
+
 							return
 						end
 						if ( strlen(dkpchars) < 244 and getdkp_list_load_char_overvlow == "") then
@@ -854,13 +854,13 @@ dkpcharlen = {}
 							--debug (dkpchars)
 							return
 						end
-						
+
 					end
 				end
 			end
-		
+
 			C_ChatInfo.SendAddonMessage("getdkp_list_load","DKP_ITEMS,end","RAID")
-			
+
 			getdkp_list_load_issend = 0
 			getdkp_list_load_multitable = false
 			getdkp_list_load_dkpinfo = false
@@ -895,7 +895,7 @@ function GetDKP_Config_OnUpdate(this, elapsed)
 		this.TimeSinceLastUpdate = 0
 		if (a > 0.9) then
 			GDLConfigFrame_send_Show_alpha = 1
-			
+
 		end
 	elseif (this.TimeSinceLastUpdate > GDL_UpdateInterval and getdkp_list_load_issend == 1 and GDLConfigFrame_send_Show_alpha == 1 ) then
 		a = GDL_send_Show:GetAlpha()
@@ -918,12 +918,12 @@ function GetDKP_Config_OnUpdate2(this, elapsed)
 	GetDKP_Config_Frame_Send_StatusBar:SetValue(getdkp_list_load_statusbar_values)
 	GetDKP_Config_Frame_Send_StatusBar2:SetValue(getdkp_list_load_statusbar_values)
 	if (this.TimeSinceLastUpdate2 > getdkp_list_load_updateinterval and getdkp_list_load_issend == 1) then
-		
+
 		if (getdkp_list_load_multitable == false) then
 			getdkp_list_load_multitable = true
 		elseif (getdkp_list_load_multitable == true and getdkp_list_load_dkpinfo == false) then
 			getdkp_list_load_dkpinfo = true
-			
+
 		elseif (getdkp_list_load_multitable == true and getdkp_list_load_dkpinfo == true and getdkp_list_load_gdkp == false) then
 			getdkp_list_load_gdkp = true
 		elseif (getdkp_list_load_multitable == true and getdkp_list_load_dkpinfo == true and getdkp_list_load_gdkp == true and getdkp_list_load_dkpitems == false) then
@@ -942,7 +942,7 @@ function GetDKP_Config_OnUpdate3(this, elapsed)
 		this.TimeSinceLastUpdate3 = 0
 		if (a > 0.9) then
 			GDLConfigFrame_send_Show_alpha2 = 1
-			
+
 		end
 	elseif (this.TimeSinceLastUpdate3 > GDL_UpdateInterval and getdkp_list_load_issend == 1 and GDLConfigFrame_send_Show_alpha2 == 1 ) then
 		a = GDL_send_Show2:GetAlpha()
@@ -1007,7 +1007,7 @@ function GDC_FrameKontoDropDown_Initialize()
 			end
 		end
 	else
-	
+
 	end
 end
 
@@ -1046,7 +1046,7 @@ function GDC_FrameKontoDropDown_OnClick(this, button)
 	if (table.getn(multiTable) == 1) then
 		GDC_FrameKontoDropDown_SetSelectedID(GDC_FrameKontoDropDown, GDC_FrameKontoDropDown_DDID, table.foreach(multiTable[1], VarReturn))
 		GDKPvar_save.konto = table.foreach(multiTable[1], VarReturn)
-	else	
+	else
 		GDC_FrameKontoDropDown_SetSelectedID(GDC_FrameKontoDropDown, GDC_FrameKontoDropDown_DDID, table.foreach(multiTable[GDC_FrameKontoDropDown_DDID], VarReturn))
 		GDKPvar_save.konto = table.foreach(multiTable[GDC_FrameKontoDropDown_DDID], VarReturn)
 	end
@@ -1063,7 +1063,7 @@ end
 -------------------------------------------
 function GDC_FrameLOOTLEVELDropDown_Initialize()
 	local info
-	
+
 		info = {
 				text = GDC_LOOTLEVEL2,
 				func = GDC_FrameLOOTLEVELDropDown_OnClick,
@@ -1191,7 +1191,7 @@ function GetDKP_Config_Toggle()
 		GetDKP_Config_OnShow()
 		GDCFrameTitleText:SetFont("Interface\\AddOns\\GetDKP\\Font\\MORPHEUS.TTF", 12,"OUTLINE, MONOCHROME")
 		GDCFrameTitleText:SetText(GDC_Title)
-		
+
 	end
 end
 
@@ -1280,7 +1280,7 @@ function GetDKP_Config_Chat()
 	if (GetDKP_Config_Frame_CheckButton10:GetChecked()) then
 		GDKPvar_save.reportChannel = "Officer"
 	end
-	
+
 end
 function GetDKP_Config_Tooltip()
 	if (GetDKP_Config_Frame_CheckButton11:GetChecked()) then
@@ -1365,7 +1365,7 @@ function GetDKP_Config_Skalierung_GDC(value)
 end
 function GetDKP_Config_Skalierung_GDA(value)
 	GDKPvar_save.Scaling_GDA = value
-	
+
 	GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
 	unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
 	GetDKPAdmin_Frame:SetScale(unsavedscale)
@@ -1390,7 +1390,7 @@ function GetDKP_Config_GDA_Rule(value)
 	for i=1,3,1 do
 		getglobal("GetDKP_Config_Frame_CheckButton"..(i+70)):SetChecked(nil)
 		getglobal("GDAConfigFrameRule"..i):Hide()
-		if (value == i)	then 
+		if (value == i)	then
 			getglobal("GetDKP_Config_Frame_CheckButton"..(i+70)):SetChecked(true)
 			getglobal("GDAConfigFrameRule"..i):Show()
 			GDAConfigCountdownFrame:Hide()
@@ -1445,28 +1445,28 @@ function GetDKP_Config_GDA_Rule1_ChatOutput(value)
 end
 
 function GetDKP_Config_announce_highest_bid1()
-	if (getglobal("GetDKP_Config_Frame_CheckButton1001"):GetChecked()) then 
+	if (getglobal("GetDKP_Config_Frame_CheckButton1001"):GetChecked()) then
 		GDKPvar_save.GDA_announce_highest_bid1 = true
-	else 
+	else
 		GDKPvar_save.GDA_announce_highest_bid1 = false
 	end
 
 end
 
 function GetDKP_Config_announce_highest_bid2()
-	if (getglobal("GetDKP_Config_Frame_CheckButton1002"):GetChecked()) then 
+	if (getglobal("GetDKP_Config_Frame_CheckButton1002"):GetChecked()) then
 		GDKPvar_save.GDA_announce_highest_bid2 = true
-	else 
+	else
 		GDKPvar_save.GDA_announce_highest_bid2 = false
 	end
 
 end
 
 function GetDKP_Config_GDA_OnOff()
-	if (getglobal("GetDKP_Config_Frame_CheckButton51"):GetChecked()) then 
+	if (getglobal("GetDKP_Config_Frame_CheckButton51"):GetChecked()) then
 		GetDKPAdmin_OnOff_Button:SetText(GDC_GDA_Off)
 		GDKPvar_save.GDA_OnOff = true
-	else 
+	else
 		GetDKPAdmin_OnOff_Button:SetText(GDC_GDA_On)
 		GDKPvar_save.GDA_OnOff = false
 	end
@@ -1475,7 +1475,7 @@ end
 function GDAConfigFrameHelpToggleButtonPlus()
 	if (GDAConfigFrameHelpSide < 4) then
 		GDAConfigFrameHelpSide = GDAConfigFrameHelpSide + 1
-		
+
 	end
 	if (GDAConfigFrameHelpSide == 4) then
 		GDAConfigFrameHelpToggleButtonNext:Disable()
@@ -1483,7 +1483,7 @@ function GDAConfigFrameHelpToggleButtonPlus()
 		GDAConfigFrameHelpToggleButtonNext:Enable()
 	end
 	GDAConfigFrameHelpToggleButtonPrev:Enable()
-	
+
 	GDAConfigHelpText:SetText(GDC_GDA_HELP_TEXT[GDAConfigFrameHelpSide])
 end
 function GDAConfigFrameHelpToggleButtonMinus()
@@ -1492,14 +1492,14 @@ function GDAConfigFrameHelpToggleButtonMinus()
 	end
 	if (GDAConfigFrameHelpSide == 1) then
 		GDAConfigFrameHelpToggleButtonPrev:Disable()
-	else	
+	else
 		GDAConfigFrameHelpToggleButtonPrev:Enable()
 	end
 	GDAConfigFrameHelpToggleButtonNext:Enable()
 	GDAConfigHelpText:SetText(GDC_GDA_HELP_TEXT[GDAConfigFrameHelpSide])
 end
 function GetDKP_Config_GDA_Rule2_ChatLook(value)
-	for i = 1,3,1 do 
+	for i = 1,3,1 do
 		getglobal("GetDKP_Config_Frame_CheckButton"..(39+i)):SetChecked(nil)
 		if (value == i) then
 			getglobal("GetDKP_Config_Frame_CheckButton"..(39+i)):SetChecked(true)
@@ -1508,7 +1508,7 @@ function GetDKP_Config_GDA_Rule2_ChatLook(value)
 	GDKPvar_save.GDA_Chatlook_Rule2 = value
 end
 function GetDKP_Config_GDA_Rule2_ChatOutput(value)
-	for i = 1,5,1 do 
+	for i = 1,5,1 do
 		getglobal("GetDKP_Config_Frame_CheckButton"..(42+i)):SetChecked(nil)
 		if (value == i) then
 			getglobal("GetDKP_Config_Frame_CheckButton"..(42+i)):SetChecked(true)
@@ -1517,7 +1517,7 @@ function GetDKP_Config_GDA_Rule2_ChatOutput(value)
 	GDKPvar_save.GDA_Chatoutput_Rule2 = value
 end
 function GetDKP_Config_GDA_Rule3_ChatLook(value)
-	for i = 1,3,1 do 
+	for i = 1,3,1 do
 		getglobal("GetDKP_Config_Frame_CheckButton"..(80+i)):SetChecked(nil)
 		if (value == i) then
 			getglobal("GetDKP_Config_Frame_CheckButton"..(80+i)):SetChecked(true)
@@ -1526,7 +1526,7 @@ function GetDKP_Config_GDA_Rule3_ChatLook(value)
 	GDKPvar_save.GDA_Chatlook_Rule3 = value
 end
 function GetDKP_Config_GDA_Rule3_ChatOutput(value)
-	for i = 1,5,1 do 
+	for i = 1,5,1 do
 		getglobal("GetDKP_Config_Frame_CheckButton"..(83+i)):SetChecked(nil)
 		if (value == i) then
 			getglobal("GetDKP_Config_Frame_CheckButton"..(83+i)):SetChecked(true)
@@ -1625,7 +1625,7 @@ function GDAConfig()
 	GDAConfigFrame:Show()
 	for i=1,3,1 do
 		getglobal("GDAConfigFrameRule"..i):Hide()
-		if (i == GDKPvar_save.GDA_Rule)	then 
+		if (i == GDKPvar_save.GDA_Rule)	then
 			getglobal("GDAConfigFrameRule"..i):Show()
 		end
 	end
@@ -1642,7 +1642,7 @@ function GDLConfig()
 	GDAConfigFrameHelp:Hide()
 	GDAConfigCountdownFrame:Hide()
 	if (GetDKP_CheckifPlayerIsInRaid(UnitName("player"))) then
-		if (IsPromoted()) then	
+		if (IsPromoted()) then
 			getglobal("GetDKP_Config_Frame_Send"):Show()
 		else
 			getglobal("GetDKP_Config_Frame_Send"):Hide()
@@ -1650,7 +1650,7 @@ function GDLConfig()
 	else
 		getglobal("GetDKP_Config_Frame_Send"):Hide()
 	end
-	
+
 end
 function SCALEConfig()
 	GDPConfigFrame:Hide()
@@ -1671,39 +1671,39 @@ function GDKP_SetOptionValue(_option,_value)
 	if _option =="requestRP" then
 		GDKPvar_save.requestRP = _value
 		GDKP_show("GETDKP: "..TEXT_DKP_REQ_DKP.._value)
-	elseif _option =="requestItems" then 
+	elseif _option =="requestItems" then
 		GDKPvar_save.requestItems = _value
 		GDKP_show("GETDKP: "..TEXT_DKP_REQ_ITEMS.._value)
-	elseif _option =="requestItem" then 
+	elseif _option =="requestItem" then
 		GDKPvar_save.requestItem = _value
 		GDKP_show("GETDKP: "..TEXT_DKP_REQ_ITEM.._value)
 	elseif string.lower(_option) == string.lower(TEXT_DKP_SETACCOUNT) then
 		GDKPvar_save.konto = _value
 		GDKP_show("GETDKP: "..TEXT_DKP_SETACCOUNT.." = ".._value)
-	elseif _option =="showtooltip" then 
+	elseif _option =="showtooltip" then
 		GDKPvar_save.showtooltip = _value
 		GDKP_show("GETDKP: "..TEXT_DKP_Tooltip.._value)
-	elseif _option =="showtooltipraid" then 
+	elseif _option =="showtooltipraid" then
 		GDKPvar_save.showtooltipraid = _value
 		GDKP_show("GETDKP: "..TEXT_DKP_Tooltip_Raid.._value)
-	elseif _option =="posi_tooltip" then 
+	elseif _option =="posi_tooltip" then
 		GDKPvar_save.posi_tooltip = _value
 		GDKP_show("GETDKP: "..TEXT_DKP_Tooltip..GDKPvar_save.posi_tooltip)
-	elseif _option =="minmax" then 
+	elseif _option =="minmax" then
 		GDKPvar_save.minmax = _value
 		GDKP_show("GETDKP: "..TEXT_DKP_Tooltip.." MinMax: "..GDKPvar_save.minmax)
-	elseif _option =="dkp" then 
+	elseif _option =="dkp" then
 		GDKPvar_save.dkp = _value
 		GDKP_show("GETDKP: "..TEXT_DKP_Tooltip.." DKP: "..GDKPvar_save.dkp)
-	elseif _option =="ignoreValue" then 
+	elseif _option =="ignoreValue" then
 		GDKPvar_save.ignoreValue = _value
-	elseif _option =="listowner" then 
+	elseif _option =="listowner" then
 		GDKPvar_save.listowner = _value
 		GDKP_show("GETDKP: "..TEXT_DKP_Tooltip.." List Buyers: "..GDKPvar_save.listowner)
-	elseif _option =="reportowner" then 
+	elseif _option =="reportowner" then
 		GDKPvar_save.reportowner = _value
 		GDKP_show("GETDKP: "..TEXT_DKP_Tooltip.." Report Buyers: "..GDKPvar_save.reportowner)
-	elseif _option =="TierDrop" then 
+	elseif _option =="TierDrop" then
 		GDKPvar_save.TierDrop = _value
 		GDKP_show("GETDKP: "..TEXT_DKP_Tooltip.." Setinformations and Dropchance: "..GDKPvar_save.TierDrop)
 	elseif _option == "ShowOnlyInRaid" then
@@ -1725,7 +1725,7 @@ function GDKP_SetOptionValue(_option,_value)
 	elseif _option == "ShowNonSet" then
 		GDKPvar_save.ShowNonSet = _value
 		GDKP_show("GETDKP: "..TEXT_DKP_ShowNonSet..": "..GDKPvar_save.ShowNonSet)
-	elseif _option =="LiveDKP" then 
+	elseif _option =="LiveDKP" then
 		GDKPvar_save.LiveDKP = _value
 		GDKP_show("GETDKP: LiveDKP: "..GDKPvar_save.LiveDKP)
 	end
@@ -1803,11 +1803,11 @@ function GDKP_DKPO(msg)
 		elseif string.lower(msg) ==	"sagen" or string.lower(msg) ==	"say" then
 			msg = "SAY"
 		elseif string.lower(msg) ==	"offizier" or string.lower(msg) ==	"officer" then
-			msg = "Officer"	
+			msg = "Officer"
 		elseif string.lower(msg) ==	"raid" then
 			msg = "RAID"
 		end
-		
+
 		if (msg == "lokal") or (msg == "RAID") or (msg == "PARTY") or (msg == "GUILD") or (msg == "SAY") or (msg == "Officer") then
 			GDKPvar_save.reportChannel = msg
 			GDKP_Output(TEXT_DKP_OUTPUT_CHAN..": "..GDKPvar_save.reportChannel,"lokal")
@@ -1825,7 +1825,7 @@ function GDKP_Info(msg)
 		elseif string.lower(msg) ==	"sagen" or string.lower(msg) ==	"say" then
 			msg = "SAY"
 		elseif string.lower(msg) ==	"offizier" or string.lower(msg) ==	"officer" then
-			msg = "Officer"	
+			msg = "Officer"
 		elseif string.lower(msg) ==	"raid" then
 			msg = "RAID"
 		end
@@ -1836,31 +1836,31 @@ function GDKP_Info(msg)
 				if DKPInfo.process_dkp_ver ~= nil then
 					GDKP_Output(TEXT_DKP_DKPLIST..DKPInfo.process_dkp_ver, msg)
 				end
-	
+
 				if DKPInfo.total_players ~= nil then
 					GDKP_Output(TEXT_DKP_PLAYERS_TOTAL..DKPInfo.total_players, msg)
 				end
-			
+
 				if DKPInfo.total_items ~= nil then
 					GDKP_Output(TEXT_DKP_ITEMS_TOTAL..DKPInfo.total_items, msg)
 				end
-				
+
 				if DKPInfo.total_points ~= nil then
 					GDKP_Output(TEXT_DKP_POINTS_TOTAL..DKPInfo.total_points, msg)
 				end
-				
+
 				if DKPInfo.set_items ~= nil then
 					GDKP_Output(TEXT_DKP_ITEMS_SET..DKPInfo.set_items, msg)
 				end
-				
+
 				if DKPInfo.nonset_items ~= nil then
 					GDKP_Output(TEXT_DKP_ITEMS_NONSET..DKPInfo.nonset_items, msg)
 				end
-				
+
 				if DKPInfo.total_points_set ~= nil then
 					GDKP_Output(TEXT_DKP_POINTS_SET..DKPInfo.total_points_set, msg)
 				end
-				
+
 				if DKPInfo.total_points_ns ~= nil then
 					GDKP_Output(TEXT_DKP_POINTS_NONSET..DKPInfo.total_points_ns, msg)
 				end
