@@ -32,7 +32,7 @@ GDA_Msg = {
 			[5] = "OFFICER",
 			[6] = "RAID_WARNING",
 		  }
-
+ 
 function GetDKPAdmin_OnLoad(this)
 		this:RegisterEvent("VARIABLES_LOADED")
 		this:RegisterEvent("CHAT_MSG_WHISPER")
@@ -47,12 +47,12 @@ function GetDKPAdmin_OnLoad(this)
 		SLASH_GETDKPADMIN1 = "/gda"
 		SLASH_GETDKPADMIN2 = "/gdb"
 		GETDKP_ADMINLOAD = true
-
+	
 end
 
 function GetDKPAdmin_OnUpdate(this, elapsed)
 	this.TimeSinceLastUpdate = this.TimeSinceLastUpdate + elapsed
-
+	 
 	if(this.TimeSinceLastUpdate > GDA_UpdateInterval and GDA_CD_StartTime ~= nil and GDA_CD_Stop == false) then
 	GDA_CD_Time = GDKPvar_save.GDA_Countdown_Time
 	GDA_CD_Alert = GDKPvar_save.GDA_Countdown_Alert
@@ -97,7 +97,7 @@ function GetDKPAdmin_OnUpdate(this, elapsed)
 		end
 		this.TimeSinceLastUpdate = 0
 	end
-
+	
 end
 
 function GetDKPAdmin_OnEvent(self, event, ...)
@@ -137,7 +137,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 			lootmethod, masterlooterPartyID, masterlooterRaidID = GetLootMethod()
 			if (lootmethod == "master") then
 				masterlootername = GetRaidRosterInfo(masterlooterRaidID)
-				if (lootmethod == "master" and UnitName("player") == masterlootername) then
+				if (lootmethod == "master" and UnitName("player") == masterlootername) then 
 					anz = GetNumLootItems()
 					if anz>6 then
 						anz = 6
@@ -150,7 +150,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 						end
 						if (LootSlotHasItem(slot) and quality >= GDKPvar_save.LOOTLEVEL) then
 							j = j + 1
-							if (j == 1) then
+							if (j == 1) then 
 								C_ChatInfo.SendAddonMessage("GDALootlist","start","RAID")
 							end
 							if (GDKPvar_save.GDA_Loot) and (quality >= GDKPvar_save.LOOTLEVEL)then
@@ -177,7 +177,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 				if (table.getn(GDA_PAAR_ENT) > 0) then
 					GDA_PAAR_FOUND = 0
 					for j = 1, table.getn(GDA_PAAR_ENT),1 do
-						if (GDA_PAAR_ENT[j].name == _name) then
+						if (GDA_PAAR_ENT[j].name == _name) then 
 							GDA_PAAR_FOUND = 1
 							msg = _name
 							msg = msg..GDA_PAAR_1ROLL
@@ -187,7 +187,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 					if (GDA_PAAR_FOUND == 0) then
 						tinsert (GDA_PAAR_ENT, {name = _name,punkte = GDA_PAAR_NAME[i].punkte,wurf = _wurf,twink = GDA_PAAR_NAME[i].twink})
 					end
-				else
+				else 
 					tinsert (GDA_PAAR_ENT, {name = _name,punkte = GDA_PAAR_NAME[i].punkte,wurf = _wurf,twink = GDA_PAAR_NAME[i].twink})
 				end
 			end
@@ -220,13 +220,13 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 		if (gdkp == nil) or (tonumber(arg1) == nil) then
 				return
 		end
-
+		
 		if (GetDKPAdmin_List ~= nil and gdkp.players ~= nil and GDKPvar_save.GDA_OnOff and IsPromoted() and GDA_CD_Stop == false) then
 				if (GDA_Countdown == 1 and GDA_CD_StartTime == nil) then
 					GDA_CD_StartTime = time()
 					GetDKPAdmin_CD_Button:SetText(GDA_CD_OFF)
 				end
-
+				
 				if (Username == UnitName("player")) then
 					if (string.find(arg1,GDA_CD_MSG_TEXT_1) ~= nil or string.find(arg1,GDA_CD_MSG_TEXT_4)~= nil or string.find(arg1,GDA_CD_MSG_TEXT_5)~= nil or string.find(arg1,GDA_CD_MSG_TEXT_6)~= nil or string.find(arg1,GDA_CD_MSG_TEXT_7)~= nil) then
 						arg1 = ""
@@ -234,8 +234,8 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 						arg1 = ""
 					end
 				end
-
-				if (GetDKPAdmin_Frame:IsVisible()) then
+				
+				if (GetDKPAdmin_Frame:IsVisible()) then 
 					arg1 = findpattern(arg1 ,"%d*%d")
 				end
 				if (gdkp.players[Username] == nil and gdkp_alliases ~= nil and tonumber(DKPInfo.process_dkp_ver) > 2.60 and tonumber(arg1) ~= nil) then
@@ -263,7 +263,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 									GetDKPAdmin_Rule1()
 									if (type(GDKPvar_save) == "table") then
 										GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-									else
+									else 
 										GDA_Scale = 1
 									end
 									unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -273,14 +273,14 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 									GetDKPAdmin_Rule1()
 									if (type(GDKPvar_save) == "table") then
 										GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-									else
+									else 
 										GDA_Scale = 1
 									end
 									unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
 									GetDKPAdmin_Frame:SetScale(unsavedscale)
 								end
 							else
-
+								
 							end
 						end
 					end
@@ -288,7 +288,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 					find = 0
 					current_highest_bid = 0
 					for i = 1 , table.getn(GetDKPAdmin_List) do
-
+						
 						if ( current_highest_bid < GetDKPAdmin_List[i].points ) then
 						current_highest_bid = GetDKPAdmin_List[i].points
 						end
@@ -314,7 +314,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 													end
 													GetDKPAdmin_List[i].points = tonumber(arg1)
 											end
-
+											
 											if ( current_highest_bid == tonumber(arg1)) then
 													if (( GDKPvar_save.GDA_Rule == 1 and GDKPvar_save.GDA_announce_highest_bid1 )) or (( GDKPvar_save.GDA_Rule == 3 and  GDKPvar_save.GDA_announce_highest_bid2 )) then
 													SendChatMessage(GDA_equal_highest_bid..tonumber(arg1).."DKP", "RAID", "Common")
@@ -334,7 +334,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 								find = 1
 							end
 						end
-
+						
 						if (find ~= 1) then
 							if(GDKP_DEBUG == true) then
 								print("DEBUG - Rule: "..GDKPvar_save.GDA_Rule)
@@ -348,13 +348,13 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 							if(GDKP_DEBUG == true) then
 								print("DEBUG: "..tmp_minDKP_setting .."<=".. tonumber(arg1))
 							end
-							if (tmp_minDKP_setting <= tonumber(arg1)) then
+							if (tmp_minDKP_setting <= tonumber(arg1)) then							
 									if ( current_highest_bid < tonumber(arg1)) then
 											if (( GDKPvar_save.GDA_Rule == 1 and GDKPvar_save.GDA_announce_highest_bid1 )) or (( GDKPvar_save.GDA_Rule == 3 and  GDKPvar_save.GDA_announce_highest_bid2 )) then
 											SendChatMessage(GDA_new_highest_bid..tonumber(arg1).."DKP", "RAID", "Common")
 											end
 									end
-
+									
 									if ( current_highest_bid == tonumber(arg1)) then
 											if (( GDKPvar_save.GDA_Rule == 1 and GDKPvar_save.GDA_announce_highest_bid1 )) or (( GDKPvar_save.GDA_Rule == 3 and  GDKPvar_save.GDA_announce_highest_bid2 )) then
 											SendChatMessage(GDA_equal_highest_bid..tonumber(arg1).."DKP", "RAID", "Common")
@@ -375,7 +375,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 							GetDKPAdmin_Rule1()
 							if (type(GDKPvar_save) == "table") then
 								GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-							else
+							else 
 								GDA_Scale = 1
 							end
 							unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -385,7 +385,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 							GetDKPAdmin_Rule1()
 							if (type(GDKPvar_save) == "table") then
 								GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-							else
+							else 
 								GDA_Scale = 1
 							end
 							unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -419,7 +419,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 					GDA_CD_StartTime = time()
 					GetDKPAdmin_CD_Button:SetText(GDA_CD_OFF)
 				end
-
+				
 				if (gdkp.players[Username] == nil and gdkp_alliases ~= nil and tonumber(DKPInfo.process_dkp_ver) > 2.60 ) then
 					local foundtwink = false
 					for key,val in pairs(gdkp_alliases) do
@@ -444,7 +444,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 									GetDKPAdmin_Rule2()
 									if (type(GDKPvar_save) == "table") then
 										GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-									else
+									else 
 										GDA_Scale = 1
 									end
 									unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -454,7 +454,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 									GetDKPAdmin_Rule2()
 									if (type(GDKPvar_save) == "table") then
 										GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-									else
+									else 
 										GDA_Scale = 1
 									end
 									unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -470,7 +470,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 								find = 1
 							end
 						end
-
+						
 						if (find ~= 1) then
 							if greedroll then
 								tinsert(GetDKPAdmin_List, {name = "[G] "..arg2; class = "unknown"; points = GDKPvar_save.GDA_GreedWord.." ("..GDKPvar_save.GDA_GreedDKP..")"; dkp = 0})
@@ -483,7 +483,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 							GetDKPAdmin_Rule2()
 							if (type(GDKPvar_save) == "table") then
 								GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-							else
+							else 
 								GDA_Scale = 1
 							end
 							unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -493,7 +493,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 							GetDKPAdmin_Rule2()
 							if (type(GDKPvar_save) == "table") then
 								GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-							else
+							else 
 								GDA_Scale = 1
 							end
 							unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -507,7 +507,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 							find = 1
 						end
 					end
-
+					
 					if (find ~= 1) then
 						if greedroll then
 							tinsert(GetDKPAdmin_List, {name = "[G] "..Username; class = "unknown"; points = GDKPvar_save.GDA_GreedWord.." ("..GDKPvar_save.GDA_GreedDKP..")"; dkp = 0})
@@ -520,7 +520,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 						GetDKPAdmin_Rule2()
 						if (type(GDKPvar_save) == "table") then
 							GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-						else
+						else 
 							GDA_Scale = 1
 						end
 						unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -530,7 +530,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 						GetDKPAdmin_Rule2()
 						if (type(GDKPvar_save) == "table") then
 							GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-						else
+						else 
 							GDA_Scale = 1
 						end
 						unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -543,21 +543,21 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 							find = 1
 						end
 					end
-
+					
 					if (find ~= 1) then
 						if greedroll then
 							tinsert(GetDKPAdmin_List, {name = Username; class = gdkp.players[Username].class; points = GDKPvar_save.GDA_GreedWord.." ("..GDKPvar_save.GDA_GreedDKP..")"; dkp = gdkp.players[Username][GDKPvar_save.konto.."_current"]})
 						else
 							tinsert(GetDKPAdmin_List, {name = Username; class = gdkp.players[Username].class; points = GDKPvar_save.GDA_BetWord.." ("..GDKPvar_save.GDA_MinDKP_Rule2..")"; dkp = gdkp.players[Username][GDKPvar_save.konto.."_current"]})
 						end
-
+							
 						find = 0
 					end
 					if (GetDKPAdmin_Frame:IsVisible()) then
 						GetDKPAdmin_Rule2()
 						if (type(GDKPvar_save) == "table") then
 							GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-						else
+						else 
 							GDA_Scale = 1
 						end
 						unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -567,7 +567,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 						GetDKPAdmin_Rule2()
 						if (type(GDKPvar_save) == "table") then
 							GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-						else
+						else 
 							GDA_Scale = 1
 						end
 						unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -578,7 +578,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 					GetDKPAdmin_Rule2()
 					if (type(GDKPvar_save) == "table") then
 						GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-					else
+					else 
 						GDA_Scale = 1
 					end
 					unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -588,7 +588,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 					GetDKPAdmin_Rule2()
 					if (type(GDKPvar_save) == "table") then
 						GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-					else
+					else 
 						GDA_Scale = 1
 					end
 					unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -626,7 +626,7 @@ end
 function GetDKPAdmin_Toggle()
 	if (type(GDKPvar_save) == "table") then
 		GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-	else
+	else 
 		GDA_Scale = 100
 	end
 	if (GetDKPAdmin_Frame:IsVisible()) then
@@ -654,7 +654,7 @@ function GetDKPAdmin_Rule1()
 			GetDKPAdmin_List[1] = GetDKPAdmin_List[2]
 			GetDKPAdmin_List[2] = test
 		end
-	else
+	else	
 		for i = table.getn (GetDKPAdmin_List),2,-1 do
 			if (GetDKPAdmin_List[i]["points"] > GetDKPAdmin_List[i-1]["points"]) then
 				test = GetDKPAdmin_List[i-1]
@@ -674,7 +674,7 @@ end
 function GetDKPAdmin_BuildList()
 	i = 1
 	j = 1
-
+	
 	while (i <= 17) do
 		local prefix = "GDAPlayer"..i
 		local itemButton = _G[prefix]
@@ -708,12 +708,12 @@ function GetDKPAdmin_BuildList()
 				key4 = GetDKPAdmin_List[lineplusoffset].twink
 				keytext = keytext..","..key4
 			end
-
+			
 			if (GDKPvar_save.GDA_Rule == 1 or GDKPvar_save.GDA_Rule == 3) then
 				if (key2 > (GetDKPAdmin_List[lineplusoffset].dkp)) then
 					getglobal(prefix.."Set"):SetTextColor(1, 0, 0)
 				end
-
+				
 			elseif (GDKPvar_save.GDA_Rule == 2) then
 				if (GDA_Sort_Rule2 == 3) then
 					getglobal(prefix.."Set"):SetTextColor(1, 0, 0)
@@ -744,7 +744,7 @@ function GetDKPAdmin_BuildList()
 					getglobal(prefix.."Name"):SetTextColor(0.77, 0.12, 0.23)
 			elseif (GetDKPAdmin_List[lineplusoffset].class == "Demonhunter" or GetDKPAdmin_List[lineplusoffset].class == "D\195\164monenj\195\164ger") then
 					getglobal(prefix.."Name"):SetTextColor(0.77, 0.12, 0.23)
-			else
+			else		
 					getglobal(prefix.."Name"):SetTextColor(1, 1, 1)
 			end
 			getglobal(prefix.."Order"):SetText(key2)
@@ -768,7 +768,7 @@ function GetDKPAdmin_BuildList()
 end
 
 function PlayersOrder(var,button)
-
+	
 	if (button == "RightButton") then
 		GDAList = {}
 		for i = 1 , table.getn(GetDKPAdmin_List) do
@@ -887,7 +887,7 @@ function PlayersOrder(var,button)
 				else
 					msg = msg..GDA_WINS2..GDKPvar_save.GDA_MinDKP_Rule2.." DKP"
 				end
-
+				
 			end
 		end
 		SendChatMessage(msg, GDA_Msg[GDKPvar_save.GDA_Chatoutput_Rule2])
@@ -992,7 +992,7 @@ function GetDKPAdmin_Clear()
 end
 
 function GetDKPAdmin_OnOff()
-	if (getglobal("GetDKP_Config_Frame_CheckButton51"):GetChecked()) then
+	if (getglobal("GetDKP_Config_Frame_CheckButton51"):GetChecked()) then 
 		GetDKP_Config_Frame_CheckButton51:SetChecked(nil)
 		GetDKPAdmin_OnOff_Button:SetText(GDC_GDA_On)
 		GDKPvar_save.GDA_OnOff = false
@@ -1001,7 +1001,7 @@ function GetDKPAdmin_OnOff()
 		GetDKPAdmin_OnOff_Button:SetText(GDC_GDA_Off)
 		GDKPvar_save.GDA_OnOff = true
 	end
-
+	
 end
 
 function GetDKPAdmin_CD_OnOff()
@@ -1054,12 +1054,12 @@ end
 
 function GDA_LootList_Update(list)
 	if list == nil then
-		for i = 1,6,1 do
+		for i = 1,6,1 do 
 			getglobal("GDA_LootList_FrameButton"..i.."_Icon"):SetTexture()
 			getglobal("GDA_LootList_FrameButton"..i.."_Icon").ItemLink = nil
 		end
 	else
-		for i = 1,getn(list),1 do
+		for i = 1,getn(list),1 do 
 			getglobal("GDA_LootList_FrameButton"..i.."_Icon"):SetTexture(list[i][2])
 			getglobal("GDA_LootList_FrameButton"..i.."_Icon").ItemLink = list[i][1]
 		end
