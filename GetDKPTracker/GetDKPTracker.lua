@@ -13,24 +13,24 @@ UIPanelWindows["GetDKPTracker_Frame"] = { area = "left", pushable = 1, whileDead
 -----------------------------
 function GetDKP_Tracker_OnLoad(self)
 
-		this:RegisterEvent("VARIABLES_LOADED")
-		this:RegisterEvent("CHAT_MSG_LOOT")
-		this:RegisterEvent("CHAT_MSG_SYSTEM")
-		this:RegisterEvent("CHAT_MSG_WHISPER")
-		this:RegisterEvent("CHAT_MSG_ADDON")
-		this:RegisterEvent("GROUP_ROSTER_UPDATE")
-		this:RegisterEvent("RAID_INSTANCE_WELCOME")
-		this:RegisterEvent("PLAYER_ENTERING_WORLD")
-		-- Slash Commands
-		SlashCmdList["GETDKPTRACKER"] = GetDKPTracker_SlashHandler
-		SLASH_GETDKPTRACKER1 = "/gdt"
-		-- Set Tabs
-		PanelTemplates_SetNumTabs(self, 4)
-		self.selectedTab = 1
-		PanelTemplates_UpdateTabs(self)
-		
-		-- ALLREADY LOAD 
-		GETDKP_TrackerLOAD = true
+	this:RegisterEvent("VARIABLES_LOADED")
+	this:RegisterEvent("CHAT_MSG_LOOT")
+	this:RegisterEvent("CHAT_MSG_SYSTEM")
+	this:RegisterEvent("CHAT_MSG_WHISPER")
+	this:RegisterEvent("CHAT_MSG_ADDON")
+	this:RegisterEvent("GROUP_ROSTER_UPDATE")
+	this:RegisterEvent("RAID_INSTANCE_WELCOME")
+	this:RegisterEvent("PLAYER_ENTERING_WORLD")
+	-- Slash Commands
+	SlashCmdList["GETDKPTRACKER"] = GetDKPTracker_SlashHandler
+	SLASH_GETDKPTRACKER1 = "/gdt"
+	-- Set Tabs
+	PanelTemplates_SetNumTabs(self, 4)
+	self.selectedTab = 1
+	PanelTemplates_UpdateTabs(self)
+
+	-- ALLREADY LOAD
+	GETDKP_TrackerLOAD = true
 end
 
 -------------------------------------
@@ -40,9 +40,9 @@ function GetDKP_Tracker_Variables_Loaded()
 	if not GetDKP_Tracker_Raids then
 		GetDKP_Tracker_Raids ={}
 	end
-	
+
 	GetDKP_Tacker_Raid_Time = nil
-	
+
 	if (GetDKP_Tracker_Raids == nil or GetDKP_Tracker_Raids == {}) then
 		GetDKP_Tracker_Raids = {}
 		getglobal("GetDKPTracker_FrameHeaderTitleSide"):SetText("Options")
@@ -72,9 +72,9 @@ function GetDKP_Tracker_OnEvent(event)
 	elseif (event == "CHAT_MSG_LOOT" or event == "CHAT_MSG_SYSTEM" or event == "CHAT_MSG_WHISPER") then
 		return
 	elseif (event == "CHAT_MSG_ADDON") then
-	
+
 	elseif (event == "GROUP_ROSTER_UPDATE" or event == "PLAYER_ENTERING_WORLD") then
-		
+
 		GetDKP_Tracker_Raid_Update (event)
 	end
 end

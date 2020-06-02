@@ -74,80 +74,80 @@ Methods
 -------------------------------------------------------------------------------]]
 local methods = {
 	["OnAcquire"] = function(self)
-		-- set the flag to stop constant size updates
-		self.resizing = true
-		-- height is set dynamically by the text and image size
-		self:SetWidth(200)
-		self:SetText()
-		self:SetImage(nil)
-		self:SetImageSize(16, 16)
-		self:SetColor()
-		self:SetFontObject()
-		self:SetJustifyH("LEFT")
-		self:SetJustifyV("TOP")
+	-- set the flag to stop constant size updates
+	self.resizing = true
+	-- height is set dynamically by the text and image size
+	self:SetWidth(200)
+	self:SetText()
+	self:SetImage(nil)
+	self:SetImageSize(16, 16)
+	self:SetColor()
+	self:SetFontObject()
+	self:SetJustifyH("LEFT")
+	self:SetJustifyV("TOP")
 
-		-- reset the flag
-		self.resizing = nil
-		-- run the update explicitly
-		UpdateImageAnchor(self)
+	-- reset the flag
+	self.resizing = nil
+	-- run the update explicitly
+	UpdateImageAnchor(self)
 	end,
 
 	-- ["OnRelease"] = nil,
 
 	["OnWidthSet"] = function(self, width)
-		UpdateImageAnchor(self)
+	UpdateImageAnchor(self)
 	end,
 
 	["SetText"] = function(self, text)
-		self.label:SetText(text)
-		UpdateImageAnchor(self)
+	self.label:SetText(text)
+	UpdateImageAnchor(self)
 	end,
 
 	["SetColor"] = function(self, r, g, b)
-		if not (r and g and b) then
-			r, g, b = 1, 1, 1
-		end
-		self.label:SetVertexColor(r, g, b)
+	if not (r and g and b) then
+		r, g, b = 1, 1, 1
+	end
+	self.label:SetVertexColor(r, g, b)
 	end,
 
 	["SetImage"] = function(self, path, ...)
-		local image = self.image
-		image:SetTexture(path)
+	local image = self.image
+	image:SetTexture(path)
 
-		if image:GetTexture() then
-			self.imageshown = true
-			local n = select("#", ...)
-			if n == 4 or n == 8 then
-				image:SetTexCoord(...)
-			else
-				image:SetTexCoord(0, 1, 0, 1)
-			end
+	if image:GetTexture() then
+		self.imageshown = true
+		local n = select("#", ...)
+		if n == 4 or n == 8 then
+			image:SetTexCoord(...)
 		else
-			self.imageshown = nil
+			image:SetTexCoord(0, 1, 0, 1)
 		end
-		UpdateImageAnchor(self)
+	else
+		self.imageshown = nil
+	end
+	UpdateImageAnchor(self)
 	end,
 
 	["SetFont"] = function(self, font, height, flags)
-		self.label:SetFont(font, height, flags)
+	self.label:SetFont(font, height, flags)
 	end,
 
 	["SetFontObject"] = function(self, font)
-		self:SetFont((font or GameFontHighlightSmall):GetFont())
+	self:SetFont((font or GameFontHighlightSmall):GetFont())
 	end,
 
 	["SetImageSize"] = function(self, width, height)
-		self.image:SetWidth(width)
-		self.image:SetHeight(height)
-		UpdateImageAnchor(self)
+	self.image:SetWidth(width)
+	self.image:SetHeight(height)
+	UpdateImageAnchor(self)
 	end,
 
 	["SetJustifyH"] = function(self, justifyH)
-		self.label:SetJustifyH(justifyH)
+	self.label:SetJustifyH(justifyH)
 	end,
 
 	["SetJustifyV"] = function(self, justifyV)
-		self.label:SetJustifyV(justifyV)
+	self.label:SetJustifyV(justifyV)
 	end,
 }
 

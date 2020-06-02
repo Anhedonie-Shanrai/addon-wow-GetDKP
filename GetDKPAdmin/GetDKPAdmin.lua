@@ -25,37 +25,37 @@ GDA_LOOTLISTUPDATE = 0
 GDA_LOOTLIST = nil
 
 GDA_Msg = {
-			[1] = "GUILD",
-			[2] = "SAY",
-			[3] = "PARTY",
-			[4] = "RAID",
-			[5] = "OFFICER",
-			[6] = "RAID_WARNING",
-		  }
- 
+	[1] = "GUILD",
+	[2] = "SAY",
+	[3] = "PARTY",
+	[4] = "RAID",
+	[5] = "OFFICER",
+	[6] = "RAID_WARNING",
+}
+
 function GetDKPAdmin_OnLoad(this)
-		this:RegisterEvent("VARIABLES_LOADED")
-		this:RegisterEvent("CHAT_MSG_WHISPER")
-		this:RegisterEvent("CHAT_MSG_RAID")
-		this:RegisterEvent("CHAT_MSG_RAID_LEADER")
-		this:RegisterEvent("CHAT_MSG_GUILD")
-		this:RegisterEvent("CHAT_MSG_SYSTEM")
-		this:RegisterEvent("LOOT_READY")
-		this:RegisterEvent("CHAT_MSG_ADDON")
-		-- Slash Commands --
-		SlashCmdList["GETDKPADMIN"] = GetDKPAdmin_SlashHandler
-		SLASH_GETDKPADMIN1 = "/gda"
-		SLASH_GETDKPADMIN2 = "/gdb"
-		GETDKP_ADMINLOAD = true
-	
+	this:RegisterEvent("VARIABLES_LOADED")
+	this:RegisterEvent("CHAT_MSG_WHISPER")
+	this:RegisterEvent("CHAT_MSG_RAID")
+	this:RegisterEvent("CHAT_MSG_RAID_LEADER")
+	this:RegisterEvent("CHAT_MSG_GUILD")
+	this:RegisterEvent("CHAT_MSG_SYSTEM")
+	this:RegisterEvent("LOOT_READY")
+	this:RegisterEvent("CHAT_MSG_ADDON")
+	-- Slash Commands --
+	SlashCmdList["GETDKPADMIN"] = GetDKPAdmin_SlashHandler
+	SLASH_GETDKPADMIN1 = "/gda"
+	SLASH_GETDKPADMIN2 = "/gdb"
+	GETDKP_ADMINLOAD = true
+
 end
 
 function GetDKPAdmin_OnUpdate(this, elapsed)
 	this.TimeSinceLastUpdate = this.TimeSinceLastUpdate + elapsed
-	 
+
 	if(this.TimeSinceLastUpdate > GDA_UpdateInterval and GDA_CD_StartTime ~= nil and GDA_CD_Stop == false) then
-	GDA_CD_Time = GDKPvar_save.GDA_Countdown_Time
-	GDA_CD_Alert = GDKPvar_save.GDA_Countdown_Alert
+		GDA_CD_Time = GDKPvar_save.GDA_Countdown_Time
+		GDA_CD_Alert = GDKPvar_save.GDA_Countdown_Alert
 		_time = time()
 		if (_time == GDA_CD_StartTime and GDA_CD_MSG_Start == false)then
 			GDA_CD_MSG_Start = true
@@ -97,7 +97,7 @@ function GetDKPAdmin_OnUpdate(this, elapsed)
 		end
 		this.TimeSinceLastUpdate = 0
 	end
-	
+
 end
 
 function GetDKPAdmin_OnEvent(self, event, ...)
@@ -137,7 +137,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 			lootmethod, masterlooterPartyID, masterlooterRaidID = GetLootMethod()
 			if (lootmethod == "master") then
 				masterlootername = GetRaidRosterInfo(masterlooterRaidID)
-				if (lootmethod == "master" and UnitName("player") == masterlootername) then 
+				if (lootmethod == "master" and UnitName("player") == masterlootername) then
 					anz = GetNumLootItems()
 					if anz>6 then
 						anz = 6
@@ -150,7 +150,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 						end
 						if (LootSlotHasItem(slot) and quality >= GDKPvar_save.LOOTLEVEL) then
 							j = j + 1
-							if (j == 1) then 
+							if (j == 1) then
 								C_ChatInfo.SendAddonMessage("GDALootlist","start","RAID")
 							end
 							if (GDKPvar_save.GDA_Loot) and (quality >= GDKPvar_save.LOOTLEVEL)then
@@ -170,14 +170,14 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 	-------------------------------- Roll Find ----------------------------------------
 	if  (event == "CHAT_MSG_SYSTEM" and GDA_PAAR ==1 and arg1~=nil) then
 		local _pos1, _posX = string.find(arg1, " ")
-  		local _name = string.sub(arg1, 0, _pos1-1)
+		local _name = string.sub(arg1, 0, _pos1-1)
 		local _pos1,_posX,_wurf = string.find(arg1, "(%d+)")
 		for i = 1, table.getn(GDA_PAAR_NAME) do
 			if (GDA_PAAR_NAME[i].name == _name) then
 				if (table.getn(GDA_PAAR_ENT) > 0) then
 					GDA_PAAR_FOUND = 0
 					for j = 1, table.getn(GDA_PAAR_ENT),1 do
-						if (GDA_PAAR_ENT[j].name == _name) then 
+						if (GDA_PAAR_ENT[j].name == _name) then
 							GDA_PAAR_FOUND = 1
 							msg = _name
 							msg = msg..GDA_PAAR_1ROLL
@@ -187,7 +187,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 					if (GDA_PAAR_FOUND == 0) then
 						tinsert (GDA_PAAR_ENT, {name = _name,punkte = GDA_PAAR_NAME[i].punkte,wurf = _wurf,twink = GDA_PAAR_NAME[i].twink})
 					end
-				else 
+				else
 					tinsert (GDA_PAAR_ENT, {name = _name,punkte = GDA_PAAR_NAME[i].punkte,wurf = _wurf,twink = GDA_PAAR_NAME[i].twink})
 				end
 			end
@@ -218,194 +218,194 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 	if (arg1 ~= nil and arg2 ~= nil) and ((GDKPvar_save.GDA_Rule == 1 and ((event == "CHAT_MSG_WHISPER" and GDKPvar_save.GDA_Chatlook == 1 ) or (event == "CHAT_MSG_GUILD" and GDKPvar_save.GDA_Chatlook == 3 ) or (event =="CHAT_MSG_RAID" and GDKPvar_save.GDA_Chatlook == 2 ) or ( event =="CHAT_MSG_RAID_LEADER" and GDKPvar_save.GDA_Chatlook == 2))) or (GDKPvar_save.GDA_Rule == 3 and ((event == "CHAT_MSG_WHISPER" and GDKPvar_save.GDA_Chatlook_Rule3 == 1 ) or (event == "CHAT_MSG_GUILD" and GDKPvar_save.GDA_Chatlook_Rule3 == 3 ) or (event =="CHAT_MSG_RAID" and GDKPvar_save.GDA_Chatlook_Rule3 == 2 ) or ( event =="CHAT_MSG_RAID_LEADER" and GDKPvar_save.GDA_Chatlook_Rule3 == 2)))) then
 		local Username, Userrealm = strsplit("-", arg2, 2)
 		if (gdkp == nil) or (tonumber(arg1) == nil) then
-				return
+			return
 		end
-		
-		if (GetDKPAdmin_List ~= nil and gdkp.players ~= nil and GDKPvar_save.GDA_OnOff and IsPromoted() and GDA_CD_Stop == false) then
-				if (GDA_Countdown == 1 and GDA_CD_StartTime == nil) then
-					GDA_CD_StartTime = time()
-					GetDKPAdmin_CD_Button:SetText(GDA_CD_OFF)
-				end
-				
-				if (Username == UnitName("player")) then
-					if (string.find(arg1,GDA_CD_MSG_TEXT_1) ~= nil or string.find(arg1,GDA_CD_MSG_TEXT_4)~= nil or string.find(arg1,GDA_CD_MSG_TEXT_5)~= nil or string.find(arg1,GDA_CD_MSG_TEXT_6)~= nil or string.find(arg1,GDA_CD_MSG_TEXT_7)~= nil) then
-						arg1 = ""
-					elseif (string.find(arg1,GDA_ROLL)~= nil or string.find(arg1,GDA_PAAR_A)~= nil) then
-						arg1 = ""
-					end
-				end
-				
-				if (GetDKPAdmin_Frame:IsVisible()) then 
-					arg1 = findpattern(arg1 ,"%d*%d")
-				end
-				if (gdkp.players[Username] == nil and gdkp_alliases ~= nil and tonumber(DKPInfo.process_dkp_ver) > 2.60 and tonumber(arg1) ~= nil) then
-					--debug (arg2)
-					for key,val in pairs(gdkp_alliases) do
-						for i=1,table.getn(gdkp_alliases[key]),1 do
-							if (gdkp_alliases[key][i] ==  Username) then
-								find = 0
-								for i = 1 , table.getn(GetDKPAdmin_List) do
-									if (GetDKPAdmin_List[i].name == Username) then
-										GetDKPAdmin_List[i].points = tonumber(arg1)
-										find = 1
-									end
-								end
 
-								if (find ~= 1) then
-									if ( GDKPvar_save.GDA_MinDKP_Rule3 <= tonumber(arg1)) then
-										tinsert(GetDKPAdmin_List, {name = Username; class = gdkp.players[Username].class; points = tonumber(arg1); dkp = gdkp.players[Username][GDKPvar_save.konto.."_current"]})
-									else
-											SendChatMessage("Bid is too low", "WHISPER", "Common", arg2)
-									end
-									find = 0
-								end
-								if (GetDKPAdmin_Frame:IsVisible()) then
-									GetDKPAdmin_Rule1()
-									if (type(GDKPvar_save) == "table") then
-										GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-									else 
-										GDA_Scale = 1
-									end
-									unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
-									GetDKPAdmin_Frame:SetScale(unsavedscale)
-								else
-									GetDKPAdmin_Frame:Show()
-									GetDKPAdmin_Rule1()
-									if (type(GDKPvar_save) == "table") then
-										GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-									else 
-										GDA_Scale = 1
-									end
-									unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
-									GetDKPAdmin_Frame:SetScale(unsavedscale)
-								end
-							else
-								
-							end
-						end
-					end
-				elseif (tonumber(arg1) ~= nil and gdkp.players[Username] ~= nil) then
-					find = 0
-					current_highest_bid = 0
-					for i = 1 , table.getn(GetDKPAdmin_List) do
-						
-						if ( current_highest_bid < GetDKPAdmin_List[i].points ) then
-						current_highest_bid = GetDKPAdmin_List[i].points
-						end
-					end
-						for i = 1 , table.getn(GetDKPAdmin_List) do
-							if (GetDKPAdmin_List[i].name == Username) then
-								if(GDKPvar_save.GDA_Rule == 1) then
-									tmp_minDKP_setting = GDKPvar_save.GDA_MinDKP
-								else
-									tmp_minDKP_setting = GDKPvar_save.GDA_MinDKP_Rule3
-								end
-								if (tmp_minDKP_setting <= tonumber(arg1)) then
-									if ( GetDKPAdmin_List[i].points > tonumber(arg1)) then
-											if (( GDKPvar_save.GDA_Rule == 1 and GDKPvar_save.GDA_announce_highest_bid1 )) or (( GDKPvar_save.GDA_Rule == 3 and  GDKPvar_save.GDA_announce_highest_bid2 )) then
-											SendChatMessage(GDA_bid_lowering, "WHISPER", "Common", arg2)
-											end
-									elseif (GetDKPAdmin_List[i].points == tonumber(arg1)) then
-											SendChatMessage(GDA_same_bid_as_before..tonumber(arg1).."DKP", "WHISPER", "Common", arg2)
-									else
-											if ( current_highest_bid < tonumber(arg1)) then
-													if (( GDKPvar_save.GDA_Rule == 1 and GDKPvar_save.GDA_announce_highest_bid1 )) or (( GDKPvar_save.GDA_Rule == 3 and  GDKPvar_save.GDA_announce_highest_bid2 )) then
-													SendChatMessage(GDA_new_highest_bid..tonumber(arg1).."DKP", "RAID", "Common")
-													end
-													GetDKPAdmin_List[i].points = tonumber(arg1)
-											end
-											
-											if ( current_highest_bid == tonumber(arg1)) then
-													if (( GDKPvar_save.GDA_Rule == 1 and GDKPvar_save.GDA_announce_highest_bid1 )) or (( GDKPvar_save.GDA_Rule == 3 and  GDKPvar_save.GDA_announce_highest_bid2 )) then
-													SendChatMessage(GDA_equal_highest_bid..tonumber(arg1).."DKP", "RAID", "Common")
-													end
-													GetDKPAdmin_List[i].points = tonumber(arg1)
-											end
-											if ( current_highest_bid > tonumber(arg1)) then
-													if (( GDKPvar_save.GDA_Rule == 1 and GDKPvar_save.GDA_announce_highest_bid1 )) or (( GDKPvar_save.GDA_Rule == 3 and  GDKPvar_save.GDA_announce_highest_bid2 )) then
-													SendChatMessage(GDA_low_highest_bid..tonumber(arg1).."DKP", "WHISPER", "Common", arg2)
-													end
-													GetDKPAdmin_List[i].points = tonumber(arg1)
-											end
-									end
-								else
-									SendChatMessage(GDA_bid_too_low, "WHISPER", "Common", arg2)
-								end
-								find = 1
-							end
-						end
-						
-						if (find ~= 1) then
-							if(GDKP_DEBUG == true) then
-								print("DEBUG - Rule: "..GDKPvar_save.GDA_Rule)
-							end
-							tmp_minDKP_setting = 0
-							if(GDKPvar_save.GDA_Rule == 1) then
-								tmp_minDKP_setting = GDKPvar_save.GDA_MinDKP
-							else
-								tmp_minDKP_setting = GDKPvar_save.GDA_MinDKP_Rule3
-							end
-							if(GDKP_DEBUG == true) then
-								print("DEBUG: "..tmp_minDKP_setting .."<=".. tonumber(arg1))
-							end
-							if (tmp_minDKP_setting <= tonumber(arg1)) then							
-									if ( current_highest_bid < tonumber(arg1)) then
-											if (( GDKPvar_save.GDA_Rule == 1 and GDKPvar_save.GDA_announce_highest_bid1 )) or (( GDKPvar_save.GDA_Rule == 3 and  GDKPvar_save.GDA_announce_highest_bid2 )) then
-											SendChatMessage(GDA_new_highest_bid..tonumber(arg1).."DKP", "RAID", "Common")
-											end
-									end
-									
-									if ( current_highest_bid == tonumber(arg1)) then
-											if (( GDKPvar_save.GDA_Rule == 1 and GDKPvar_save.GDA_announce_highest_bid1 )) or (( GDKPvar_save.GDA_Rule == 3 and  GDKPvar_save.GDA_announce_highest_bid2 )) then
-											SendChatMessage(GDA_equal_highest_bid..tonumber(arg1).."DKP", "RAID", "Common")
-											end
-									end
-									if ( current_highest_bid > tonumber(arg1)) then
-											if (( GDKPvar_save.GDA_Rule == 1 and GDKPvar_save.GDA_announce_highest_bid1 )) or (( GDKPvar_save.GDA_Rule == 3 and  GDKPvar_save.GDA_announce_highest_bid2 )) then
-											SendChatMessage(GDA_low_highest_bid..tonumber(arg1).."DKP", "WHISPER", "Common", arg2)
-											end
-									end
-									tinsert(GetDKPAdmin_List, {name = Username; class = gdkp.players[Username].class; points = tonumber(arg1); dkp = gdkp.players[Username][GDKPvar_save.konto.."_current"]})
-							else
-									SendChatMessage(GDA_bid_too_low, "WHISPER", "Common", arg2)
-							end
-							find = 0
-						end
-						if (GetDKPAdmin_Frame:IsVisible()) then
-							GetDKPAdmin_Rule1()
-							if (type(GDKPvar_save) == "table") then
-								GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-							else 
-								GDA_Scale = 1
-							end
-							unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
-							GetDKPAdmin_Frame:SetScale(unsavedscale)
-						else
-							GetDKPAdmin_Frame:Show()
-							GetDKPAdmin_Rule1()
-							if (type(GDKPvar_save) == "table") then
-								GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-							else 
-								GDA_Scale = 1
-							end
-							unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
-							GetDKPAdmin_Frame:SetScale(unsavedscale)
-						end
-				elseif (gdkp.players[Username] == nil and gdkp_alliases == nil and tonumber(DKPInfo.process_dkp_ver) > 2.60 ) then
-						StaticPopupDialogs["no_dkp_user-"..Username] = {
-							text = Username.."(No DKP-User) bids "..tonumber(arg1).."DKP",
-							button1 = "OK",
-							timeout = 0,
-							}
-						StaticPopup_Show("no_dkp_user-"..Username)
+		if (GetDKPAdmin_List ~= nil and gdkp.players ~= nil and GDKPvar_save.GDA_OnOff and IsPromoted() and GDA_CD_Stop == false) then
+			if (GDA_Countdown == 1 and GDA_CD_StartTime == nil) then
+				GDA_CD_StartTime = time()
+				GetDKPAdmin_CD_Button:SetText(GDA_CD_OFF)
+			end
+
+			if (Username == UnitName("player")) then
+				if (string.find(arg1,GDA_CD_MSG_TEXT_1) ~= nil or string.find(arg1,GDA_CD_MSG_TEXT_4)~= nil or string.find(arg1,GDA_CD_MSG_TEXT_5)~= nil or string.find(arg1,GDA_CD_MSG_TEXT_6)~= nil or string.find(arg1,GDA_CD_MSG_TEXT_7)~= nil) then
+					arg1 = ""
+				elseif (string.find(arg1,GDA_ROLL)~= nil or string.find(arg1,GDA_PAAR_A)~= nil) then
+					arg1 = ""
 				end
 			end
-	-----------------------------------------------------------------------------------
-	-------------------------------- Rule 2 ------------------------------------------
+
+			if (GetDKPAdmin_Frame:IsVisible()) then
+				arg1 = findpattern(arg1 ,"%d*%d")
+			end
+			if (gdkp.players[Username] == nil and gdkp_alliases ~= nil and tonumber(DKPInfo.process_dkp_ver) > 2.60 and tonumber(arg1) ~= nil) then
+				--debug (arg2)
+				for key,val in pairs(gdkp_alliases) do
+					for i=1,table.getn(gdkp_alliases[key]),1 do
+						if (gdkp_alliases[key][i] ==  Username) then
+							find = 0
+							for i = 1 , table.getn(GetDKPAdmin_List) do
+								if (GetDKPAdmin_List[i].name == Username) then
+									GetDKPAdmin_List[i].points = tonumber(arg1)
+									find = 1
+								end
+							end
+
+							if (find ~= 1) then
+								if ( GDKPvar_save.GDA_MinDKP_Rule3 <= tonumber(arg1)) then
+									tinsert(GetDKPAdmin_List, {name = Username; class = gdkp.players[Username].class; points = tonumber(arg1); dkp = gdkp.players[Username][GDKPvar_save.konto.."_current"]})
+								else
+									SendChatMessage("Bid is too low", "WHISPER", "Common", arg2)
+								end
+								find = 0
+							end
+							if (GetDKPAdmin_Frame:IsVisible()) then
+								GetDKPAdmin_Rule1()
+								if (type(GDKPvar_save) == "table") then
+									GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
+								else
+									GDA_Scale = 1
+								end
+								unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
+								GetDKPAdmin_Frame:SetScale(unsavedscale)
+							else
+								GetDKPAdmin_Frame:Show()
+								GetDKPAdmin_Rule1()
+								if (type(GDKPvar_save) == "table") then
+									GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
+								else
+									GDA_Scale = 1
+								end
+								unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
+								GetDKPAdmin_Frame:SetScale(unsavedscale)
+							end
+						else
+
+						end
+					end
+				end
+			elseif (tonumber(arg1) ~= nil and gdkp.players[Username] ~= nil) then
+				find = 0
+				current_highest_bid = 0
+				for i = 1 , table.getn(GetDKPAdmin_List) do
+
+					if ( current_highest_bid < GetDKPAdmin_List[i].points ) then
+						current_highest_bid = GetDKPAdmin_List[i].points
+					end
+				end
+				for i = 1 , table.getn(GetDKPAdmin_List) do
+					if (GetDKPAdmin_List[i].name == Username) then
+						if(GDKPvar_save.GDA_Rule == 1) then
+							tmp_minDKP_setting = GDKPvar_save.GDA_MinDKP
+						else
+							tmp_minDKP_setting = GDKPvar_save.GDA_MinDKP_Rule3
+						end
+						if (tmp_minDKP_setting <= tonumber(arg1)) then
+							if ( GetDKPAdmin_List[i].points > tonumber(arg1)) then
+								if (( GDKPvar_save.GDA_Rule == 1 and GDKPvar_save.GDA_announce_highest_bid1 )) or (( GDKPvar_save.GDA_Rule == 3 and  GDKPvar_save.GDA_announce_highest_bid2 )) then
+									SendChatMessage(GDA_bid_lowering, "WHISPER", "Common", arg2)
+								end
+							elseif (GetDKPAdmin_List[i].points == tonumber(arg1)) then
+								SendChatMessage(GDA_same_bid_as_before..tonumber(arg1).."DKP", "WHISPER", "Common", arg2)
+							else
+								if ( current_highest_bid < tonumber(arg1)) then
+									if (( GDKPvar_save.GDA_Rule == 1 and GDKPvar_save.GDA_announce_highest_bid1 )) or (( GDKPvar_save.GDA_Rule == 3 and  GDKPvar_save.GDA_announce_highest_bid2 )) then
+										SendChatMessage(GDA_new_highest_bid..tonumber(arg1).."DKP", "RAID", "Common")
+									end
+									GetDKPAdmin_List[i].points = tonumber(arg1)
+								end
+
+								if ( current_highest_bid == tonumber(arg1)) then
+									if (( GDKPvar_save.GDA_Rule == 1 and GDKPvar_save.GDA_announce_highest_bid1 )) or (( GDKPvar_save.GDA_Rule == 3 and  GDKPvar_save.GDA_announce_highest_bid2 )) then
+										SendChatMessage(GDA_equal_highest_bid..tonumber(arg1).."DKP", "RAID", "Common")
+									end
+									GetDKPAdmin_List[i].points = tonumber(arg1)
+								end
+								if ( current_highest_bid > tonumber(arg1)) then
+									if (( GDKPvar_save.GDA_Rule == 1 and GDKPvar_save.GDA_announce_highest_bid1 )) or (( GDKPvar_save.GDA_Rule == 3 and  GDKPvar_save.GDA_announce_highest_bid2 )) then
+										SendChatMessage(GDA_low_highest_bid..tonumber(arg1).."DKP", "WHISPER", "Common", arg2)
+									end
+									GetDKPAdmin_List[i].points = tonumber(arg1)
+								end
+							end
+						else
+							SendChatMessage(GDA_bid_too_low, "WHISPER", "Common", arg2)
+						end
+						find = 1
+					end
+				end
+
+				if (find ~= 1) then
+					if(GDKP_DEBUG == true) then
+						print("DEBUG - Rule: "..GDKPvar_save.GDA_Rule)
+					end
+					tmp_minDKP_setting = 0
+					if(GDKPvar_save.GDA_Rule == 1) then
+						tmp_minDKP_setting = GDKPvar_save.GDA_MinDKP
+					else
+						tmp_minDKP_setting = GDKPvar_save.GDA_MinDKP_Rule3
+					end
+					if(GDKP_DEBUG == true) then
+						print("DEBUG: "..tmp_minDKP_setting .."<=".. tonumber(arg1))
+					end
+					if (tmp_minDKP_setting <= tonumber(arg1)) then
+						if ( current_highest_bid < tonumber(arg1)) then
+							if (( GDKPvar_save.GDA_Rule == 1 and GDKPvar_save.GDA_announce_highest_bid1 )) or (( GDKPvar_save.GDA_Rule == 3 and  GDKPvar_save.GDA_announce_highest_bid2 )) then
+								SendChatMessage(GDA_new_highest_bid..tonumber(arg1).."DKP", "RAID", "Common")
+							end
+						end
+
+						if ( current_highest_bid == tonumber(arg1)) then
+							if (( GDKPvar_save.GDA_Rule == 1 and GDKPvar_save.GDA_announce_highest_bid1 )) or (( GDKPvar_save.GDA_Rule == 3 and  GDKPvar_save.GDA_announce_highest_bid2 )) then
+								SendChatMessage(GDA_equal_highest_bid..tonumber(arg1).."DKP", "RAID", "Common")
+							end
+						end
+						if ( current_highest_bid > tonumber(arg1)) then
+							if (( GDKPvar_save.GDA_Rule == 1 and GDKPvar_save.GDA_announce_highest_bid1 )) or (( GDKPvar_save.GDA_Rule == 3 and  GDKPvar_save.GDA_announce_highest_bid2 )) then
+								SendChatMessage(GDA_low_highest_bid..tonumber(arg1).."DKP", "WHISPER", "Common", arg2)
+							end
+						end
+						tinsert(GetDKPAdmin_List, {name = Username; class = gdkp.players[Username].class; points = tonumber(arg1); dkp = gdkp.players[Username][GDKPvar_save.konto.."_current"]})
+					else
+						SendChatMessage(GDA_bid_too_low, "WHISPER", "Common", arg2)
+					end
+					find = 0
+				end
+				if (GetDKPAdmin_Frame:IsVisible()) then
+					GetDKPAdmin_Rule1()
+					if (type(GDKPvar_save) == "table") then
+						GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
+					else
+						GDA_Scale = 1
+					end
+					unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
+					GetDKPAdmin_Frame:SetScale(unsavedscale)
+				else
+					GetDKPAdmin_Frame:Show()
+					GetDKPAdmin_Rule1()
+					if (type(GDKPvar_save) == "table") then
+						GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
+					else
+						GDA_Scale = 1
+					end
+					unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
+					GetDKPAdmin_Frame:SetScale(unsavedscale)
+				end
+			elseif (gdkp.players[Username] == nil and gdkp_alliases == nil and tonumber(DKPInfo.process_dkp_ver) > 2.60 ) then
+				StaticPopupDialogs["no_dkp_user-"..Username] = {
+					text = Username.."(No DKP-User) bids "..tonumber(arg1).."DKP",
+					button1 = "OK",
+					timeout = 0,
+				}
+				StaticPopup_Show("no_dkp_user-"..Username)
+			end
+		end
+		-----------------------------------------------------------------------------------
+		-------------------------------- Rule 2 ------------------------------------------
 	elseif (arg1 ~= nil and arg2 ~= nil) and (GDKPvar_save.GDA_Rule == 2) then
 		local Username, Userrealm = strsplit("-", arg2, 2)
 		if (gdkp == nil) then
-				return
+			return
 		end
 		if (arg1 ~= nil) and (((event == "CHAT_MSG_WHISPER" and GDKPvar_save.GDA_Chatlook_Rule2 == 1 ) or (event == "CHAT_MSG_GUILD" and GDKPvar_save.GDA_Chatlook_Rule2 == 3 ) or (event =="CHAT_MSG_RAID" and GDKPvar_save.GDA_Chatlook_Rule2 == 2 ) or ( event =="CHAT_MSG_RAID_LEADER" and GDKPvar_save.GDA_Chatlook_Rule2 == 2))  ) then
 			if (GetDKPAdmin_List ~= nil and gdkp.players ~= nil and GDKPvar_save.GDA_OnOff and ((string.upper(arg1) == string.upper(GDKPvar_save.GDA_BetWord)) or (string.upper(arg1) == string.upper(GDKPvar_save.GDA_GreedWord))) and IsPromoted() and GDA_CD_Stop == false) then
@@ -419,7 +419,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 					GDA_CD_StartTime = time()
 					GetDKPAdmin_CD_Button:SetText(GDA_CD_OFF)
 				end
-				
+
 				if (gdkp.players[Username] == nil and gdkp_alliases ~= nil and tonumber(DKPInfo.process_dkp_ver) > 2.60 ) then
 					local foundtwink = false
 					for key,val in pairs(gdkp_alliases) do
@@ -444,7 +444,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 									GetDKPAdmin_Rule2()
 									if (type(GDKPvar_save) == "table") then
 										GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-									else 
+									else
 										GDA_Scale = 1
 									end
 									unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -454,7 +454,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 									GetDKPAdmin_Rule2()
 									if (type(GDKPvar_save) == "table") then
 										GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-									else 
+									else
 										GDA_Scale = 1
 									end
 									unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -470,7 +470,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 								find = 1
 							end
 						end
-						
+
 						if (find ~= 1) then
 							if greedroll then
 								tinsert(GetDKPAdmin_List, {name = "[G] "..arg2; class = "unknown"; points = GDKPvar_save.GDA_GreedWord.." ("..GDKPvar_save.GDA_GreedDKP..")"; dkp = 0})
@@ -483,7 +483,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 							GetDKPAdmin_Rule2()
 							if (type(GDKPvar_save) == "table") then
 								GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-							else 
+							else
 								GDA_Scale = 1
 							end
 							unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -493,7 +493,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 							GetDKPAdmin_Rule2()
 							if (type(GDKPvar_save) == "table") then
 								GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-							else 
+							else
 								GDA_Scale = 1
 							end
 							unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -507,7 +507,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 							find = 1
 						end
 					end
-					
+
 					if (find ~= 1) then
 						if greedroll then
 							tinsert(GetDKPAdmin_List, {name = "[G] "..Username; class = "unknown"; points = GDKPvar_save.GDA_GreedWord.." ("..GDKPvar_save.GDA_GreedDKP..")"; dkp = 0})
@@ -520,7 +520,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 						GetDKPAdmin_Rule2()
 						if (type(GDKPvar_save) == "table") then
 							GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-						else 
+						else
 							GDA_Scale = 1
 						end
 						unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -530,7 +530,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 						GetDKPAdmin_Rule2()
 						if (type(GDKPvar_save) == "table") then
 							GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-						else 
+						else
 							GDA_Scale = 1
 						end
 						unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -543,21 +543,21 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 							find = 1
 						end
 					end
-					
+
 					if (find ~= 1) then
 						if greedroll then
 							tinsert(GetDKPAdmin_List, {name = Username; class = gdkp.players[Username].class; points = GDKPvar_save.GDA_GreedWord.." ("..GDKPvar_save.GDA_GreedDKP..")"; dkp = gdkp.players[Username][GDKPvar_save.konto.."_current"]})
 						else
 							tinsert(GetDKPAdmin_List, {name = Username; class = gdkp.players[Username].class; points = GDKPvar_save.GDA_BetWord.." ("..GDKPvar_save.GDA_MinDKP_Rule2..")"; dkp = gdkp.players[Username][GDKPvar_save.konto.."_current"]})
 						end
-							
+
 						find = 0
 					end
 					if (GetDKPAdmin_Frame:IsVisible()) then
 						GetDKPAdmin_Rule2()
 						if (type(GDKPvar_save) == "table") then
 							GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-						else 
+						else
 							GDA_Scale = 1
 						end
 						unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -567,7 +567,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 						GetDKPAdmin_Rule2()
 						if (type(GDKPvar_save) == "table") then
 							GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-						else 
+						else
 							GDA_Scale = 1
 						end
 						unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -578,7 +578,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 					GetDKPAdmin_Rule2()
 					if (type(GDKPvar_save) == "table") then
 						GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-					else 
+					else
 						GDA_Scale = 1
 					end
 					unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -588,7 +588,7 @@ function GetDKPAdmin_OnEvent(self, event, ...)
 					GetDKPAdmin_Rule2()
 					if (type(GDKPvar_save) == "table") then
 						GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-					else 
+					else
 						GDA_Scale = 1
 					end
 					unsavedscale = 1 - UIParent:GetEffectiveScale() + GDA_Scale
@@ -626,7 +626,7 @@ end
 function GetDKPAdmin_Toggle()
 	if (type(GDKPvar_save) == "table") then
 		GDA_Scale = (GDKPvar_save.Scaling_GDA / 100)
-	else 
+	else
 		GDA_Scale = 100
 	end
 	if (GetDKPAdmin_Frame:IsVisible()) then
@@ -654,7 +654,7 @@ function GetDKPAdmin_Rule1()
 			GetDKPAdmin_List[1] = GetDKPAdmin_List[2]
 			GetDKPAdmin_List[2] = test
 		end
-	else	
+	else
 		for i = table.getn (GetDKPAdmin_List),2,-1 do
 			if (GetDKPAdmin_List[i]["points"] > GetDKPAdmin_List[i-1]["points"]) then
 				test = GetDKPAdmin_List[i-1]
@@ -674,7 +674,7 @@ end
 function GetDKPAdmin_BuildList()
 	i = 1
 	j = 1
-	
+
 	while (i <= 17) do
 		local prefix = "GDAPlayer"..i
 		local itemButton = _G[prefix]
@@ -708,12 +708,12 @@ function GetDKPAdmin_BuildList()
 				key4 = GetDKPAdmin_List[lineplusoffset].twink
 				keytext = keytext..","..key4
 			end
-			
+
 			if (GDKPvar_save.GDA_Rule == 1 or GDKPvar_save.GDA_Rule == 3) then
 				if (key2 > (GetDKPAdmin_List[lineplusoffset].dkp)) then
 					getglobal(prefix.."Set"):SetTextColor(1, 0, 0)
 				end
-				
+
 			elseif (GDKPvar_save.GDA_Rule == 2) then
 				if (GDA_Sort_Rule2 == 3) then
 					getglobal(prefix.."Set"):SetTextColor(1, 0, 0)
@@ -721,31 +721,31 @@ function GetDKPAdmin_BuildList()
 			end
 			getglobal(prefix.."Name"):SetText(keytext)
 			if (GetDKPAdmin_List[lineplusoffset].class == "Warrior" or GetDKPAdmin_List[lineplusoffset].class == "Krieger") then
-					getglobal(prefix.."Name"):SetTextColor(0.78, 0.61, 0.43)
+				getglobal(prefix.."Name"):SetTextColor(0.78, 0.61, 0.43)
 			elseif (GetDKPAdmin_List[lineplusoffset].class == "Mage" or GetDKPAdmin_List[lineplusoffset].class == "Magier") then
-					getglobal(prefix.."Name"):SetTextColor(0.41, 0.8, 0.94)
+				getglobal(prefix.."Name"):SetTextColor(0.41, 0.8, 0.94)
 			elseif (GetDKPAdmin_List[lineplusoffset].class == "Rogue" or GetDKPAdmin_List[lineplusoffset].class == "Schurke") then
-					getglobal(prefix.."Name"):SetTextColor(1, 0.96, 0.41)
+				getglobal(prefix.."Name"):SetTextColor(1, 0.96, 0.41)
 			elseif (GetDKPAdmin_List[lineplusoffset].class == "Druid" or GetDKPAdmin_List[lineplusoffset].class == "Druide") then
-					getglobal(prefix.."Name"):SetTextColor(1, 0.49, 0.04)
+				getglobal(prefix.."Name"):SetTextColor(1, 0.49, 0.04)
 			elseif (GetDKPAdmin_List[lineplusoffset].class == "Hunter" or GetDKPAdmin_List[lineplusoffset].class == "J\195\164ger") then
-					getglobal(prefix.."Name"):SetTextColor(0.67, 0.83, 0.45)
+				getglobal(prefix.."Name"):SetTextColor(0.67, 0.83, 0.45)
 			elseif (GetDKPAdmin_List[lineplusoffset].class == "Shaman" or GetDKPAdmin_List[lineplusoffset].class == "Schamane") then
-					getglobal(prefix.."Name"):SetTextColor(0.58,0.51,0.79)
+				getglobal(prefix.."Name"):SetTextColor(0.58,0.51,0.79)
 			elseif (GetDKPAdmin_List[lineplusoffset].class == "Priest" or GetDKPAdmin_List[lineplusoffset].class == "Priester") then
-					getglobal(prefix.."Name"):SetTextColor(1, 1, 1)
+				getglobal(prefix.."Name"):SetTextColor(1, 1, 1)
 			elseif (GetDKPAdmin_List[lineplusoffset].class == "Warlock" or GetDKPAdmin_List[lineplusoffset].class == "Hexenmeister") then
-					getglobal(prefix.."Name"):SetTextColor(0.58, 0.51, 0.79)
+				getglobal(prefix.."Name"):SetTextColor(0.58, 0.51, 0.79)
 			elseif (GetDKPAdmin_List[lineplusoffset].class == "Paladin" or GetDKPAdmin_List[lineplusoffset].class == "Paladin") then
-					getglobal(prefix.."Name"):SetTextColor(0.96, 0.55, 0.73)
+				getglobal(prefix.."Name"):SetTextColor(0.96, 0.55, 0.73)
 			elseif (GetDKPAdmin_List[lineplusoffset].class == "DeathKnight" or GetDKPAdmin_List[lineplusoffset].class == "Todesritter") then
-					getglobal(prefix.."Name"):SetTextColor(0.77, 0.12, 0.23)
+				getglobal(prefix.."Name"):SetTextColor(0.77, 0.12, 0.23)
 			elseif (GetDKPAdmin_List[lineplusoffset].class == "Monk" or GetDKPAdmin_List[lineplusoffset].class == "M\195\182nch") then
-					getglobal(prefix.."Name"):SetTextColor(0.77, 0.12, 0.23)
+				getglobal(prefix.."Name"):SetTextColor(0.77, 0.12, 0.23)
 			elseif (GetDKPAdmin_List[lineplusoffset].class == "Demonhunter" or GetDKPAdmin_List[lineplusoffset].class == "D\195\164monenj\195\164ger") then
-					getglobal(prefix.."Name"):SetTextColor(0.77, 0.12, 0.23)
-			else		
-					getglobal(prefix.."Name"):SetTextColor(1, 1, 1)
+				getglobal(prefix.."Name"):SetTextColor(0.77, 0.12, 0.23)
+			else
+				getglobal(prefix.."Name"):SetTextColor(1, 1, 1)
 			end
 			getglobal(prefix.."Order"):SetText(key2)
 			getglobal(prefix.."Set"):SetText(GetDKPAdmin_List[lineplusoffset].dkp)
@@ -768,7 +768,7 @@ function GetDKPAdmin_BuildList()
 end
 
 function PlayersOrder(var,button)
-	
+
 	if (button == "RightButton") then
 		GDAList = {}
 		for i = 1 , table.getn(GetDKPAdmin_List) do
@@ -780,7 +780,7 @@ function PlayersOrder(var,button)
 		GetDKPAdmin_List = GDAList
 		GDAList = nil
 		GetDKPAdmin_BuildList ()
-	--------------------  Rule 1  --------------------------
+		--------------------  Rule 1  --------------------------
 	elseif (button == "LeftButton" and GDKPvar_save.GDA_Rule == 1) then
 		GDA_PAAR_NAME = {}
 		gdapaar = 0
@@ -809,7 +809,7 @@ function PlayersOrder(var,button)
 			if (table.getn(GetDKPAdmin_List) == 1) then
 				msg = GetDKPAdmin_List[1].name
 				if ( GetDKPAdmin_List[1].twink ~= nil) then
-						msg = msg.."->"..GetDKPAdmin_List[1].twink
+					msg = msg.."->"..GetDKPAdmin_List[1].twink
 				end
 				msg = msg..GDA_WINS..GDKPvar_save.GDA_MinDKP.." DKP"
 			else
@@ -837,7 +837,7 @@ function PlayersOrder(var,button)
 			end
 			SendChatMessage(msg, GDA_Msg[GDKPvar_save.GDA_Chatoutput])
 		end
-	--------------------  Rule 2  --------------------------
+		--------------------  Rule 2  --------------------------
 	elseif (button == "LeftButton" and GDKPvar_save.GDA_Rule == 2) then
 		GDA_PAAR_NAME = {}
 		gdapaar = 0
@@ -887,11 +887,11 @@ function PlayersOrder(var,button)
 				else
 					msg = msg..GDA_WINS2..GDKPvar_save.GDA_MinDKP_Rule2.." DKP"
 				end
-				
+
 			end
 		end
 		SendChatMessage(msg, GDA_Msg[GDKPvar_save.GDA_Chatoutput_Rule2])
-	--------------------  Rule 3  --------------------------
+		--------------------  Rule 3  --------------------------
 	elseif (button == "LeftButton" and GDKPvar_save.GDA_Rule == 3) then
 		GDA_PAAR_NAME = {}
 		gdapaar = 0
@@ -992,7 +992,7 @@ function GetDKPAdmin_Clear()
 end
 
 function GetDKPAdmin_OnOff()
-	if (getglobal("GetDKP_Config_Frame_CheckButton51"):GetChecked()) then 
+	if (getglobal("GetDKP_Config_Frame_CheckButton51"):GetChecked()) then
 		GetDKP_Config_Frame_CheckButton51:SetChecked(nil)
 		GetDKPAdmin_OnOff_Button:SetText(GDC_GDA_On)
 		GDKPvar_save.GDA_OnOff = false
@@ -1001,7 +1001,7 @@ function GetDKPAdmin_OnOff()
 		GetDKPAdmin_OnOff_Button:SetText(GDC_GDA_Off)
 		GDKPvar_save.GDA_OnOff = true
 	end
-	
+
 end
 
 function GetDKPAdmin_CD_OnOff()
@@ -1054,12 +1054,12 @@ end
 
 function GDA_LootList_Update(list)
 	if list == nil then
-		for i = 1,6,1 do 
+		for i = 1,6,1 do
 			getglobal("GDA_LootList_FrameButton"..i.."_Icon"):SetTexture()
 			getglobal("GDA_LootList_FrameButton"..i.."_Icon").ItemLink = nil
 		end
 	else
-		for i = 1,getn(list),1 do 
+		for i = 1,getn(list),1 do
 			getglobal("GDA_LootList_FrameButton"..i.."_Icon"):SetTexture(list[i][2])
 			getglobal("GDA_LootList_FrameButton"..i.."_Icon").ItemLink = list[i][1]
 		end

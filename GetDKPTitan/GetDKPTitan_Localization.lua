@@ -68,8 +68,8 @@ TITAN_GETDKP_CLASSES = {
 	{ class = "Shaman",			name = TITAN_GETDKP_CLASS[7],	 	format = "+%d",		short = "SSHAMAN",		cat = "CLASS" },
 	{ class = "Hunter",			name = TITAN_GETDKP_CLASS[8],	 	format = "+%d",		short = "HHUNTER",		cat = "CLASS" },
 	{ class = "WARLOCK",		name = TITAN_GETDKP_CLASS[9],	 	format = "+%d",		short = "AWARLOCK",		cat = "CLASS" },
-	
-	
+
+
 	{ class = "Special Class1",		name = "T5 = "..TITAN_GETDKP_CLASS[10],		format = "+%d",		short = "SC1",		cat = "Special_Class" },
 	{ class = "Special Class2",		name = "T5 = "..TITAN_GETDKP_CLASS[11], 	format = "+%d",		short = "SC2",		cat = "Special_Class" },
 	{ class = "Special Class3", 	name = "T5 = "..TITAN_GETDKP_CLASS[12], 	format = "+%d",		short = "SC3",		cat = "Special_Class" },
@@ -80,8 +80,8 @@ TITAN_GETDKP_CLASSES = {
 	{ class = "Special Class8", 	name = "T3 = "..TITAN_GETDKP_CLASS[17], 	format = "+%d",		short = "SC8",		cat = "Special_Class" },
 	{ class = "Special Class9",		name = "T3 = "..TITAN_GETDKP_CLASS[18], 	format = "+%d",		short = "SC9",		cat = "Special_Class" },
 	{ class = "Special Class10",	name = "T3 = "..TITAN_GETDKP_CLASS[19],		format = "+%d",		short = "SC10",		cat = "Special_Class" },
-	
-	}
+
+}
 TITAN_GETDKP_CATEGORIES = {'ACCOUNT','CLASS', 'Special_Class'}
 
 TitanGETDKP_colors = {
@@ -94,7 +94,7 @@ TitanGETDKP_colors = {
 	P = 'ffffff',  -- Priest
 	A = '9482ca',  -- Warlock
 	N = 'f58cba',  -- Paladin
-	
+
 }
 TITAN_GETDKP_CLASS_TRANS = {}
 TITAN_GETDKP_CLASS_TRANS [1] = "Priest,Priester"

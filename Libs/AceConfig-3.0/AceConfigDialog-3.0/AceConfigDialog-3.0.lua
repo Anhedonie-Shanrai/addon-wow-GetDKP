@@ -38,7 +38,7 @@ local math_min, math_max, math_floor = math.min, math.max, math.floor
 local emptyTbl = {}
 
 --[[
-	 xpcall safecall implementation
+xpcall safecall implementation
 ]]
 local xpcall = xpcall
 
@@ -56,19 +56,19 @@ local width_multiplier = 170
 
 --[[
 Group Types
-  Tree 	- All Descendant Groups will all become nodes on the tree, direct child options will appear above the tree
-        - Descendant Groups with inline=true and thier children will not become nodes
+Tree 	- All Descendant Groups will all become nodes on the tree, direct child options will appear above the tree
+- Descendant Groups with inline=true and thier children will not become nodes
 
-  Tab	- Direct Child Groups will become tabs, direct child options will appear above the tab control
-        - Grandchild groups will default to inline unless specified otherwise
+Tab	- Direct Child Groups will become tabs, direct child options will appear above the tab control
+- Grandchild groups will default to inline unless specified otherwise
 
-  Select- Same as Tab but with entries in a dropdown rather than tabs
+Select- Same as Tab but with entries in a dropdown rather than tabs
 
 
-  Inline Groups
-    - Will not become nodes of a select group, they will be effectivly part of thier parent group seperated by a border
-    - If declared on a direct child of a root node of a select group, they will appear above the group container control
-    - When a group is displayed inline, all descendants will also be inline members of the group
+Inline Groups
+- Will not become nodes of a select group, they will be effectivly part of thier parent group seperated by a border
+- If declared on a direct child of a root node of a select group, they will appear above the group container control
+- When a group is displayed inline, all descendants will also be inline members of the group
 
 ]]
 
@@ -100,22 +100,22 @@ do
 		wipe(t)
 		pool[t] = true
 	end
---	function cached()
---		local n = 0
---		for k in pairs(pool) do
---			n = n + 1
---		end
---		return n
---	end
+	--	function cached()
+	--		local n = 0
+	--		for k in pairs(pool) do
+	--			n = n + 1
+	--		end
+	--		return n
+	--	end
 end
 
 -- picks the first non-nil value and returns it
 local function pickfirstset(...)
-  for i=1,select("#",...) do
-    if select(i,...)~=nil then
-      return select(i,...)
-    end
-  end
+	for i=1,select("#",...) do
+		if select(i,...)~=nil then
+			return select(i,...)
+		end
+	end
 end
 
 --gets an option from a given group, checking plugins
@@ -552,16 +552,16 @@ do
 		frame:SetSize(320, 72)
 		frame:SetFrameStrata("TOOLTIP")
 		frame:SetScript("OnKeyDown", function(self, key)
-			if key == "ESCAPE" then
-				self:SetPropagateKeyboardInput(false)
-				if self.cancel:IsShown() then
-					self.cancel:Click()
-				else -- Showing a validation error
-					self:Hide()
-				end
-			else
-				self:SetPropagateKeyboardInput(true)
+		if key == "ESCAPE" then
+			self:SetPropagateKeyboardInput(false)
+			if self.cancel:IsShown() then
+				self.cancel:Click()
+			else -- Showing a validation error
+				self:Hide()
 			end
+		else
+			self:SetPropagateKeyboardInput(true)
+		end
 		end)
 
 		if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
@@ -625,19 +625,19 @@ local function confirmPopup(appName, rootframe, basepath, info, message, func, .
 	local t = {...}
 	local tCount = select("#", ...)
 	frame.accept:SetScript("OnClick", function(self)
-		safecall(func, unpack(t, 1, tCount)) -- Manually set count as unpack() stops on nil (bug with #table)
-		AceConfigDialog:Open(appName, rootframe, unpack(basepath or emptyTbl))
-		frame:Hide()
-		self:SetScript("OnClick", nil)
-		frame.cancel:SetScript("OnClick", nil)
-		del(info)
+	safecall(func, unpack(t, 1, tCount)) -- Manually set count as unpack() stops on nil (bug with #table)
+	AceConfigDialog:Open(appName, rootframe, unpack(basepath or emptyTbl))
+	frame:Hide()
+	self:SetScript("OnClick", nil)
+	frame.cancel:SetScript("OnClick", nil)
+	del(info)
 	end)
 	frame.cancel:SetScript("OnClick", function(self)
-		AceConfigDialog:Open(appName, rootframe, unpack(basepath or emptyTbl))
-		frame:Hide()
-		self:SetScript("OnClick", nil)
-		frame.accept:SetScript("OnClick", nil)
-		del(info)
+	AceConfigDialog:Open(appName, rootframe, unpack(basepath or emptyTbl))
+	frame:Hide()
+	self:SetScript("OnClick", nil)
+	frame.accept:SetScript("OnClick", nil)
+	del(info)
 	end)
 end
 
@@ -657,7 +657,7 @@ local function validationErrorPopup(message)
 	frame.cancel:Hide()
 
 	frame.accept:SetScript("OnClick", function()
-		frame:Hide()
+	frame:Hide()
 	end)
 end
 
@@ -865,7 +865,7 @@ local function ActivateControl(widget, event, ...)
 					AceConfigDialog:Open(user.appName, unpack(basepath))
 				end
 			end
-		--multiselects don't cause a refresh on 'OnValueChanged' only 'OnClosed'
+			--multiselects don't cause a refresh on 'OnValueChanged' only 'OnClosed'
 		elseif option.type == "multiselect" then
 			user.valuechanged = true
 		else
@@ -1108,10 +1108,10 @@ local function sortTblAsStrings(x,y)
 end
 
 --[[
-	options - root of the options table being fed
-	container - widget that controls will be placed in
-	rootframe - Frame object the options are in
-	path - table with the keys to get to the group being fed
+options - root of the options table being fed
+container - widget that controls will be placed in
+rootframe - Frame object the options are in
+path - table with the keys to get to the group being fed
 --]]
 
 local function FeedOptions(appName, options,container,rootframe,path,group,inline)
@@ -1584,274 +1584,274 @@ Select Groups will only have the selection control (tree, tabs, dropdown) fed in
 and have a group selected, this event will trigger the feeding of child groups
 
 Rules:
-	If the group is Inline, FeedOptions
-	If the group has no child groups, FeedOptions
+If the group is Inline, FeedOptions
+If the group has no child groups, FeedOptions
 
-	If the group is a tab or select group, FeedOptions then add the Group Control
-	If the group is a tree group FeedOptions then
-		its parent isnt a tree group:  then add the tree control containing this and all child tree groups
-		if its parent is a tree group, its already a node on a tree
---]]
+If the group is a tab or select group, FeedOptions then add the Group Control
+If the group is a tree group FeedOptions then
+	its parent isnt a tree group:  then add the tree control containing this and all child tree groups
+	if its parent is a tree group, its already a node on a tree
+	--]]
 
-function AceConfigDialog:FeedGroup(appName,options,container,rootframe,path, isRoot)
-	local group = options
-	--follow the path to get to the curent group
-	local inline
-	local grouptype, parenttype = options.childGroups, "none"
+	function AceConfigDialog:FeedGroup(appName,options,container,rootframe,path, isRoot)
+		local group = options
+		--follow the path to get to the curent group
+		local inline
+		local grouptype, parenttype = options.childGroups, "none"
 
 
-	for i = 1, #path do
-		local v = path[i]
-		group = GetSubOption(group, v)
-		inline = inline or pickfirstset(v.dialogInline,v.guiInline,v.inline, false)
-		parenttype = grouptype
-		grouptype = group.childGroups
-	end
-
-	if not parenttype then
-		parenttype = "tree"
-	end
-
-	--check if the group has child groups
-	local hasChildGroups
-	for k, v in pairs(group.args) do
-		if v.type == "group" and not pickfirstset(v.dialogInline,v.guiInline,v.inline, false) and not CheckOptionHidden(v, options, path, appName) then
-			hasChildGroups = true
+		for i = 1, #path do
+			local v = path[i]
+			group = GetSubOption(group, v)
+			inline = inline or pickfirstset(v.dialogInline,v.guiInline,v.inline, false)
+			parenttype = grouptype
+			grouptype = group.childGroups
 		end
-	end
-	if group.plugins then
-		for plugin, t in pairs(group.plugins) do
-			for k, v in pairs(t) do
-				if v.type == "group" and not pickfirstset(v.dialogInline,v.guiInline,v.inline, false) and not CheckOptionHidden(v, options, path, appName) then
-					hasChildGroups = true
+
+		if not parenttype then
+			parenttype = "tree"
+		end
+
+		--check if the group has child groups
+		local hasChildGroups
+		for k, v in pairs(group.args) do
+			if v.type == "group" and not pickfirstset(v.dialogInline,v.guiInline,v.inline, false) and not CheckOptionHidden(v, options, path, appName) then
+				hasChildGroups = true
+			end
+		end
+		if group.plugins then
+			for plugin, t in pairs(group.plugins) do
+				for k, v in pairs(t) do
+					if v.type == "group" and not pickfirstset(v.dialogInline,v.guiInline,v.inline, false) and not CheckOptionHidden(v, options, path, appName) then
+						hasChildGroups = true
+					end
 				end
 			end
 		end
-	end
 
-	container:SetLayout("flow")
-	local scroll
+		container:SetLayout("flow")
+		local scroll
 
-	--Add a scrollframe if we are not going to add a group control, this is the inverse of the conditions for that later on
-	if (not (hasChildGroups and not inline)) or (grouptype ~= "tab" and grouptype ~= "select" and (parenttype == "tree" and not isRoot)) then
-		if container.type ~= "InlineGroup" and container.type ~= "SimpleGroup" then
-			scroll = gui:Create("ScrollFrame")
-			scroll:SetLayout("flow")
-			scroll.width = "fill"
-			scroll.height = "fill"
-			container:SetLayout("fill")
-			container:AddChild(scroll)
-			container = scroll
-		end
-	end
-
-	FeedOptions(appName,options,container,rootframe,path,group,nil)
-
-	if scroll then
-		container:PerformLayout()
-		local status = self:GetStatusTable(appName, path)
-		if not status.scroll then
-			status.scroll = {}
-		end
-		scroll:SetStatusTable(status.scroll)
-	end
-
-	if hasChildGroups and not inline then
-		local name = GetOptionsMemberValue("name", group, options, path, appName)
-		if grouptype == "tab" then
-
-			local tab = gui:Create("TabGroup")
-			InjectInfo(tab, options, group, path, rootframe, appName)
-			tab:SetCallback("OnGroupSelected", GroupSelected)
-			tab:SetCallback("OnTabEnter", TreeOnButtonEnter)
-			tab:SetCallback("OnTabLeave", TreeOnButtonLeave)
-
-			local status = AceConfigDialog:GetStatusTable(appName, path)
-			if not status.groups then
-				status.groups = {}
+		--Add a scrollframe if we are not going to add a group control, this is the inverse of the conditions for that later on
+		if (not (hasChildGroups and not inline)) or (grouptype ~= "tab" and grouptype ~= "select" and (parenttype == "tree" and not isRoot)) then
+			if container.type ~= "InlineGroup" and container.type ~= "SimpleGroup" then
+				scroll = gui:Create("ScrollFrame")
+				scroll:SetLayout("flow")
+				scroll.width = "fill"
+				scroll.height = "fill"
+				container:SetLayout("fill")
+				container:AddChild(scroll)
+				container = scroll
 			end
-			tab:SetStatusTable(status.groups)
-			tab.width = "fill"
-			tab.height = "fill"
+		end
 
-			local tabs = BuildGroups(group, options, path, appName)
-			tab:SetTabs(tabs)
-			tab:SetUserData("tablist", tabs)
+		FeedOptions(appName,options,container,rootframe,path,group,nil)
 
-			for i = 1, #tabs do
-				local entry = tabs[i]
-				if not entry.disabled then
-					tab:SelectTab((GroupExists(appName, options, path,status.groups.selected) and status.groups.selected) or entry.value)
-					break
+		if scroll then
+			container:PerformLayout()
+			local status = self:GetStatusTable(appName, path)
+			if not status.scroll then
+				status.scroll = {}
+			end
+			scroll:SetStatusTable(status.scroll)
+		end
+
+		if hasChildGroups and not inline then
+			local name = GetOptionsMemberValue("name", group, options, path, appName)
+			if grouptype == "tab" then
+
+				local tab = gui:Create("TabGroup")
+				InjectInfo(tab, options, group, path, rootframe, appName)
+				tab:SetCallback("OnGroupSelected", GroupSelected)
+				tab:SetCallback("OnTabEnter", TreeOnButtonEnter)
+				tab:SetCallback("OnTabLeave", TreeOnButtonLeave)
+
+				local status = AceConfigDialog:GetStatusTable(appName, path)
+				if not status.groups then
+					status.groups = {}
+				end
+				tab:SetStatusTable(status.groups)
+				tab.width = "fill"
+				tab.height = "fill"
+
+				local tabs = BuildGroups(group, options, path, appName)
+				tab:SetTabs(tabs)
+				tab:SetUserData("tablist", tabs)
+
+				for i = 1, #tabs do
+					local entry = tabs[i]
+					if not entry.disabled then
+						tab:SelectTab((GroupExists(appName, options, path,status.groups.selected) and status.groups.selected) or entry.value)
+						break
+					end
+				end
+
+				container:AddChild(tab)
+
+			elseif grouptype == "select" then
+
+				local select = gui:Create("DropdownGroup")
+				select:SetTitle(name)
+				InjectInfo(select, options, group, path, rootframe, appName)
+				select:SetCallback("OnGroupSelected", GroupSelected)
+				local status = AceConfigDialog:GetStatusTable(appName, path)
+				if not status.groups then
+					status.groups = {}
+				end
+				select:SetStatusTable(status.groups)
+				local grouplist, orderlist = BuildSelect(group, options, path, appName)
+				select:SetGroupList(grouplist, orderlist)
+				select:SetUserData("grouplist", grouplist)
+				select:SetUserData("orderlist", orderlist)
+
+				local firstgroup = orderlist[1]
+				if firstgroup then
+					select:SetGroup((GroupExists(appName, options, path,status.groups.selected) and status.groups.selected) or firstgroup)
+				end
+
+				select.width = "fill"
+				select.height = "fill"
+
+				container:AddChild(select)
+
+				--assume tree group by default
+				--if parenttype is tree then this group is already a node on that tree
+			elseif (parenttype ~= "tree") or isRoot then
+				local tree = gui:Create("TreeGroup")
+				InjectInfo(tree, options, group, path, rootframe, appName)
+				tree:EnableButtonTooltips(false)
+
+				tree.width = "fill"
+				tree.height = "fill"
+
+				tree:SetCallback("OnGroupSelected", GroupSelected)
+				tree:SetCallback("OnButtonEnter", TreeOnButtonEnter)
+				tree:SetCallback("OnButtonLeave", TreeOnButtonLeave)
+
+				local status = AceConfigDialog:GetStatusTable(appName, path)
+				if not status.groups then
+					status.groups = {}
+				end
+				local treedefinition = BuildGroups(group, options, path, appName, true)
+				tree:SetStatusTable(status.groups)
+
+				tree:SetTree(treedefinition)
+				tree:SetUserData("tree",treedefinition)
+
+				for i = 1, #treedefinition do
+					local entry = treedefinition[i]
+					if not entry.disabled then
+						tree:SelectByValue((GroupExists(appName, options, path,status.groups.selected) and status.groups.selected) or entry.value)
+						break
+					end
+				end
+
+				container:AddChild(tree)
+			end
+		end
+	end
+
+	local old_CloseSpecialWindows
+
+
+	local function RefreshOnUpdate(this)
+		for appName in pairs(this.closing) do
+			if AceConfigDialog.OpenFrames[appName] then
+				AceConfigDialog.OpenFrames[appName]:Hide()
+			end
+			if AceConfigDialog.BlizOptions and AceConfigDialog.BlizOptions[appName] then
+				for key, widget in pairs(AceConfigDialog.BlizOptions[appName]) do
+					if not widget:IsVisible() then
+						widget:ReleaseChildren()
+					end
 				end
 			end
+			this.closing[appName] = nil
+		end
 
-			container:AddChild(tab)
-
-		elseif grouptype == "select" then
-
-			local select = gui:Create("DropdownGroup")
-			select:SetTitle(name)
-			InjectInfo(select, options, group, path, rootframe, appName)
-			select:SetCallback("OnGroupSelected", GroupSelected)
-			local status = AceConfigDialog:GetStatusTable(appName, path)
-			if not status.groups then
-				status.groups = {}
-			end
-			select:SetStatusTable(status.groups)
-			local grouplist, orderlist = BuildSelect(group, options, path, appName)
-			select:SetGroupList(grouplist, orderlist)
-			select:SetUserData("grouplist", grouplist)
-			select:SetUserData("orderlist", orderlist)
-
-			local firstgroup = orderlist[1]
-			if firstgroup then
-				select:SetGroup((GroupExists(appName, options, path,status.groups.selected) and status.groups.selected) or firstgroup)
-			end
-
-			select.width = "fill"
-			select.height = "fill"
-
-			container:AddChild(select)
-
-		--assume tree group by default
-		--if parenttype is tree then this group is already a node on that tree
-		elseif (parenttype ~= "tree") or isRoot then
-			local tree = gui:Create("TreeGroup")
-			InjectInfo(tree, options, group, path, rootframe, appName)
-			tree:EnableButtonTooltips(false)
-
-			tree.width = "fill"
-			tree.height = "fill"
-
-			tree:SetCallback("OnGroupSelected", GroupSelected)
-			tree:SetCallback("OnButtonEnter", TreeOnButtonEnter)
-			tree:SetCallback("OnButtonLeave", TreeOnButtonLeave)
-
-			local status = AceConfigDialog:GetStatusTable(appName, path)
-			if not status.groups then
-				status.groups = {}
-			end
-			local treedefinition = BuildGroups(group, options, path, appName, true)
-			tree:SetStatusTable(status.groups)
-
-			tree:SetTree(treedefinition)
-			tree:SetUserData("tree",treedefinition)
-
-			for i = 1, #treedefinition do
-				local entry = treedefinition[i]
-				if not entry.disabled then
-					tree:SelectByValue((GroupExists(appName, options, path,status.groups.selected) and status.groups.selected) or entry.value)
-					break
+		if this.closeAll then
+			for k, v in pairs(AceConfigDialog.OpenFrames) do
+				if not this.closeAllOverride[k] then
+					v:Hide()
 				end
 			end
-
-			container:AddChild(tree)
+			this.closeAll = nil
+			wipe(this.closeAllOverride)
 		end
-	end
-end
 
-local old_CloseSpecialWindows
-
-
-local function RefreshOnUpdate(this)
-	for appName in pairs(this.closing) do
-		if AceConfigDialog.OpenFrames[appName] then
-			AceConfigDialog.OpenFrames[appName]:Hide()
-		end
-		if AceConfigDialog.BlizOptions and AceConfigDialog.BlizOptions[appName] then
-			for key, widget in pairs(AceConfigDialog.BlizOptions[appName]) do
-				if not widget:IsVisible() then
-					widget:ReleaseChildren()
+		for appName in pairs(this.apps) do
+			if AceConfigDialog.OpenFrames[appName] then
+				local user = AceConfigDialog.OpenFrames[appName]:GetUserDataTable()
+				AceConfigDialog:Open(appName, unpack(user.basepath or emptyTbl))
+			end
+			if AceConfigDialog.BlizOptions and AceConfigDialog.BlizOptions[appName] then
+				for key, widget in pairs(AceConfigDialog.BlizOptions[appName]) do
+					local user = widget:GetUserDataTable()
+					if widget:IsVisible() then
+						AceConfigDialog:Open(widget:GetUserData("appName"), widget, unpack(user.basepath or emptyTbl))
+					end
 				end
 			end
+			this.apps[appName] = nil
 		end
-		this.closing[appName] = nil
+		this:SetScript("OnUpdate", nil)
 	end
 
-	if this.closeAll then
-		for k, v in pairs(AceConfigDialog.OpenFrames) do
-			if not this.closeAllOverride[k] then
-				v:Hide()
-			end
-		end
-		this.closeAll = nil
-		wipe(this.closeAllOverride)
-	end
-
-	for appName in pairs(this.apps) do
-		if AceConfigDialog.OpenFrames[appName] then
-			local user = AceConfigDialog.OpenFrames[appName]:GetUserDataTable()
-			AceConfigDialog:Open(appName, unpack(user.basepath or emptyTbl))
-		end
-		if AceConfigDialog.BlizOptions and AceConfigDialog.BlizOptions[appName] then
-			for key, widget in pairs(AceConfigDialog.BlizOptions[appName]) do
-				local user = widget:GetUserDataTable()
-				if widget:IsVisible() then
-					AceConfigDialog:Open(widget:GetUserData("appName"), widget, unpack(user.basepath or emptyTbl))
-				end
-			end
-		end
-		this.apps[appName] = nil
-	end
-	this:SetScript("OnUpdate", nil)
-end
-
--- Upgrade the OnUpdate script as well, if needed.
-if AceConfigDialog.frame:GetScript("OnUpdate") then
-	AceConfigDialog.frame:SetScript("OnUpdate", RefreshOnUpdate)
-end
-
---- Close all open options windows
-function AceConfigDialog:CloseAll()
-	AceConfigDialog.frame.closeAll = true
-	AceConfigDialog.frame:SetScript("OnUpdate", RefreshOnUpdate)
-	if next(self.OpenFrames) then
-		return true
-	end
-end
-
---- Close a specific options window.
--- @param appName The application name as given to `:RegisterOptionsTable()`
-function AceConfigDialog:Close(appName)
-	if self.OpenFrames[appName] then
-		AceConfigDialog.frame.closing[appName] = true
+	-- Upgrade the OnUpdate script as well, if needed.
+	if AceConfigDialog.frame:GetScript("OnUpdate") then
 		AceConfigDialog.frame:SetScript("OnUpdate", RefreshOnUpdate)
-		return true
 	end
-end
 
--- Internal -- Called by AceConfigRegistry
-function AceConfigDialog:ConfigTableChanged(event, appName)
-	AceConfigDialog.frame.apps[appName] = true
-	AceConfigDialog.frame:SetScript("OnUpdate", RefreshOnUpdate)
-end
-
-reg.RegisterCallback(AceConfigDialog, "ConfigTableChange", "ConfigTableChanged")
-
---- Sets the default size of the options window for a specific application.
--- @param appName The application name as given to `:RegisterOptionsTable()`
--- @param width The default width
--- @param height The default height
-function AceConfigDialog:SetDefaultSize(appName, width, height)
-	local status = AceConfigDialog:GetStatusTable(appName)
-	if type(width) == "number" and type(height) == "number" then
-		status.width = width
-		status.height = height
+	--- Close all open options windows
+	function AceConfigDialog:CloseAll()
+		AceConfigDialog.frame.closeAll = true
+		AceConfigDialog.frame:SetScript("OnUpdate", RefreshOnUpdate)
+		if next(self.OpenFrames) then
+			return true
+		end
 	end
-end
 
---- Open an option window at the specified path (if any).
--- This function can optionally feed the group into a pre-created container
--- instead of creating a new container frame.
--- @paramsig appName [, container][, ...]
--- @param appName The application name as given to `:RegisterOptionsTable()`
--- @param container An optional container frame to feed the options into
--- @param ... The path to open after creating the options window (see `:SelectGroup` for details)
-function AceConfigDialog:Open(appName, container, ...)
-	if not old_CloseSpecialWindows then
-		old_CloseSpecialWindows = CloseSpecialWindows
-		CloseSpecialWindows = function()
+	--- Close a specific options window.
+	-- @param appName The application name as given to `:RegisterOptionsTable()`
+	function AceConfigDialog:Close(appName)
+		if self.OpenFrames[appName] then
+			AceConfigDialog.frame.closing[appName] = true
+			AceConfigDialog.frame:SetScript("OnUpdate", RefreshOnUpdate)
+			return true
+		end
+	end
+
+	-- Internal -- Called by AceConfigRegistry
+	function AceConfigDialog:ConfigTableChanged(event, appName)
+		AceConfigDialog.frame.apps[appName] = true
+		AceConfigDialog.frame:SetScript("OnUpdate", RefreshOnUpdate)
+	end
+
+	reg.RegisterCallback(AceConfigDialog, "ConfigTableChange", "ConfigTableChanged")
+
+	--- Sets the default size of the options window for a specific application.
+	-- @param appName The application name as given to `:RegisterOptionsTable()`
+	-- @param width The default width
+	-- @param height The default height
+	function AceConfigDialog:SetDefaultSize(appName, width, height)
+		local status = AceConfigDialog:GetStatusTable(appName)
+		if type(width) == "number" and type(height) == "number" then
+			status.width = width
+			status.height = height
+		end
+	end
+
+	--- Open an option window at the specified path (if any).
+	-- This function can optionally feed the group into a pre-created container
+	-- instead of creating a new container frame.
+	-- @paramsig appName [, container][, ...]
+	-- @param appName The application name as given to `:RegisterOptionsTable()`
+	-- @param container An optional container frame to feed the options into
+	-- @param ... The path to open after creating the options window (see `:SelectGroup` for details)
+	function AceConfigDialog:Open(appName, container, ...)
+		if not old_CloseSpecialWindows then
+			old_CloseSpecialWindows = CloseSpecialWindows
+			CloseSpecialWindows = function()
 			local found = old_CloseSpecialWindows()
 			return self:CloseAll() or found
 		end

@@ -15,15 +15,15 @@ TITAN_GETDKP_THRESHOLD_TABLE = {
 }
 
 function TitanPanelGETDKPButton_OnLoad(this)
-	
+
 	this.registry = {
 		id = TITAN_GETDKP_ID,
 		version = "1.0",
 		menuText = TITAN_GETDKP_MENU_TEXT,
-		buttonTextFunction = "TitanPanelGETDKPButton_GetButtonText", 
-		tooltipTitle = TITAN_GETDKP_TOOLTIP, 
-		tooltipTextFunction = "TitanPanelGETDKPButton_GetTooltipText", 
-		icon = "Interface\\Icons\\INV_Misc_Head_Dragon_Black",	
+		buttonTextFunction = "TitanPanelGETDKPButton_GetButtonText",
+		tooltipTitle = TITAN_GETDKP_TOOLTIP,
+		tooltipTextFunction = "TitanPanelGETDKPButton_GetTooltipText",
+		icon = "Interface\\Icons\\INV_Misc_Head_Dragon_Black",
 		iconWidth = 16,
 		savedVariables = {
 			Konto = "dkp",
@@ -36,12 +36,12 @@ function TitanPanelGETDKPButton_OnLoad(this)
 	}
 	TITAN_GETDKP_GETN_TITAN_GETDKP_CLASSES = getn(TITAN_GETDKP_CLASSES)
 	for j = 1,getn(multiTable),1 do
-	tinsert(TITAN_GETDKP_CLASSES,{class = table.foreach(multiTable[j], VarReturn), name = table.foreach(multiTable[j], VarReturn), format = "+%d",	short = table.foreach(multiTable[j], VarReturn), cat = "ACCOUNT"})
+		tinsert(TITAN_GETDKP_CLASSES,{class = table.foreach(multiTable[j], VarReturn), name = table.foreach(multiTable[j], VarReturn), format = "+%d",	short = table.foreach(multiTable[j], VarReturn), cat = "ACCOUNT"})
 	end
 	this:RegisterEvent("PLAYER_ENTERING_WORLD")
 end
 
-function TitanPanelGETDKPButton_OnEvent() 
+function TitanPanelGETDKPButton_OnEvent()
 	if (event == "PLAYER_ENTERING_WORLD") then
 		Titan_GETDKP_active = 1
 	end
@@ -57,20 +57,20 @@ function TitanPanelGETDKPButton_GetButtonText()
 		if (gdkp_alliases ~= nil) then
 			for key,val in pairs(gdkp_alliases) do
 				for i=1,table.getn(gdkp_alliases[key]),1 do
-					if (gdkp_alliases[key][i] ==  _name) then 
+					if (gdkp_alliases[key][i] ==  _name) then
 						_name = key
 					end
 				end
 			end
 		end
-		
+
 		if (gdkp.players[_name] ~= nil and TitanGetVar(TITAN_GETDKP_ID,"displayclass") == nil) then
-				konto = TitanGetVar(TITAN_GETDKP_ID,"Konto").."_current"
-				if (gdkp.players[_name][konto] == nil) then
-					konto = table.foreach(multiTable[1], VarReturn).."_current"
-					TitanSetVar(TITAN_GETDKP_ID,"Konto",table.foreach(multiTable[1], VarReturn))
-				end
-				settext = TitanGetVar(TITAN_GETDKP_ID,"Konto")
+			konto = TitanGetVar(TITAN_GETDKP_ID,"Konto").."_current"
+			if (gdkp.players[_name][konto] == nil) then
+				konto = table.foreach(multiTable[1], VarReturn).."_current"
+				TitanSetVar(TITAN_GETDKP_ID,"Konto",table.foreach(multiTable[1], VarReturn))
+			end
+			settext = TitanGetVar(TITAN_GETDKP_ID,"Konto")
 		elseif (gdkp.players[_name] ~= nil and TitanGetVar(TITAN_GETDKP_ID,"displayclass")) then
 			local db = TitanGetVar(TITAN_GETDKP_ID, "displayclass")
 			for i,d in pairs(db) do
@@ -81,7 +81,7 @@ function TitanPanelGETDKPButton_GetButtonText()
 				end
 			end
 		end
-		
+
 		if (settext == "") then
 			settext = "No Data"
 			GetDKP_text = "GetDKP : "..settext
@@ -100,18 +100,18 @@ function TitanPanelGETDKPButton_GetTooltipText()
 	local i,d,_class,found,titan_getdkp_rubric,titan_getdkp_rubric_chars
 	titan_getdkp_rubric = "\n"
 	table.sort(db,function(a,b) return a<b end)
-	
+
 	for e,d in pairs(db) do
 		local found = 0
 		local db_found = {}
-		
-		if (d < TITAN_GETDKP_GETN_TITAN_GETDKP_CLASSES+1) then 
+
+		if (d < TITAN_GETDKP_GETN_TITAN_GETDKP_CLASSES+1) then
 			for key, val in pairs(gdkp.players) do
 				_class = GDKP_GetArgs(TITAN_GETDKP_CLASS_TRANS[d],",")
-				
+
 				for i = 1 ,getn(_class),1 do
-					
-					if (_class[i] == val.class and found == 0) then 
+
+					if (_class[i] == val.class and found == 0) then
 						if (GDKPvar_save.ShowOnlyInRaid == "true" and GetDKP_List_CheckifPlayerIsInRaid(key) == true) then
 							found = 1
 							tinsert (db_found, {color = TitanPanelGETDKPButton_FormatShortText(0,0,val.class), name = key , class = val.class , dkp = gdkp.players[key][TitanGetVar(TITAN_GETDKP_ID,"Konto").."_current"]})
@@ -131,7 +131,7 @@ function TitanPanelGETDKPButton_GetTooltipText()
 				end
 				titan_getdkp_rubric = titan_getdkp_rubric.."\n"
 			end
-			
+
 		end
 	end
 	GetDKP_text = "by Charla/Antonidas"
@@ -157,16 +157,16 @@ end
 function TitanPanelGETDKP_SetDisplayClass()
 	local db = TitanGetVar(TITAN_GETDKP_ID, "displayclass")
 	local i,d,found
-	
-	
+
+
 	if(this.value == 0) then
 		TitanSetVar(TITAN_GETDKP_ID, "displayclass", {})
 	elseif (this.value >= TITAN_GETDKP_GETN_TITAN_GETDKP_CLASSES+1) then
-	
+
 		db = {}
 		table.insert(db,this.value)
 		TitanSetVar(TITAN_GETDKP_ID, "displayclass", db)
-	
+
 	elseif (this.value < TITAN_GETDKP_GETN_TITAN_GETDKP_CLASSES+1) then
 		found = 0
 		for i,d in pairs(db) do
@@ -188,7 +188,7 @@ end
 
 
 function TitanPanelGETDKPButton_FormatShortText(short,val,class)
-	if ( class == nil ) then	
+	if ( class == nil ) then
 		local color = 'FFFFFF'
 		local text = string.sub(short,2)
 		local colorcode = string.sub(short,1,1)
@@ -197,7 +197,7 @@ function TitanPanelGETDKPButton_FormatShortText(short,val,class)
 		end
 		if(val) then
 			return '|cff'.. color .. val .. FONT_COLOR_CODE_CLOSE
-		else 
+		else
 			return '|cff'.. color .. text .. FONT_COLOR_CODE_CLOSE
 		end
 	else
@@ -219,7 +219,7 @@ function TitanPanelGETDKPButton_FormatShortText(short,val,class)
 			return '|cff9482ca'
 		elseif (class == "Paladin" or class == "Paladin") then
 			return '|cfff58cba'
-		else 
+		else
 			return '|cff'
 		end
 	end
@@ -229,35 +229,35 @@ function TitanPanelRightClickMenu_PrepareGETDKPMenu()
 	local info = {}
 	local i,cat,disp,val
 	if ( UIDROPDOWNMENU_MENU_LEVEL == 2 ) then
-			for i,e in pairs(TITAN_GETDKP_CLASSES) do
-				if(e.cat == this.value) then
-					info = {}
-					info.text = '[' .. TitanPanelGETDKPButton_FormatShortText(e.short,e.name) .. ']'
-					info.value = i
-					info.func = TitanPanelGETDKP_SetDisplayClass
-					info.checked = TitanPanelGETDKPButton_isdisp(i)
-					--info.keepShownOnClick = 1
-					UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL)
-				end
+		for i,e in pairs(TITAN_GETDKP_CLASSES) do
+			if(e.cat == this.value) then
+				info = {}
+				info.text = '[' .. TitanPanelGETDKPButton_FormatShortText(e.short,e.name) .. ']'
+				info.value = i
+				info.func = TitanPanelGETDKP_SetDisplayClass
+				info.checked = TitanPanelGETDKPButton_isdisp(i)
+				--info.keepShownOnClick = 1
+				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL)
 			end
-		
+		end
+
 	else
 		TitanPanelRightClickMenu_AddTitle(TitanPlugins[TITAN_GETDKP_ID].menuText)
 		TitanPanelRightClickMenu_AddSpacer(UIDROPDOWNMENU_MENU_LEVEL)
-				
-			for i,cat in pairs(TITAN_GETDKP_CATEGORIES) do
-				info = {}
-				info.text = getglobal('TITAN_GETDKP_CAT_'..cat)
-				info.hasArrow = 1
-				info.value = cat
-				UIDropDownMenu_AddButton(info)
-			end
-			TitanPanelRightClickMenu_AddSpacer(UIDROPDOWNMENU_MENU_LEVEL)
-			TitanPanelRightClickMenu_AddToggleIcon(TITAN_GETDKP_ID)
-			TitanPanelRightClickMenu_AddToggleVar(TITAN_GETDKP_SHORTDISPLAY, TITAN_GETDKP_ID,'shortdisplay')
-			TitanPanelRightClickMenu_AddToggleLabelText(TITAN_GETDKP_ID)
-			TitanPanelRightClickMenu_AddToggleColoredText(TITAN_GETDKP_ID)
-			TitanPanelRightClickMenu_AddCommand(TITAN_PANEL_MENU_HIDE, id, TITAN_PANEL_MENU_FUNC_HIDE)
+
+		for i,cat in pairs(TITAN_GETDKP_CATEGORIES) do
+			info = {}
+			info.text = getglobal('TITAN_GETDKP_CAT_'..cat)
+			info.hasArrow = 1
+			info.value = cat
+			UIDropDownMenu_AddButton(info)
+		end
+		TitanPanelRightClickMenu_AddSpacer(UIDROPDOWNMENU_MENU_LEVEL)
+		TitanPanelRightClickMenu_AddToggleIcon(TITAN_GETDKP_ID)
+		TitanPanelRightClickMenu_AddToggleVar(TITAN_GETDKP_SHORTDISPLAY, TITAN_GETDKP_ID,'shortdisplay')
+		TitanPanelRightClickMenu_AddToggleLabelText(TITAN_GETDKP_ID)
+		TitanPanelRightClickMenu_AddToggleColoredText(TITAN_GETDKP_ID)
+		TitanPanelRightClickMenu_AddCommand(TITAN_PANEL_MENU_HIDE, id, TITAN_PANEL_MENU_FUNC_HIDE)
 	end
 end
 function TitanPanelGETDKPButton_OnClick()

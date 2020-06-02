@@ -60,7 +60,7 @@ local assert, loadstring, error = assert, loadstring, error
 local bucketCache = setmetatable({}, {__mode='k'})
 
 --[[
-	 xpcall safecall implementation
+xpcall safecall implementation
 ]]
 local xpcall = xpcall
 
