@@ -551,6 +551,9 @@ end
 
 ----------------------------- GetDKP Config Lokalization ---------------------------------
 GDC_GDA_HELP_TEXT = {}
+GDC_GDA_HELP ="Bet and Win Hilfe"
+GDC_GDA_HELP2 ="Bet and Win"
+
 GDC_Raidonly = "Show only Raidmembers"
 MiniMap_Button_Positionx = "MiniMap Button Position angle"
 MiniMap_Button_Positiony = "MiniMap Button Position radius"
