@@ -2126,7 +2126,7 @@ function GDKP_Event(event, ...)
 			end
 
 			function GDKP_Send_Whisper(playerName, Message)
-				return SendChatMessage(WHISPER_PREFIX..Message, "WHISPER", this.language, playerName)
+				return SendChatMessage(WHISPER_PREFIX..Message, "WHISPER", GetDKP.language, playerName)
 			end
 			--################################################# Functions #######################################
 
@@ -2266,7 +2266,7 @@ function GDKP_Event(event, ...)
 			itemlink = getdkp_GetLinkID_FromLinkedItemname(msg)
 
 			-- itemlink direkt ansprechen aus gdkp_sets
-			if gdkp_sets.items[itemlink] ~= nil then
+			if gdkp_sets ~= nil and gdkp_sets.items[itemlink] ~= nil then
 				aclassde = gdkp_sets.items[itemlink].Class_de
 				aclasseng = gdkp_sets.items[itemlink].Class_eng
 				anamede = gdkp_sets.items[itemlink].name_de
