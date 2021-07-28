@@ -6,5 +6,5 @@
 ---- see http://www.gnu.org/licenses/.									----
 -------------------------------------------------------------------
 
-GDKP_VERSION    = "7.4.0" ;
-GDKP_DEBUG      = true;
+GDKP_VERSION    = "7.4.0"
+GDKP_DEBUG      = true

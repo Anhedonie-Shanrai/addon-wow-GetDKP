@@ -126,159 +126,159 @@ Methods
 -------------------------------------------------------------------------------]]
 local methods = {
 	["OnAcquire"] = function(self)
-		self:SetWidth(200)
-		self:SetHeight(44)
-		self:SetDisabled(false)
-		self:SetIsPercent(nil)
-		self:SetSliderValues(0,100,1)
-		self:SetValue(0)
-		self.slider:EnableMouseWheel(false)
+	self:SetWidth(200)
+	self:SetHeight(44)
+	self:SetDisabled(false)
+	self:SetIsPercent(nil)
+	self:SetSliderValues(0,100,1)
+	self:SetValue(0)
+	self.slider:EnableMouseWheel(false)
 	end,
 
 	-- ["OnRelease"] = nil,
 
 	["SetDisabled"] = function(self, disabled)
-		self.disabled = disabled
-		if disabled then
-			self.slider:EnableMouse(false)
-			self.label:SetTextColor(.5, .5, .5)
-			self.hightext:SetTextColor(.5, .5, .5)
-			self.lowtext:SetTextColor(.5, .5, .5)
-			--self.valuetext:SetTextColor(.5, .5, .5)
-			self.editbox:SetTextColor(.5, .5, .5)
-			self.editbox:EnableMouse(false)
-			self.editbox:ClearFocus()
-		else
-			self.slider:EnableMouse(true)
-			self.label:SetTextColor(1, .82, 0)
-			self.hightext:SetTextColor(1, 1, 1)
-			self.lowtext:SetTextColor(1, 1, 1)
-			--self.valuetext:SetTextColor(1, 1, 1)
-			self.editbox:SetTextColor(1, 1, 1)
-			self.editbox:EnableMouse(true)
-		end
+	self.disabled = disabled
+	if disabled then
+		self.slider:EnableMouse(false)
+		self.label:SetTextColor(.5, .5, .5)
+		self.hightext:SetTextColor(.5, .5, .5)
+		self.lowtext:SetTextColor(.5, .5, .5)
+		--self.valuetext:SetTextColor(.5, .5, .5)
+		self.editbox:SetTextColor(.5, .5, .5)
+		self.editbox:EnableMouse(false)
+		self.editbox:ClearFocus()
+	else
+		self.slider:EnableMouse(true)
+		self.label:SetTextColor(1, .82, 0)
+		self.hightext:SetTextColor(1, 1, 1)
+		self.lowtext:SetTextColor(1, 1, 1)
+		--self.valuetext:SetTextColor(1, 1, 1)
+		self.editbox:SetTextColor(1, 1, 1)
+		self.editbox:EnableMouse(true)
+	end
 	end,
 
 	["SetValue"] = function(self, value)
-		self.slider.setup = true
-		self.slider:SetValue(value)
-		self.value = value
-		UpdateText(self)
-		self.slider.setup = nil
+	self.slider.setup = true
+	self.slider:SetValue(value)
+	self.value = value
+	UpdateText(self)
+	self.slider.setup = nil
 	end,
 
 	["GetValue"] = function(self)
-		return self.value
+	return self.value
 	end,
 
 	["SetLabel"] = function(self, text)
-		self.label:SetText(text)
+	self.label:SetText(text)
 	end,
 
 	["SetSliderValues"] = function(self, min, max, step)
-		local frame = self.slider
-		frame.setup = true
-		self.min = min
-		self.max = max
-		self.step = step
-		frame:SetMinMaxValues(min or 0,max or 100)
-		UpdateLabels(self)
-		frame:SetValueStep(step or 1)
-		if self.value then
-			frame:SetValue(self.value)
-		end
-		frame.setup = nil
+	local frame = self.slider
+	frame.setup = true
+	self.min = min
+	self.max = max
+	self.step = step
+	frame:SetMinMaxValues(min or 0,max or 100)
+	UpdateLabels(self)
+	frame:SetValueStep(step or 1)
+	if self.value then
+		frame:SetValue(self.value)
+	end
+	frame.setup = nil
 	end,
 
 	["SetIsPercent"] = function(self, value)
-		self.ispercent = value
-		UpdateLabels(self)
-		UpdateText(self)
-	end
+	self.ispercent = value
+	UpdateLabels(self)
+	UpdateText(self)
+end
 }
 
 --[[-----------------------------------------------------------------------------
 Constructor
 -------------------------------------------------------------------------------]]
 local SliderBackdrop  = {
-	bgFile = "Interface\\Buttons\\UI-SliderBar-Background",
-	edgeFile = "Interface\\Buttons\\UI-SliderBar-Border",
-	tile = true, tileSize = 8, edgeSize = 8,
-	insets = { left = 3, right = 3, top = 6, bottom = 6 }
+bgFile = "Interface\\Buttons\\UI-SliderBar-Background",
+edgeFile = "Interface\\Buttons\\UI-SliderBar-Border",
+tile = true, tileSize = 8, edgeSize = 8,
+insets = { left = 3, right = 3, top = 6, bottom = 6 }
 }
 
 local ManualBackdrop = {
-	bgFile = "Interface\\ChatFrame\\ChatFrameBackground",
-	edgeFile = "Interface\\ChatFrame\\ChatFrameBackground",
-	tile = true, edgeSize = 1, tileSize = 5,
+bgFile = "Interface\\ChatFrame\\ChatFrameBackground",
+edgeFile = "Interface\\ChatFrame\\ChatFrameBackground",
+tile = true, edgeSize = 1, tileSize = 5,
 }
 
 local function Constructor()
-	local frame = CreateFrame("Frame", nil, UIParent)
+local frame = CreateFrame("Frame", nil, UIParent)
 
-	frame:EnableMouse(true)
-	frame:SetScript("OnMouseDown", Frame_OnMouseDown)
+frame:EnableMouse(true)
+frame:SetScript("OnMouseDown", Frame_OnMouseDown)
 
-	local label = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-	label:SetPoint("TOPLEFT")
-	label:SetPoint("TOPRIGHT")
-	label:SetJustifyH("CENTER")
-	label:SetHeight(15)
+local label = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+label:SetPoint("TOPLEFT")
+label:SetPoint("TOPRIGHT")
+label:SetJustifyH("CENTER")
+label:SetHeight(15)
 
-	local slider = CreateFrame("Slider", nil, frame)
-	slider:SetOrientation("HORIZONTAL")
-	slider:SetHeight(15)
-	slider:SetHitRectInsets(0, 0, -10, 0)
-	slider:SetBackdrop(SliderBackdrop)
-	slider:SetThumbTexture("Interface\\Buttons\\UI-SliderBar-Button-Horizontal")
-	slider:SetPoint("TOP", label, "BOTTOM")
-	slider:SetPoint("LEFT", 3, 0)
-	slider:SetPoint("RIGHT", -3, 0)
-	slider:SetValue(0)
-	slider:SetScript("OnValueChanged",Slider_OnValueChanged)
-	slider:SetScript("OnEnter", Control_OnEnter)
-	slider:SetScript("OnLeave", Control_OnLeave)
-	slider:SetScript("OnMouseUp", Slider_OnMouseUp)
-	slider:SetScript("OnMouseWheel", Slider_OnMouseWheel)
+local slider = CreateFrame("Slider", nil, frame)
+slider:SetOrientation("HORIZONTAL")
+slider:SetHeight(15)
+slider:SetHitRectInsets(0, 0, -10, 0)
+slider:SetBackdrop(SliderBackdrop)
+slider:SetThumbTexture("Interface\\Buttons\\UI-SliderBar-Button-Horizontal")
+slider:SetPoint("TOP", label, "BOTTOM")
+slider:SetPoint("LEFT", 3, 0)
+slider:SetPoint("RIGHT", -3, 0)
+slider:SetValue(0)
+slider:SetScript("OnValueChanged",Slider_OnValueChanged)
+slider:SetScript("OnEnter", Control_OnEnter)
+slider:SetScript("OnLeave", Control_OnLeave)
+slider:SetScript("OnMouseUp", Slider_OnMouseUp)
+slider:SetScript("OnMouseWheel", Slider_OnMouseWheel)
 
-	local lowtext = slider:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
-	lowtext:SetPoint("TOPLEFT", slider, "BOTTOMLEFT", 2, 3)
+local lowtext = slider:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+lowtext:SetPoint("TOPLEFT", slider, "BOTTOMLEFT", 2, 3)
 
-	local hightext = slider:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
-	hightext:SetPoint("TOPRIGHT", slider, "BOTTOMRIGHT", -2, 3)
+local hightext = slider:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+hightext:SetPoint("TOPRIGHT", slider, "BOTTOMRIGHT", -2, 3)
 
-	local editbox = CreateFrame("EditBox", nil, frame)
-	editbox:SetAutoFocus(false)
-	editbox:SetFontObject(GameFontHighlightSmall)
-	editbox:SetPoint("TOP", slider, "BOTTOM")
-	editbox:SetHeight(14)
-	editbox:SetWidth(70)
-	editbox:SetJustifyH("CENTER")
-	editbox:EnableMouse(true)
-	editbox:SetBackdrop(ManualBackdrop)
-	editbox:SetBackdropColor(0, 0, 0, 0.5)
-	editbox:SetBackdropBorderColor(0.3, 0.3, 0.30, 0.80)
-	editbox:SetScript("OnEnter", EditBox_OnEnter)
-	editbox:SetScript("OnLeave", EditBox_OnLeave)
-	editbox:SetScript("OnEnterPressed", EditBox_OnEnterPressed)
-	editbox:SetScript("OnEscapePressed", EditBox_OnEscapePressed)
+local editbox = CreateFrame("EditBox", nil, frame)
+editbox:SetAutoFocus(false)
+editbox:SetFontObject(GameFontHighlightSmall)
+editbox:SetPoint("TOP", slider, "BOTTOM")
+editbox:SetHeight(14)
+editbox:SetWidth(70)
+editbox:SetJustifyH("CENTER")
+editbox:EnableMouse(true)
+editbox:SetBackdrop(ManualBackdrop)
+editbox:SetBackdropColor(0, 0, 0, 0.5)
+editbox:SetBackdropBorderColor(0.3, 0.3, 0.30, 0.80)
+editbox:SetScript("OnEnter", EditBox_OnEnter)
+editbox:SetScript("OnLeave", EditBox_OnLeave)
+editbox:SetScript("OnEnterPressed", EditBox_OnEnterPressed)
+editbox:SetScript("OnEscapePressed", EditBox_OnEscapePressed)
 
-	local widget = {
-		label       = label,
-		slider      = slider,
-		lowtext     = lowtext,
-		hightext    = hightext,
-		editbox     = editbox,
-		alignoffset = 25,
-		frame       = frame,
-		type        = Type
-	}
-	for method, func in pairs(methods) do
-		widget[method] = func
-	end
-	slider.obj, editbox.obj = widget, widget
+local widget = {
+	label       = label,
+	slider      = slider,
+	lowtext     = lowtext,
+	hightext    = hightext,
+	editbox     = editbox,
+	alignoffset = 25,
+	frame       = frame,
+	type        = Type
+}
+for method, func in pairs(methods) do
+	widget[method] = func
+end
+slider.obj, editbox.obj = widget, widget
 
-	return AceGUI:RegisterAsWidget(widget)
+return AceGUI:RegisterAsWidget(widget)
 end
 
 AceGUI:RegisterWidgetType(Type,Constructor,Version)

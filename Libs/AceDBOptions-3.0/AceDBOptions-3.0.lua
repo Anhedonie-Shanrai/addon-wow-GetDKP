@@ -21,7 +21,7 @@ AceDBOptions.optionTables = AceDBOptions.optionTables or {}
 AceDBOptions.handlers = AceDBOptions.handlers or {}
 
 --[[
-	Localization of AceDBOptions-3.0
+Localization of AceDBOptions-3.0
 ]]
 
 local L = {
@@ -260,8 +260,8 @@ local function getProfileList(db, common, nocurrent)
 end
 
 --[[
-	OptionsHandlerPrototype
-	prototype class for handling the options in a sane way
+OptionsHandlerPrototype
+prototype class for handling the options in a sane way
 ]]
 local OptionsHandlerPrototype = {}
 
@@ -281,14 +281,14 @@ function OptionsHandlerPrototype:GetCurrentProfile()
 end
 
 --[[
-	List all active profiles
-	you can control the output with the .arg variable
-	currently four modes are supported
+List all active profiles
+you can control the output with the .arg variable
+currently four modes are supported
 
-	(empty) - return all available profiles
-	"nocurrent" - returns all available profiles except the currently active profile
-	"common" - returns all avaialble profiles + some commonly used profiles ("char - realm", "realm", "class", "Default")
-	"both" - common except the active profile
+(empty) - return all available profiles
+"nocurrent" - returns all available profiles except the currently active profile
+"common" - returns all avaialble profiles + some commonly used profiles ("char - realm", "realm", "class", "Default")
+"both" - common except the active profile
 ]]
 function OptionsHandlerPrototype:ListProfiles(info)
 	local arg = info.arg
@@ -348,7 +348,7 @@ local function getOptionsHandler(db, noDefaultProfiles)
 end
 
 --[[
-	the real options table
+the real options table
 ]]
 local optionsTable = {
 	desc = {
@@ -441,10 +441,10 @@ local optionsTable = {
 -- options.args.profiles = LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db)
 function AceDBOptions:GetOptionsTable(db, noDefaultProfiles)
 	local tbl = AceDBOptions.optionTables[db] or {
-			type = "group",
-			name = L["profiles"],
-			desc = L["profiles_sub"],
-		}
+		type = "group",
+		name = L["profiles"],
+		desc = L["profiles_sub"],
+	}
 
 	tbl.handler = getOptionsHandler(db, noDefaultProfiles)
 	tbl.args = optionsTable

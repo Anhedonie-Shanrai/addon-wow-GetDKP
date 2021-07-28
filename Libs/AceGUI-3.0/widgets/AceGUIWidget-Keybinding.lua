@@ -115,56 +115,56 @@ Methods
 -------------------------------------------------------------------------------]]
 local methods = {
 	["OnAcquire"] = function(self)
-		self:SetWidth(200)
-		self:SetLabel("")
-		self:SetKey("")
-		self.waitingForKey = nil
-		self.msgframe:Hide()
-		self:SetDisabled(false)
-		self.button:EnableKeyboard(false)
-		self.button:EnableMouseWheel(false)
+	self:SetWidth(200)
+	self:SetLabel("")
+	self:SetKey("")
+	self.waitingForKey = nil
+	self.msgframe:Hide()
+	self:SetDisabled(false)
+	self.button:EnableKeyboard(false)
+	self.button:EnableMouseWheel(false)
 	end,
 
 	-- ["OnRelease"] = nil,
 
 	["SetDisabled"] = function(self, disabled)
-		self.disabled = disabled
-		if disabled then
-			self.button:Disable()
-			self.label:SetTextColor(0.5,0.5,0.5)
-		else
-			self.button:Enable()
-			self.label:SetTextColor(1,1,1)
-		end
+	self.disabled = disabled
+	if disabled then
+		self.button:Disable()
+		self.label:SetTextColor(0.5,0.5,0.5)
+	else
+		self.button:Enable()
+		self.label:SetTextColor(1,1,1)
+	end
 	end,
 
 	["SetKey"] = function(self, key)
-		if (key or "") == "" then
-			self.button:SetText(NOT_BOUND)
-			self.button:SetNormalFontObject("GameFontNormal")
-		else
-			self.button:SetText(key)
-			self.button:SetNormalFontObject("GameFontHighlight")
-		end
+	if (key or "") == "" then
+		self.button:SetText(NOT_BOUND)
+		self.button:SetNormalFontObject("GameFontNormal")
+	else
+		self.button:SetText(key)
+		self.button:SetNormalFontObject("GameFontHighlight")
+	end
 	end,
 
 	["GetKey"] = function(self)
-		local key = self.button:GetText()
-		if key == NOT_BOUND then
-			key = nil
-		end
-		return key
+	local key = self.button:GetText()
+	if key == NOT_BOUND then
+		key = nil
+	end
+	return key
 	end,
 
 	["SetLabel"] = function(self, label)
-		self.label:SetText(label or "")
-		if (label or "") == "" then
-			self.alignoffset = nil
-			self:SetHeight(24)
-		else
-			self.alignoffset = 30
-			self:SetHeight(44)
-		end
+	self.label:SetText(label or "")
+	if (label or "") == "" then
+		self.alignoffset = nil
+		self:SetHeight(24)
+	else
+		self.alignoffset = 30
+		self:SetHeight(44)
+	end
 	end,
 }
 

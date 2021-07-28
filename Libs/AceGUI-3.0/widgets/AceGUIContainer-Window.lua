@@ -15,8 +15,8 @@ local CreateFrame, UIParent = CreateFrame, UIParent
 -- Main Frame --
 ----------------
 --[[
-	Events :
-		OnClose
+Events :
+OnClose
 
 ]]
 do
