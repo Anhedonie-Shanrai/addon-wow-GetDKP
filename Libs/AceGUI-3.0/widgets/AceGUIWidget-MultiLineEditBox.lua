@@ -160,102 +160,102 @@ Methods
 -------------------------------------------------------------------------------]]
 local methods = {
 	["OnAcquire"] = function(self)
-		self.editBox:SetText("")
-		self:SetDisabled(false)
-		self:SetWidth(200)
-		self:DisableButton(false)
-		self:SetNumLines()
-		self.entered = nil
-		self:SetMaxLetters(0)
+	self.editBox:SetText("")
+	self:SetDisabled(false)
+	self:SetWidth(200)
+	self:DisableButton(false)
+	self:SetNumLines()
+	self.entered = nil
+	self:SetMaxLetters(0)
 	end,
 
 	["OnRelease"] = function(self)
-		self:ClearFocus()
+	self:ClearFocus()
 	end,
 
 	["SetDisabled"] = function(self, disabled)
-		local editBox = self.editBox
-		if disabled then
-			editBox:ClearFocus()
-			editBox:EnableMouse(false)
-			editBox:SetTextColor(0.5, 0.5, 0.5)
-			self.label:SetTextColor(0.5, 0.5, 0.5)
-			self.scrollFrame:EnableMouse(false)
-			self.button:Disable()
-		else
-			editBox:EnableMouse(true)
-			editBox:SetTextColor(1, 1, 1)
-			self.label:SetTextColor(1, 0.82, 0)
-			self.scrollFrame:EnableMouse(true)
-		end
+	local editBox = self.editBox
+	if disabled then
+		editBox:ClearFocus()
+		editBox:EnableMouse(false)
+		editBox:SetTextColor(0.5, 0.5, 0.5)
+		self.label:SetTextColor(0.5, 0.5, 0.5)
+		self.scrollFrame:EnableMouse(false)
+		self.button:Disable()
+	else
+		editBox:EnableMouse(true)
+		editBox:SetTextColor(1, 1, 1)
+		self.label:SetTextColor(1, 0.82, 0)
+		self.scrollFrame:EnableMouse(true)
+	end
 	end,
 
 	["SetLabel"] = function(self, text)
-		if text and text ~= "" then
-			self.label:SetText(text)
-			if self.labelHeight ~= 10 then
-				self.labelHeight = 10
-				self.label:Show()
-			end
-		elseif self.labelHeight ~= 0 then
-			self.labelHeight = 0
-			self.label:Hide()
+	if text and text ~= "" then
+		self.label:SetText(text)
+		if self.labelHeight ~= 10 then
+			self.labelHeight = 10
+			self.label:Show()
 		end
-		Layout(self)
+	elseif self.labelHeight ~= 0 then
+		self.labelHeight = 0
+		self.label:Hide()
+	end
+	Layout(self)
 	end,
 
 	["SetNumLines"] = function(self, value)
-		if not value or value < 4 then
-			value = 4
-		end
-		self.numlines = value
-		Layout(self)
+	if not value or value < 4 then
+		value = 4
+	end
+	self.numlines = value
+	Layout(self)
 	end,
 
 	["SetText"] = function(self, text)
-		self.editBox:SetText(text)
+	self.editBox:SetText(text)
 	end,
 
 	["GetText"] = function(self)
-		return self.editBox:GetText()
+	return self.editBox:GetText()
 	end,
 
 	["SetMaxLetters"] = function (self, num)
-		self.editBox:SetMaxLetters(num or 0)
+	self.editBox:SetMaxLetters(num or 0)
 	end,
 
 	["DisableButton"] = function(self, disabled)
-		self.disablebutton = disabled
-		if disabled then
-			self.button:Hide()
-		else
-			self.button:Show()
-		end
-		Layout(self)
+	self.disablebutton = disabled
+	if disabled then
+		self.button:Hide()
+	else
+		self.button:Show()
+	end
+	Layout(self)
 	end,
 
 	["ClearFocus"] = function(self)
-		self.editBox:ClearFocus()
-		self.frame:SetScript("OnShow", nil)
+	self.editBox:ClearFocus()
+	self.frame:SetScript("OnShow", nil)
 	end,
 
 	["SetFocus"] = function(self)
-		self.editBox:SetFocus()
-		if not self.frame:IsShown() then
-			self.frame:SetScript("OnShow", OnShowFocus)
-		end
+	self.editBox:SetFocus()
+	if not self.frame:IsShown() then
+		self.frame:SetScript("OnShow", OnShowFocus)
+	end
 	end,
 
 	["HighlightText"] = function(self, from, to)
-		self.editBox:HighlightText(from, to)
+	self.editBox:HighlightText(from, to)
 	end,
 
 	["GetCursorPosition"] = function(self)
-		return self.editBox:GetCursorPosition()
+	return self.editBox:GetCursorPosition()
 	end,
 
 	["SetCursorPosition"] = function(self, ...)
-		return self.editBox:SetCursorPosition(...)
+	return self.editBox:SetCursorPosition(...)
 	end,
 
 

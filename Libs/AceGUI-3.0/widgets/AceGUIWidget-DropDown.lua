@@ -595,151 +595,151 @@ do
 	local function sortTbl(x,y)
 		local num1, num2 = tonumber(x), tonumber(y)
 		if num1 and num2 then -- numeric comparison, either two numbers or numeric strings
-			return num1 < num2
-		else -- compare everything else tostring'ed
-			return tostring(x) < tostring(y)
+		return num1 < num2
+	else -- compare everything else tostring'ed
+		return tostring(x) < tostring(y)
+	end
+end
+local function SetList(self, list, order, itemType)
+	self.list = list
+	self.pullout:Clear()
+	self.hasClose = nil
+	if not list then return end
+
+	if type(order) ~= "table" then
+		for v in pairs(list) do
+			sortlist[#sortlist + 1] = v
+		end
+		tsort(sortlist, sortTbl)
+
+		for i, key in ipairs(sortlist) do
+			AddListItem(self, key, list[key], itemType)
+			sortlist[i] = nil
+		end
+	else
+		for i, key in ipairs(order) do
+			AddListItem(self, key, list[key], itemType)
 		end
 	end
-	local function SetList(self, list, order, itemType)
-		self.list = list
-		self.pullout:Clear()
-		self.hasClose = nil
-		if not list then return end
-
-		if type(order) ~= "table" then
-			for v in pairs(list) do
-				sortlist[#sortlist + 1] = v
-			end
-			tsort(sortlist, sortTbl)
-
-			for i, key in ipairs(sortlist) do
-				AddListItem(self, key, list[key], itemType)
-				sortlist[i] = nil
-			end
-		else
-			for i, key in ipairs(order) do
-				AddListItem(self, key, list[key], itemType)
-			end
-		end
-		if self.multiselect then
-			ShowMultiText(self)
-			AddCloseButton(self)
-		end
+	if self.multiselect then
+		ShowMultiText(self)
+		AddCloseButton(self)
 	end
+end
 
-	-- exported
-	local function AddItem(self, value, text, itemType)
-		if self.list then
-			self.list[value] = text
-			AddListItem(self, value, text, itemType)
-		end
+-- exported
+local function AddItem(self, value, text, itemType)
+	if self.list then
+		self.list[value] = text
+		AddListItem(self, value, text, itemType)
 	end
+end
 
-	-- exported
-	local function SetMultiselect(self, multi)
-		self.multiselect = multi
-		if multi then
-			ShowMultiText(self)
-			AddCloseButton(self)
-		end
+-- exported
+local function SetMultiselect(self, multi)
+	self.multiselect = multi
+	if multi then
+		ShowMultiText(self)
+		AddCloseButton(self)
 	end
+end
 
-	-- exported
-	local function GetMultiselect(self)
-		return self.multiselect
-	end
+-- exported
+local function GetMultiselect(self)
+	return self.multiselect
+end
 
-	local function SetPulloutWidth(self, width)
-		self.pulloutWidth = width
-	end
+local function SetPulloutWidth(self, width)
+	self.pulloutWidth = width
+end
 
-	--[[ Constructor ]]--
+--[[ Constructor ]]--
 
-	local function Constructor()
-		local count = AceGUI:GetNextWidgetNum(widgetType)
-		local frame = CreateFrame("Frame", nil, UIParent)
-		local dropdown = CreateFrame("Frame", "AceGUI30DropDown"..count, frame, "UIDropDownMenuTemplate")
+local function Constructor()
+	local count = AceGUI:GetNextWidgetNum(widgetType)
+	local frame = CreateFrame("Frame", nil, UIParent)
+	local dropdown = CreateFrame("Frame", "AceGUI30DropDown"..count, frame, "UIDropDownMenuTemplate")
 
-		local self = {}
-		self.type = widgetType
-		self.frame = frame
-		self.dropdown = dropdown
-		self.count = count
-		frame.obj = self
-		dropdown.obj = self
+	local self = {}
+	self.type = widgetType
+	self.frame = frame
+	self.dropdown = dropdown
+	self.count = count
+	frame.obj = self
+	dropdown.obj = self
 
-		self.OnRelease   = OnRelease
-		self.OnAcquire   = OnAcquire
+	self.OnRelease   = OnRelease
+	self.OnAcquire   = OnAcquire
 
-		self.ClearFocus  = ClearFocus
+	self.ClearFocus  = ClearFocus
 
-		self.SetText     = SetText
-		self.SetValue    = SetValue
-		self.GetValue    = GetValue
-		self.SetList     = SetList
-		self.SetLabel    = SetLabel
-		self.SetDisabled = SetDisabled
-		self.AddItem     = AddItem
-		self.SetMultiselect = SetMultiselect
-		self.GetMultiselect = GetMultiselect
-		self.SetItemValue = SetItemValue
-		self.SetItemDisabled = SetItemDisabled
-		self.SetPulloutWidth = SetPulloutWidth
+	self.SetText     = SetText
+	self.SetValue    = SetValue
+	self.GetValue    = GetValue
+	self.SetList     = SetList
+	self.SetLabel    = SetLabel
+	self.SetDisabled = SetDisabled
+	self.AddItem     = AddItem
+	self.SetMultiselect = SetMultiselect
+	self.GetMultiselect = GetMultiselect
+	self.SetItemValue = SetItemValue
+	self.SetItemDisabled = SetItemDisabled
+	self.SetPulloutWidth = SetPulloutWidth
 
-		self.alignoffset = 26
+	self.alignoffset = 26
 
-		frame:SetScript("OnHide",Dropdown_OnHide)
+	frame:SetScript("OnHide",Dropdown_OnHide)
 
-		dropdown:ClearAllPoints()
-		dropdown:SetPoint("TOPLEFT",frame,"TOPLEFT",-15,0)
-		dropdown:SetPoint("BOTTOMRIGHT",frame,"BOTTOMRIGHT",17,0)
-		dropdown:SetScript("OnHide", nil)
+	dropdown:ClearAllPoints()
+	dropdown:SetPoint("TOPLEFT",frame,"TOPLEFT",-15,0)
+	dropdown:SetPoint("BOTTOMRIGHT",frame,"BOTTOMRIGHT",17,0)
+	dropdown:SetScript("OnHide", nil)
 
-		local left = _G[dropdown:GetName() .. "Left"]
-		local middle = _G[dropdown:GetName() .. "Middle"]
-		local right = _G[dropdown:GetName() .. "Right"]
+	local left = _G[dropdown:GetName() .. "Left"]
+	local middle = _G[dropdown:GetName() .. "Middle"]
+	local right = _G[dropdown:GetName() .. "Right"]
 
-		middle:ClearAllPoints()
-		right:ClearAllPoints()
+	middle:ClearAllPoints()
+	right:ClearAllPoints()
 
-		middle:SetPoint("LEFT", left, "RIGHT", 0, 0)
-		middle:SetPoint("RIGHT", right, "LEFT", 0, 0)
-		right:SetPoint("TOPRIGHT", dropdown, "TOPRIGHT", 0, 17)
+	middle:SetPoint("LEFT", left, "RIGHT", 0, 0)
+	middle:SetPoint("RIGHT", right, "LEFT", 0, 0)
+	right:SetPoint("TOPRIGHT", dropdown, "TOPRIGHT", 0, 17)
 
-		local button = _G[dropdown:GetName() .. "Button"]
-		self.button = button
-		button.obj = self
-		button:SetScript("OnEnter",Control_OnEnter)
-		button:SetScript("OnLeave",Control_OnLeave)
-		button:SetScript("OnClick",Dropdown_TogglePullout)
+	local button = _G[dropdown:GetName() .. "Button"]
+	self.button = button
+	button.obj = self
+	button:SetScript("OnEnter",Control_OnEnter)
+	button:SetScript("OnLeave",Control_OnLeave)
+	button:SetScript("OnClick",Dropdown_TogglePullout)
 
-		local button_cover = CreateFrame("BUTTON",nil,self.frame)
-		self.button_cover = button_cover
-		button_cover.obj = self
-		button_cover:SetPoint("TOPLEFT",self.frame,"BOTTOMLEFT",0,25)
-		button_cover:SetPoint("BOTTOMRIGHT",self.frame,"BOTTOMRIGHT")
-		button_cover:SetScript("OnEnter",Control_OnEnter)
-		button_cover:SetScript("OnLeave",Control_OnLeave)
-		button_cover:SetScript("OnClick",Dropdown_TogglePullout)
+	local button_cover = CreateFrame("BUTTON",nil,self.frame)
+	self.button_cover = button_cover
+	button_cover.obj = self
+	button_cover:SetPoint("TOPLEFT",self.frame,"BOTTOMLEFT",0,25)
+	button_cover:SetPoint("BOTTOMRIGHT",self.frame,"BOTTOMRIGHT")
+	button_cover:SetScript("OnEnter",Control_OnEnter)
+	button_cover:SetScript("OnLeave",Control_OnLeave)
+	button_cover:SetScript("OnClick",Dropdown_TogglePullout)
 
-		local text = _G[dropdown:GetName() .. "Text"]
-		self.text = text
-		text.obj = self
-		text:ClearAllPoints()
-		text:SetPoint("RIGHT", right, "RIGHT" ,-43, 2)
-		text:SetPoint("LEFT", left, "LEFT", 25, 2)
+	local text = _G[dropdown:GetName() .. "Text"]
+	self.text = text
+	text.obj = self
+	text:ClearAllPoints()
+	text:SetPoint("RIGHT", right, "RIGHT" ,-43, 2)
+	text:SetPoint("LEFT", left, "LEFT", 25, 2)
 
-		local label = frame:CreateFontString(nil,"OVERLAY","GameFontNormalSmall")
-		label:SetPoint("TOPLEFT",frame,"TOPLEFT",0,0)
-		label:SetPoint("TOPRIGHT",frame,"TOPRIGHT",0,0)
-		label:SetJustifyH("LEFT")
-		label:SetHeight(18)
-		label:Hide()
-		self.label = label
+	local label = frame:CreateFontString(nil,"OVERLAY","GameFontNormalSmall")
+	label:SetPoint("TOPLEFT",frame,"TOPLEFT",0,0)
+	label:SetPoint("TOPRIGHT",frame,"TOPRIGHT",0,0)
+	label:SetJustifyH("LEFT")
+	label:SetHeight(18)
+	label:Hide()
+	self.label = label
 
-		AceGUI:RegisterAsWidget(self)
-		return self
-	end
+	AceGUI:RegisterAsWidget(self)
+	return self
+end
 
-	AceGUI:RegisterWidgetType(widgetType, Constructor, widgetVersion)
+AceGUI:RegisterWidgetType(widgetType, Constructor, widgetVersion)
 end

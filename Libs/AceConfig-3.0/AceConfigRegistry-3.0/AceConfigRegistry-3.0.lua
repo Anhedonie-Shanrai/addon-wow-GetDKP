@@ -79,9 +79,9 @@ local basekeys={
 	confirmText=optstring,
 	disabled=optmethodbool,
 	hidden=optmethodbool,
-		guiHidden=optmethodbool,
-		dialogHidden=optmethodbool,
-		dropdownHidden=optmethodbool,
+	guiHidden=optmethodbool,
+	dialogHidden=optmethodbool,
+	dropdownHidden=optmethodbool,
 	cmdHidden=optmethodbool,
 	icon=optstringnumberfunc,
 	iconCoords=optmethodtable,
@@ -113,10 +113,10 @@ local typedkeys={
 		args=istable,
 		plugins=opttable,
 		inline=optbool,
-			cmdInline=optbool,
-			guiInline=optbool,
-			dropdownInline=optbool,
-			dialogInline=optbool,
+		cmdInline=optbool,
+		guiInline=optbool,
+		dropdownInline=optbool,
+		dialogInline=optbool,
 		childGroups=optstring,
 	},
 	execute={
@@ -210,61 +210,61 @@ local function validateVal(v, oktypes, errlvl,...)
 		err(": expected a "..oktypes._..", got '"..tostring(v).."'", errlvl,...)
 	end
 	if type(isok)=="table" then		-- isok was a table containing specific values to be tested for!
-		if not isok[v] then
-			err(": did not expect "..type(v).." value '"..tostring(v).."'", errlvl,...)
-		end
+	if not isok[v] then
+		err(": did not expect "..type(v).." value '"..tostring(v).."'", errlvl,...)
 	end
+end
 end
 
 local function validate(options,errlvl,...)
-	errlvl=(errlvl or 0)+1
-	-- basic consistency
-	if type(options)~="table" then
-		err(": expected a table, got a "..type(options), errlvl,...)
-	end
-	if type(options.type)~="string" then
-		err(".type: expected a string, got a "..type(options.type), errlvl,...)
-	end
+errlvl=(errlvl or 0)+1
+-- basic consistency
+if type(options)~="table" then
+	err(": expected a table, got a "..type(options), errlvl,...)
+end
+if type(options.type)~="string" then
+	err(".type: expected a string, got a "..type(options.type), errlvl,...)
+end
 
-	-- get type and 'typedkeys' member
-	local tk = typedkeys[options.type]
-	if not tk then
-		err(".type: unknown type '"..options.type.."'", errlvl,...)
-	end
+-- get type and 'typedkeys' member
+local tk = typedkeys[options.type]
+if not tk then
+	err(".type: unknown type '"..options.type.."'", errlvl,...)
+end
 
-	-- make sure that all options[] are known parameters
-	for k,v in pairs(options) do
-		if not (tk[k] or basekeys[k]) then
-			err(": unknown parameter", errlvl,tostring(k),...)
-		end
+-- make sure that all options[] are known parameters
+for k,v in pairs(options) do
+	if not (tk[k] or basekeys[k]) then
+		err(": unknown parameter", errlvl,tostring(k),...)
 	end
+end
 
-	-- verify that required params are there, and that everything is the right type
-	for k,oktypes in pairs(basekeys) do
-		validateVal(options[k], oktypes, errlvl,k,...)
-	end
-	for k,oktypes in pairs(tk) do
-		validateVal(options[k], oktypes, errlvl,k,...)
-	end
+-- verify that required params are there, and that everything is the right type
+for k,oktypes in pairs(basekeys) do
+	validateVal(options[k], oktypes, errlvl,k,...)
+end
+for k,oktypes in pairs(tk) do
+	validateVal(options[k], oktypes, errlvl,k,...)
+end
 
-	-- extra logic for groups
-	if options.type=="group" then
-		for k,v in pairs(options.args) do
-			validateKey(k,errlvl,"args",...)
-			validate(v, errlvl,k,"args",...)
-		end
-		if options.plugins then
-			for plugname,plugin in pairs(options.plugins) do
-				if type(plugin)~="table" then
-					err(": expected a table, got '"..tostring(plugin).."'", errlvl,tostring(plugname),"plugins",...)
-				end
-				for k,v in pairs(plugin) do
-					validateKey(k,errlvl,tostring(plugname),"plugins",...)
-					validate(v, errlvl,k,tostring(plugname),"plugins",...)
-				end
+-- extra logic for groups
+if options.type=="group" then
+	for k,v in pairs(options.args) do
+		validateKey(k,errlvl,"args",...)
+		validate(v, errlvl,k,"args",...)
+	end
+	if options.plugins then
+		for plugname,plugin in pairs(options.plugins) do
+			if type(plugin)~="table" then
+				err(": expected a table, got '"..tostring(plugin).."'", errlvl,tostring(plugname),"plugins",...)
+			end
+			for k,v in pairs(plugin) do
+				validateKey(k,errlvl,tostring(plugname),"plugins",...)
+				validate(v, errlvl,k,tostring(plugname),"plugins",...)
 			end
 		end
 	end
+end
 end
 
 
@@ -274,12 +274,12 @@ end
 -- @param name The name of the table to be validated (shown in any error message)
 -- @param errlvl (optional number) error level offset, default 0 (=errors point to the function calling :ValidateOptionsTable)
 function AceConfigRegistry:ValidateOptionsTable(options,name,errlvl)
-	errlvl=(errlvl or 0)+1
-	name = name or "Optionstable"
-	if not options.name then
-		options.name=name	-- bit of a hack, the root level doesn't really need a .name :-/
-	end
-	validate(options,errlvl,name)
+errlvl=(errlvl or 0)+1
+name = name or "Optionstable"
+if not options.name then
+	options.name=name	-- bit of a hack, the root level doesn't really need a .name :-/
+end
+validate(options,errlvl,name)
 end
 
 --- Fires a "ConfigTableChange" callback for those listening in on it, allowing config GUIs to refresh.
@@ -287,8 +287,8 @@ end
 -- or a timer.
 -- @param appName The application name as given to `:RegisterOptionsTable()`
 function AceConfigRegistry:NotifyChange(appName)
-	if not AceConfigRegistry.tables[appName] then return end
-	AceConfigRegistry.callbacks:Fire("ConfigTableChange", appName)
+if not AceConfigRegistry.tables[appName] then return end
+AceConfigRegistry.callbacks:Fire("ConfigTableChange", appName)
 end
 
 -- -------------------------------------------------------------------
@@ -298,13 +298,13 @@ end
 -- validateGetterArgs: helper function for :GetOptionsTable (or, rather, the getter functions returned by it)
 
 local function validateGetterArgs(uiType, uiName, errlvl)
-	errlvl=(errlvl or 0)+2
-	if uiType~="cmd" and uiType~="dropdown" and uiType~="dialog" then
-		error(MAJOR..": Requesting options table: 'uiType' - invalid configuration UI type, expected 'cmd', 'dropdown' or 'dialog'", errlvl)
-	end
-	if not strmatch(uiName, "[A-Za-z]%-[0-9]") then	-- Expecting e.g. "MyLib-1.2"
-		error(MAJOR..": Requesting options table: 'uiName' - badly formatted or missing version number. Expected e.g. 'MyLib-1.2'", errlvl)
-	end
+errlvl=(errlvl or 0)+2
+if uiType~="cmd" and uiType~="dropdown" and uiType~="dialog" then
+	error(MAJOR..": Requesting options table: 'uiType' - invalid configuration UI type, expected 'cmd', 'dropdown' or 'dialog'", errlvl)
+end
+if not strmatch(uiName, "[A-Za-z]%-[0-9]") then	-- Expecting e.g. "MyLib-1.2"
+error(MAJOR..": Requesting options table: 'uiName' - badly formatted or missing version number. Expected e.g. 'MyLib-1.2'", errlvl)
+end
 end
 
 --- Register an options table with the config registry.
@@ -313,38 +313,38 @@ end
 -- See the top of the page for info on arguments passed to such functions.
 -- @param skipValidation Skip options table validation (primarily useful for extremely huge options, with a noticeable slowdown)
 function AceConfigRegistry:RegisterOptionsTable(appName, options, skipValidation)
-	if type(options)=="table" then
-		if options.type~="group" then	-- quick sanity checker
-			error(MAJOR..": RegisterOptionsTable(appName, options): 'options' - missing type='group' member in root group", 2)
-		end
-		AceConfigRegistry.tables[appName] = function(uiType, uiName, errlvl)
-			errlvl=(errlvl or 0)+1
-			validateGetterArgs(uiType, uiName, errlvl)
-			if not AceConfigRegistry.validated[uiType][appName] and not skipValidation then
-				AceConfigRegistry:ValidateOptionsTable(options, appName, errlvl)	-- upgradable
-				AceConfigRegistry.validated[uiType][appName] = true
-			end
-			return options
-		end
-	elseif type(options)=="function" then
-		AceConfigRegistry.tables[appName] = function(uiType, uiName, errlvl)
-			errlvl=(errlvl or 0)+1
-			validateGetterArgs(uiType, uiName, errlvl)
-			local tab = assert(options(uiType, uiName, appName))
-			if not AceConfigRegistry.validated[uiType][appName] and not skipValidation then
-				AceConfigRegistry:ValidateOptionsTable(tab, appName, errlvl)	-- upgradable
-				AceConfigRegistry.validated[uiType][appName] = true
-			end
-			return tab
-		end
-	else
-		error(MAJOR..": RegisterOptionsTable(appName, options): 'options' - expected table or function reference", 2)
-	end
+if type(options)=="table" then
+if options.type~="group" then	-- quick sanity checker
+error(MAJOR..": RegisterOptionsTable(appName, options): 'options' - missing type='group' member in root group", 2)
+end
+AceConfigRegistry.tables[appName] = function(uiType, uiName, errlvl)
+errlvl=(errlvl or 0)+1
+validateGetterArgs(uiType, uiName, errlvl)
+if not AceConfigRegistry.validated[uiType][appName] and not skipValidation then
+AceConfigRegistry:ValidateOptionsTable(options, appName, errlvl)	-- upgradable
+AceConfigRegistry.validated[uiType][appName] = true
+end
+return options
+end
+elseif type(options)=="function" then
+AceConfigRegistry.tables[appName] = function(uiType, uiName, errlvl)
+errlvl=(errlvl or 0)+1
+validateGetterArgs(uiType, uiName, errlvl)
+local tab = assert(options(uiType, uiName, appName))
+if not AceConfigRegistry.validated[uiType][appName] and not skipValidation then
+AceConfigRegistry:ValidateOptionsTable(tab, appName, errlvl)	-- upgradable
+AceConfigRegistry.validated[uiType][appName] = true
+end
+return tab
+end
+else
+error(MAJOR..": RegisterOptionsTable(appName, options): 'options' - expected table or function reference", 2)
+end
 end
 
 --- Returns an iterator of ["appName"]=funcref pairs
 function AceConfigRegistry:IterateOptionsTables()
-	return pairs(AceConfigRegistry.tables)
+return pairs(AceConfigRegistry.tables)
 end
 
 
@@ -358,14 +358,14 @@ end
 -- @param uiType The type of UI to get the table for, one of "cmd", "dropdown", "dialog"
 -- @param uiName The name of the library/addon querying for the table, e.g. "MyLib-1.0"
 function AceConfigRegistry:GetOptionsTable(appName, uiType, uiName)
-	local f = AceConfigRegistry.tables[appName]
-	if not f then
-		return nil
-	end
+local f = AceConfigRegistry.tables[appName]
+if not f then
+return nil
+end
 
-	if uiType then
-		return f(uiType,uiName,1)	-- get the table for us
-	else
-		return f	-- return the function
-	end
+if uiType then
+return f(uiType,uiName,1)	-- get the table for us
+else
+return f	-- return the function
+end
 end

@@ -222,7 +222,7 @@ if IBLib then
 end
 
 --[[
-	Template for items:
+Template for items:
 
 -- Item:
 --
