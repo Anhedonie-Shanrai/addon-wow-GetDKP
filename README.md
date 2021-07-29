@@ -4,7 +4,9 @@ For Support, please use our [Support Board](https://eqdkp-plus.eu/forum/).
 
 License
 ------------------
-Copyright (C) 2006-2019 EQdkp-Plus Developer Team
+Copyright (C) 2006-2019 EQdkp-Plus Developer Team 
+Updated by hgletthofer, ianv88 - I (Anhedonie) merged both versions together. 
+Result is less to no LUA-Errors & compatibility with various other addons such as Bagnon, Guild Rooster Manager and so on. (Compared to the version 7.3.1 on Curseforge)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
@@ -34,7 +36,7 @@ There is a config menu to make all your settings.
 
 Compatibility
 ------------------
-Works with current 8.2.x+ and classic 1.13.x +
+Works with WoW Classic TBC 2.5.1
 
 Features
 ------------------
