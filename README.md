@@ -5,7 +5,9 @@ For Support, please use our [Support Board](https://eqdkp-plus.eu/forum/).
 License
 ------------------
 Copyright (C) 2006-2019 EQdkp-Plus Developer Team 
+
 Updated by hgletthofer, ianv88 - I (Anhedonie) merged both versions together. 
+
 Result is less to no LUA-Errors & compatibility with various other addons such as Bagnon, Guild Rooster Manager and so on. (Compared to the version 7.3.1 on Curseforge)
 
 This program is free software: you can redistribute it and/or modify
