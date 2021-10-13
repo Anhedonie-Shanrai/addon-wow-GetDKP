@@ -38,7 +38,7 @@ There is a config menu to make all your settings.
 
 Compatibility
 ------------------
-Works with WoW Classic TBC 2.5.1
+Works with WoW Classic TBC 2.5.1/2.5.2
 
 Features
 ------------------
